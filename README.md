@@ -8,6 +8,8 @@ This project is being developed by 5 students from the SDU:
 - Daryn
 - Serik
 
+Start date: 13.10.2021
+
 ## Authors
 - Parassat
 - Serik
