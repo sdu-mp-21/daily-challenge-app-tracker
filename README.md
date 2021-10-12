@@ -8,6 +8,13 @@ This project is being developed by 5 students from the SDU:
 - Daryn
 - Serik
 
+## Authors
+- Parassat
+- Serik
+- Sanzhar
+- Marlen
+- Daryn
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
