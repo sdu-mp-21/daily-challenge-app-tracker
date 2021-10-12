@@ -2,6 +2,13 @@
 
 A new Flutter project.
 
+## Authors
+- Parassat
+- Serik
+- Sanzhar
+- Marlen
+- Daryn
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
