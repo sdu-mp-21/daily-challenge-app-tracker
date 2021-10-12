@@ -2,6 +2,8 @@
 
 A new Flutter project made by students of SDU. Will help you to build healthy habits.
 
+Start date: 13.10.2021
+
 ## Authors
 - Parassat
 - Serik
