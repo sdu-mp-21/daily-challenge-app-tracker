@@ -1,6 +1,6 @@
 # challenge_tracker
 
-A new Flutter project.
+A new Flutter project made by students of SDU. Will help you to build healthy habits.
 
 ## Authors
 - Parassat
