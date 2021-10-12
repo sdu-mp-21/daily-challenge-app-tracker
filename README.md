@@ -1,4 +1,4 @@
-# daily_challenge_tracker
+# challenge_tracker
 
 A new Flutter project.
 
