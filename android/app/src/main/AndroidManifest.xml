@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kz.sdu.challenge_tracker">
+    package="kz.university.daily_challenge_tracker">
    <application
-        android:label="challenge_tracker"
+        android:label="daily_challenge_tracker"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
