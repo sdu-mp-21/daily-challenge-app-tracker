@@ -9,16 +9,16 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.menu),
-            tooltip: 'Show the Menu',
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('This is should display the Menu')));
-            },
-          ),
-        ],
+        backgroundColor: Color.fromRGBO(50, 168, 82, 1),
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          tooltip: 'Show the Menu',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text('This is should display the Menu')));
+          },
+        ),
+        actions: [],
       ),
       body: const Center(
         child: Text(
