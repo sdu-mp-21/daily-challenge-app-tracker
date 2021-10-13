@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'navigators/m_page.dart';
-void main () {
-  runApp(const MyApp());
+import 'main_page.dart';
+
+void main() {
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-
+  static const String _title = '21 days Challenge';
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: GoogleFonts.nunitoSansTextTheme(
-          Theme.of(context).textTheme,
-        ),
-      ),
-      home: const MainPage(),
+      title: _title,
+      home: MainPage(),
     );
   }
 }
