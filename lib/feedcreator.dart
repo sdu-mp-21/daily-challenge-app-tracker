@@ -30,7 +30,7 @@ class _FeedCreatorState extends State<FeedCreator> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Userinfo(),
-          const Textfield(),
+           Textfield(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
