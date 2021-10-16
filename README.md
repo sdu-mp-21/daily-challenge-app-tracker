@@ -1,23 +1,12 @@
 # daily_challenge_tracker
 
-This is a new application with the ability to add yourself a challenge.
-This project is being developed by 5 students from the SDU:
-- Sanzhar
-- Parasat
-- Marlen
-- Daryn
-- Serik
+A new Flutter project.
 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
 
-When developing this application, you will need the Dart sdk and Flutter sdk installed.
-They can be installed on sites 
-- [Dart SDK](https://dart.dev/get-dart)
-- [Flutter SDK](https://flutter.dev/docs/get-started/install)
-
-A few resources to get started:
+A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
