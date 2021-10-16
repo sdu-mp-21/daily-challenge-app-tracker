@@ -1,3 +1,5 @@
+import 'app_bar.dart';
+import 'bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,25 +9,21 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(50, 168, 82, 1),
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          tooltip: 'Show the Menu',
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text('This is should display the Menu')));
-          },
-        ),
-        actions: [],
-      ),
-      body: const Center(
+    return const Scaffold(
+      appBar: GeneralAppBar(),
+      body: Center(
         child: Text(
           'This is the home page',
           style: TextStyle(fontSize: 24),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        tooltip: "Centre FAB",
+        onPressed: null,
+        child: Icon(Icons.add),
+      ),
+      bottomNavigationBar: GeneralBottomBar(),
     );
   }
 }
