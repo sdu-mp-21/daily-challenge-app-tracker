@@ -13,7 +13,7 @@ class GeneralBottomBar extends StatelessWidget {
         margin: const EdgeInsets.only(left: 12.0, right: 12.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
               //update the bottom app bar view each time an item is clicked
