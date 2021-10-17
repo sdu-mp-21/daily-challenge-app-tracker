@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Textfield extends StatelessWidget {
+  final dynamic text;
+   const Textfield({Key? key, this.text}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 2.0,
 
-          color: Colors.grey,
-          style: BorderStyle.solid,
+      decoration: const BoxDecoration(
+        border:  Border(
+         top: BorderSide(width: 0.0, color: Colors.grey),
+         right: BorderSide(width: 0.0, color: Colors.grey),
+         bottom: BorderSide(width: 2.0, color: Colors.grey),
+         left: BorderSide(width: 0.0, color: Colors.grey),
         ),
       ),
       width: double.infinity,
@@ -17,16 +22,16 @@ class Textfield extends StatelessWidget {
         horizontal: 20.0,
         vertical: 10.0,
       ),
-      child: const Text(
-        'Lorem Ipsum is simply dummy text of the printing '
-            'and typesetting industry. Lorem Ipsum has been '
-            'the industrys standard dummy text ever since the'
-            ' 1500s, when an unknown printer took a galley of ',
+      child:  Text(
+          text ?? 'No Text',
         textDirection: TextDirection.ltr,
-        style: TextStyle(
-          fontSize: 16.0,
-          fontWeight: FontWeight.w500,
+        style: GoogleFonts.lato(
+          textStyle: Theme.of(context).textTheme.headline4,
+          fontSize: 22,
+          fontWeight: FontWeight.w600,
+          color: const Color(0xff000080),
         ),
+
       ),
     );
   }

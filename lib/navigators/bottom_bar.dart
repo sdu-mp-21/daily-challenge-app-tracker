@@ -11,7 +11,9 @@ class GeneralBottomBar extends StatelessWidget {
     return BottomAppBar(
       shape: const CircularNotchedRectangle(),
       notchMargin: 5.0,
-      color: Colors.orange.shade300,
+      //color: Colors.orange.shade300,
+      //#fad6a5
+      color: const Color(0xfffad6a5),
       child: Container(
         margin: const EdgeInsets.only(left: 12.0, right: 12.0),
         child: Row(

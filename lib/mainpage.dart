@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'feedcreator.dart';
-import 'parasat/app_bar.dart';
-import 'parasat/bottom_bar.dart';
+import 'navigators/app_bar.dart';
+import 'navigators/bottom_bar.dart';
 class Mainpage extends StatefulWidget {
   const Mainpage({Key? key}) : super(key: key);
 
@@ -20,15 +20,25 @@ class _MainpageState extends State<Mainpage> {
           padding: const EdgeInsets.symmetric(
             horizontal: 2.0,
           ),
-          color: const Color(0xff0F0F13),
+          color: const Color(0xfff1f1f1),
           child: ListView(
             children: const [
-              FeedCreator(),
-              FeedCreator(),
-              FeedCreator(),
-              FeedCreator(),
-              FeedCreator(),
-              FeedCreator(),
+              FeedCreator(
+                textfield: 'First Feed about something Lorem ips Lorem ipsum asdad ada g qwqhei',
+              ),
+              FeedCreator(
+                textfield: 'Second Feed about something',
+              ),
+              FeedCreator(
+                textfield: 'Third Feed about something',
+              ),
+              FeedCreator(
+                textfield: 'Fourth Feed about something',
+              ),
+              FeedCreator(
+                textfield: 'Fifth Feed about something',
+              ),
+
             ],
           ),
         ),

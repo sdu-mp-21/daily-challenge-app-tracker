@@ -4,11 +4,12 @@ import 'package:flutter/cupertino.dart';
 
 class GeneralAppBar extends StatelessWidget with PreferredSizeWidget {
   const GeneralAppBar({Key? key}) : super(key: key);
-
+//#ffe5b4
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.orange.shade300,
+      //backgroundColor: Colors.orange.shade300,
+      backgroundColor: const Color(0xfffad6a5),
       leading: IconButton(
         icon: const Icon(Icons.menu),
         tooltip: 'Show the Menu',
