@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'models/textfield.dart';
 import 'models/userinfo.dart';
-import 'models/like.dart';
+import 'models/likebtn.dart';
 import 'models/view.dart';
 
 class FeedCreator extends StatefulWidget {
@@ -41,15 +41,15 @@ class _FeedCreatorState extends State<FeedCreator> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
 
-            children: [
+            children: const [
               Padding(
-                  padding: const EdgeInsets.only(
+                  padding:  EdgeInsets.only(
                     left: 24.0,
                     top: 10.0,
                     bottom: 10.0,
                   ),
-                  child: Like()),
-              const Padding(
+                  child: LikeBtn()),
+               Padding(
                 padding: EdgeInsets.only(
                   right: 24.0,
                   top: 10.0,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 
-class Like extends StatelessWidget {
-  late int counter;
+class LikeBtn extends StatelessWidget {
+  const LikeBtn({Key? key}) : super(key: key);
 
   void increments(){
 
@@ -59,29 +59,3 @@ class Like extends StatelessWidget {
 
 }
 
-
-class LikeB1utton extends StatefulWidget {
-  const LikeB1utton({Key? key}) : super(key: key);
-
-
-  @override
-  State createState() => _LikeButton();
-}
-
-class _LikeButton  extends State<LikeButton>{
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      child: const Image(
-        image: AssetImage(
-          'assets/images/like.png',
-        ),
-      ),
-    );
-  }
-}
