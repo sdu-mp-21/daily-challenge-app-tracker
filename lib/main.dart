@@ -54,7 +54,7 @@ class _SplashPageState extends State<SplashPage> {
               begin: Alignment.topCenter),
         ),
         child: Center(
-          child: Image.asset("logo.png"),
+          child: Image.asset("here logo or something"),
         ),
       ),
     );
