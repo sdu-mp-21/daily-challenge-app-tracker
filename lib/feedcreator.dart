@@ -5,8 +5,8 @@ import 'models/likebtn.dart';
 import 'models/view.dart';
 
 class FeedCreator extends StatefulWidget {
-  final dynamic textfield;
-  const FeedCreator({Key? key, this.textfield}) : super(key: key);
+   final dynamic textfield;
+   const FeedCreator({Key? key, this.textfield}) : super(key: key);
 
   @override
   State<FeedCreator> createState() => _FeedCreatorState(textfield);
@@ -35,8 +35,8 @@ class _FeedCreatorState extends State<FeedCreator> {
         children: [
           Userinfo(),
             Textfield(
-              text: textfield,
-            ),
+             text: textfield,
+           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
