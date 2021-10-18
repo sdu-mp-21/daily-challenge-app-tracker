@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 main() => runApp(
-  const Directionality(
+  Directionality(
     textDirection: TextDirection.ltr,
     child: Center(
         child: MyMainWidget()
@@ -11,12 +11,10 @@ main() => runApp(
 );
 
 class MyMainWidget extends StatelessWidget{
-  const MyMainWidget({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
-    return const Directionality(
+    return Directionality(
       textDirection: TextDirection.ltr,
       child: Center (
         child: BigColumn(),
@@ -29,8 +27,6 @@ class MyMainWidget extends StatelessWidget{
 }
 
 class BigColumn extends StatelessWidget {
-  const BigColumn({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) { // [context] будет описан позже
     return  Directionality(
@@ -58,7 +54,7 @@ class BigColumn extends StatelessWidget {
 class Imagination extends StatelessWidget {
   @override
   Widget build(BuildContext context) { // [context] будет описан позже
-    return const Center(
+    return Center(
       child: Expanded(
         child: FittedBox(
           fit: BoxFit.contain, // otherwise the logo will be tiny
