@@ -81,9 +81,9 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             HeaderContainer("Login"),
             Expanded(
-              flex: 1,
+             
               child: Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                padding: EdgeInsets.only(left: 40, right: 40, top: 30),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
@@ -180,16 +180,14 @@ class ButtonWidget extends StatelessWidget {
 
 
 
-
 class HeaderContainer extends StatelessWidget {
   var text = "Login";
-
   HeaderContainer(this.text);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: 250,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [orangeColors, orangeLightColors],
@@ -198,13 +196,11 @@ class HeaderContainer extends StatelessWidget {
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50),topLeft: Radius.circular(50), topRight: Radius.circular(50)
           ,bottomRight: Radius.circular(50)
           )),
-      child: Stack(
-        children: <Widget>[
-          
+      child: Container(
+        child:
           Center(
             child: Image.asset("here smth or logo"),
           ),
-        ],
       ),
     );
   }
