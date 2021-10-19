@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login Design',
+
       home: SplashPage(),
     );
   }
@@ -50,7 +51,7 @@ class _SplashPageState extends State<SplashPage> {
               begin: Alignment.topCenter),
         ),
         child: Center(
-          child: Image.asset("here logo or something"),
+          child: Image.asset("usgifsagfshafa"),
         ),
       ),
     );
@@ -58,7 +59,10 @@ class _SplashPageState extends State<SplashPage> {
 }
 
 
-Color orangeColors = Color(0xffF5591F);
+
+
+
+Color orangeColors = Colors.orange.shade300;
 Color orangeLightColors = Color(0xffF2861E);
 
 
@@ -72,16 +76,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(bottom: 150),
+        padding: EdgeInsets.only(bottom: 0),
         child: Column(
           children: <Widget>[
             HeaderContainer("Login"),
             Expanded(
-             
               child: Container(
-                padding: EdgeInsets.only(left: 40, right: 40, top: 30),
+                padding: EdgeInsets.only(left: 40, right: 40, top: 30,bottom: 100),
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     _textInput(hint: "Email", icon: Icons.email),
                     _textInput(hint: "Password", icon: Icons.vpn_key),
@@ -94,14 +96,17 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Expanded(
                       child: Center(
-                        child: ButtonWidget(btnText: '',),
+                        child: ButtonWidget(btnText: 'Login',),
                       ),
                     ),
                     RichText(
+
                       text: TextSpan(children: [
                         TextSpan(
                             text: "Don't have an account ? ",
-                            style: TextStyle(color: Colors.black)),
+                            style: TextStyle(color: Colors.black,)
+                        ),
+
                         TextSpan(
                             text: "Registor",
                             style: TextStyle(color: orangeColors)),
@@ -111,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             )
+           ,BottomContainer("Login")
           ],
         ),
       ),
@@ -119,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _textInput({controller, hint, icon}) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         color: Colors.white,
@@ -138,6 +144,7 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 
+
 class ButtonWidget extends StatelessWidget {
   var btnText ="";
   var onClick;
@@ -151,7 +158,7 @@ class ButtonWidget extends StatelessWidget {
       onTap: onClick,
       child: Container(
         width: double.infinity,
-        height: 40,
+        height: 50,
         decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [orangeColors, orangeLightColors],
@@ -176,29 +183,51 @@ class ButtonWidget extends StatelessWidget {
 
 
 
+
 class HeaderContainer extends StatelessWidget {
   var text = "Login";
+
   HeaderContainer(this.text);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 250,
+      height: 200,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [orangeColors, orangeLightColors],
               end: Alignment.bottomCenter,
               begin: Alignment.topCenter),
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50),topLeft: Radius.circular(50), topRight: Radius.circular(50)
-          ,bottomRight: Radius.circular(50)
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50),bottomRight: Radius.circular(50)
           )),
       child: Container(
         child:
           Center(
-            child: Image.asset("here smth or logo"),
+            child: Image.asset("asldhsiadhai"),
           ),
       ),
     );
   }
 }
 
+class BottomContainer extends StatelessWidget {
+  var text = "Login";
+
+  BottomContainer(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [orangeColors, orangeLightColors],
+              end: Alignment.bottomCenter,
+              begin: Alignment.topCenter),
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(50), topRight: Radius.circular(50)
+
+          )),
+
+    );
+  }
+}
