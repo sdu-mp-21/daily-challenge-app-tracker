@@ -79,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.only(bottom: 30),
         child: Column(
           children: <Widget>[
+            HeaderContainer("Login"),
             Expanded(
               flex: 1,
               child: Container(
