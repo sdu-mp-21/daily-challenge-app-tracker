@@ -200,13 +200,7 @@ class HeaderContainer extends StatelessWidget {
           )),
       child: Stack(
         children: <Widget>[
-          Positioned(
-              bottom: 20,
-              right: 20,
-              child: Text(
-                text,
-                style: TextStyle(color: Colors.white,fontSize: 20),
-              )),
+          
           Center(
             child: Image.asset("here smth or logo"),
           ),
