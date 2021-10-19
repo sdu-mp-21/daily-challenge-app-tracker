@@ -195,7 +195,9 @@ class HeaderContainer extends StatelessWidget {
               colors: [orangeColors, orangeLightColors],
               end: Alignment.bottomCenter,
               begin: Alignment.topCenter),
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100))),
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50),topLeft: Radius.circular(50), topRight: Radius.circular(50)
+          ,bottomRight: Radius.circular(50)
+          )),
       child: Stack(
         children: <Widget>[
           Positioned(
