@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(const Duration(milliseconds: 4000), () {
+    Timer(const Duration(milliseconds: 100), () {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => LoginPage()));
     });
@@ -189,7 +189,7 @@ class HeaderContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height * 0.3,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [orangeColors, orangeLightColors],
