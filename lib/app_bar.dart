@@ -18,10 +18,7 @@ class GeneralAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('This is should display the account info')));
-            },
+            onPressed: () => Navigator.pushNamed(context, '/third'),
             icon: const Icon(Icons.account_circle))
       ],
     );
