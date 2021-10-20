@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'main_page.dart';
 import 'Daryn/main_page.dart';
+import 'marlen/main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const MainPage(),
         '/second': (context) => const Mainpage(),
+        '/third': (context) => SplashPage(),
       },
     );
   }
