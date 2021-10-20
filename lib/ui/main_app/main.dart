@@ -1,18 +1,18 @@
 import 'package:challenge_tracker/navigators/app_bar.dart';
 import 'package:challenge_tracker/navigators/bottom_bar.dart';
+import 'package:challenge_tracker/ui/pages/auth/auth_page.dart';
 import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
 import 'package:flutter/material.dart';
-import '../pages/splash/splash_page.dart';
 import 'package:flutter/cupertino.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MainApp());
 }
 
-class MyApp extends StatelessWidget {
+class MainApp extends StatelessWidget {
   static const String _title = '21 days Challenge';
 
-  const MyApp({Key? key}) : super(key: key);
+  const MainApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const MainPage(),
         '/second': (context) => const FeedMainPage(),
-        '/third': (context) => const SplashPage(),
+        '/third': (context) =>  Authorization(),
       },
     );
   }

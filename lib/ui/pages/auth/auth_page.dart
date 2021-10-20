@@ -1,0 +1,46 @@
+import 'package:challenge_tracker/ui/widgets/color_custom.dart';
+import 'package:flutter/material.dart';
+
+class Authorization extends StatefulWidget {
+  static Widget getHeader() {
+    return Container(
+      height: 150,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [ColorsCustom.orangeColors, ColorsCustom.orangeLightColors],
+              end: Alignment.bottomCenter,
+              begin: Alignment.topCenter),
+          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(50),bottomRight: Radius.circular(50)
+          )),
+      child:Container(
+        child: Image.network(
+          'assets/images/mental.png',height: 120,width: 120,
+        ),
+        alignment: Alignment.center,
+      ),
+    );
+  }
+
+  static Widget getFooter() {
+    return Container(
+      height: 100,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [ColorsCustom.orangeColors, ColorsCustom.orangeLightColors],
+              end: Alignment.topCenter,
+              begin: Alignment.bottomCenter),
+          borderRadius: const BorderRadius.only(topLeft: Radius.circular(50), topRight: Radius.circular(50)
+          )),
+    );
+  }
+
+  @override
+  State<StatefulWidget> createState() => _AuthorizationState();
+}
+
+class _AuthorizationState extends State<Authorization> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
