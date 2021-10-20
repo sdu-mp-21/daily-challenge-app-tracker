@@ -9,21 +9,21 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: GeneralAppBar(),
-      body: Center(
+    return Scaffold(
+      appBar: const GeneralAppBar(),
+      body: const Center(
         child: Text(
           'This is the home page',
           style: TextStyle(fontSize: 24),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: const FloatingActionButton(
         tooltip: "Centre FAB",
         onPressed: null,
         child: Icon(Icons.add),
       ),
-      bottomNavigationBar: GeneralBottomBar(),
+      bottomNavigationBar: GeneralBottomBar(true, false),
     );
   }
 }

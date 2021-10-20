@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class GeneralBottomBar extends StatelessWidget {
-  const GeneralBottomBar({Key? key}) : super(key: key);
+  bool first_active = true;
+  bool second_active = false;
+  GeneralBottomBar(this.first_active, this.second_active);
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +18,22 @@ class GeneralBottomBar extends StatelessWidget {
         children: <Widget>[
           IconButton(
             //update the bottom app bar view each time an item is clicked
-            onPressed: () {},
+            tooltip: "Home",
+            onPressed: () => Navigator.pop(context),
             iconSize: 27.0,
             icon: Icon(Icons.home,
                 //darken the icon if it is selected or else give it a different color
-                color: Colors.white),
+                color: first_active ? Colors.white : Colors.grey.shade400),
           ),
           IconButton(
             //update the bottom app bar view each time an item is clicked
-            onPressed: () {},
+            tooltip: "Feed",
+            onPressed: () => Navigator.pushNamed(context, '/second'),
             iconSize: 27.0,
             icon: Icon(Icons.chat,
+
                 //darken the icon if it is selected or else give it a different color
-                color: Colors.grey.shade400),
+                color: second_active ? Colors.white : Colors.grey.shade400),
           )
         ],
       ),
