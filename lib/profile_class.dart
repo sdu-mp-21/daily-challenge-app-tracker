@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+
 
 main() => runApp(StaticApp());
 class StaticApp extends StatelessWidget {
@@ -11,144 +13,163 @@ class StaticApp extends StatelessWidget {
   }
 }
 
-class MyMainWidget extends StatelessWidget{
+class MyMainWidget extends StatelessWidget {
+  const MyMainWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        //backgroundColor: Colors.indigo,
-        backgroundColor: Colors.deepOrange,
-        title: Text('Here is your profile!'),
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Icon(Icons.edit),
+
+        body: SafeArea(
+
+          child: Column(
+
+            children: [
+
+              Container(
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkTeyKKhCeXGhe_pdatQghtspNKST0BopZXA&usqp=CAU"
+                        ),
+                        fit: BoxFit.cover
+                    )
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 200,
+                  child: Container(
+                    alignment: const Alignment(0.0,2.5),
+                    child: const CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          "SMD.jpg"
+                        //Image to profile
+                      ),
+                      radius: 60.0,
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(
+                height: 60,
+              ),
+              const Text(
+                'Serik Syzdykov'
+                ,style: TextStyle(
+                  fontSize: 25.0,
+                  color:Colors.blueGrey,
+                  letterSpacing: 2.0,
+                  fontWeight: FontWeight.w400
+              ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                "Almaty, Kazakhstan"
+                ,style: TextStyle(
+                  fontSize: 18.0,
+                  color:Colors.black45,
+                  letterSpacing: 2.0,
+                  fontWeight: FontWeight.w300
+              ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                "Mobile Developer"
+                ,style: TextStyle(
+                  fontSize: 15.0,
+                  color:Colors.black45,
+                  letterSpacing: 2.0,
+                  fontWeight: FontWeight.w300
+              ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Card(
+                  margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 8.0),
+
+                  elevation: 2.0,
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 12,horizontal: 30),
+                      child: Text("Watch the news",style: TextStyle(
+                          letterSpacing: 2.0,
+                          fontWeight: FontWeight.w300
+                      ),))
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const Text(
+                "NickName:SSurikkiller\nID: 190107046"
+                ,style: TextStyle(
+                  fontSize: 18.0,
+                  color:Colors.black45,
+                  letterSpacing: 2.0,
+                  fontWeight: FontWeight.w300
+              ),
+              ),
+              Card(
+                margin: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 8.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: const [
+                            Text("Challenges",
+                              style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.w600
+                              ),),
+                            SizedBox(
+                              height: 7,
+                            ),
+                            Text("5 today",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.w300
+                              ),)
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child:
+                        Column(
+                          children: const [
+                            Text("Habits today",
+                              style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.w600
+                              ),),
+                            SizedBox(
+                              height: 7,
+                            ),
+                            Text("0",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.w300
+                              ),)
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: Center(
-        child: AspectRatio(
-          aspectRatio: 1.0,
-          child: BigColumn(),
-        ),
-      ),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.lightBlue,
-          child: Center(
-            child: Text("Something here!"),
-          ),
-        ),
-      ),
-    );
-  }
-
-}
-
-class BigColumn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) { // [context] будет описан позже
-    return Container(
-        color: Colors.limeAccent,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Imagination(),
-              SmallColumn(),
-              NumbRow(),
-            ]
-        ),
-        //color: Colors.blue,
-        //padding: EdgeInsets.all(20),
-      );
-
-
-  }
-}
-
-
-
-class Imagination extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) { // [context] будет описан позже
-    return Center(
-          child: _buildthis(),
-    );
-  }
-  Widget _buildthis(){
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: const Color(0xff7c94b6),
-        image: const DecorationImage(
-          image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-          fit: BoxFit.fill,
-        ),
-        border: Border.all(
-          color: Colors.black,
-          width: 8,
-        ),
-
-      ),
-    );
-  }
-  // Widget _buildShinyCircle() {
-  //   return Container(
-  //     decoration: BoxDecoration(
-  //       shape: BoxShape.circle,
-  //       gradient: RadialGradient(
-  //         colors: [
-  //           Colors.lightBlueAccent,
-  //           Colors.blueAccent,
-  //         ],
-  //         center: Alignment(-0.3, -0.5),
-  //       ),
-  //       boxShadow: [
-  //         BoxShadow(blurRadius: 20),
-  //       ],
-  //     ),
-  //   );
-  // }
-}
-
-//Numb not all
-class NumbRow extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) { // [context] будет описан позже
-    return Row(
-      children:const <Widget>[
-        Expanded(
-          child: Text('Challenges today: \n 0', textAlign: TextAlign.center),
-        ),
-        Expanded(
-          child: Text('Habits today: \n 0', textAlign: TextAlign.center),
-        ),
-        Expanded(
-          child: FittedBox(
-            fit: BoxFit.contain, // otherwise the logo will be tiny
-            child: FlutterLogo(),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class SmallColumn extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) { // [context] будет описан позже
-    return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: const <Widget>[
-          Text('NickName: SSurikkiller', textAlign: TextAlign.center, style: TextStyle(fontStyle: FontStyle.italic)),
-          Text('ID: 190107046', textAlign: TextAlign.center,style: TextStyle(fontStyle: FontStyle.italic)),
-          Text('Email: SSurikkiller@mail.ru',textAlign: TextAlign.center,style: TextStyle(fontStyle: FontStyle.italic))
-        ],
-      ),
+        )
     );
   }
 }
