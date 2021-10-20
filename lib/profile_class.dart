@@ -1,25 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-main() => runApp(
-  Directionality(
-    textDirection: TextDirection.ltr,
-    child: Center(
-        child: MyMainWidget()
-    ),
-  ),
-);
+main() => runApp(StaticApp());
+class StaticApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyMainWidget(),
+    );
+  }
+}
 
 class MyMainWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: Center (
-        child: BigColumn(),
-        //color: Colors.blue,
-        //padding: EdgeInsets.all(20),
+    return Scaffold(
+      appBar: AppBar(
+        //backgroundColor: Colors.indigo,
+        backgroundColor: Colors.deepOrange,
+        title: Text('Here is your profile!'),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Icon(Icons.edit),
+          ),
+        ],
+      ),
+      body: Center(
+        child: AspectRatio(
+          aspectRatio: 1.0,
+          child: BigColumn(),
+        ),
+      ),
+      drawer: Drawer(
+        child: Container(
+          color: Colors.lightBlue,
+          child: Center(
+            child: Text("Something here!"),
+          ),
+        ),
       ),
     );
   }
@@ -29,9 +49,8 @@ class MyMainWidget extends StatelessWidget{
 class BigColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) { // [context] будет описан позже
-    return  Directionality(
-      textDirection: TextDirection.ltr,
-      child: Center (
+    return Container(
+        color: Colors.limeAccent,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -43,8 +62,8 @@ class BigColumn extends StatelessWidget {
         ),
         //color: Colors.blue,
         //padding: EdgeInsets.all(20),
-      ),
-    );
+      );
+
 
   }
 }
@@ -55,14 +74,43 @@ class Imagination extends StatelessWidget {
   @override
   Widget build(BuildContext context) { // [context] будет описан позже
     return Center(
-      child: Expanded(
-        child: FittedBox(
-          fit: BoxFit.contain, // otherwise the logo will be tiny
-          child: FlutterLogo(),
+          child: _buildthis(),
+    );
+  }
+  Widget _buildthis(){
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: const Color(0xff7c94b6),
+        image: const DecorationImage(
+          image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+          fit: BoxFit.fill,
         ),
+        border: Border.all(
+          color: Colors.black,
+          width: 8,
+        ),
+
       ),
     );
   }
+  // Widget _buildShinyCircle() {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       shape: BoxShape.circle,
+  //       gradient: RadialGradient(
+  //         colors: [
+  //           Colors.lightBlueAccent,
+  //           Colors.blueAccent,
+  //         ],
+  //         center: Alignment(-0.3, -0.5),
+  //       ),
+  //       boxShadow: [
+  //         BoxShadow(blurRadius: 20),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
 
 //Numb not all
