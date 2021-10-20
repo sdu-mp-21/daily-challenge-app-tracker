@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:async';
@@ -13,7 +14,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login Design',
-
       home: SplashPage(),
     );
   }
@@ -27,8 +27,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -38,7 +36,6 @@ class _SplashPageState extends State<SplashPage> {
           context, MaterialPageRoute(builder: (context) => LoginPage()));
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +48,12 @@ class _SplashPageState extends State<SplashPage> {
               begin: Alignment.topCenter),
         ),
         child: Center(
-          child: Image.asset("usgifsagfshafa"),
+          child: Image.asset(""),
         ),
       ),
     );
   }
 }
-
-
-
 
 
 Color orangeColors = Colors.orange.shade300;
@@ -70,7 +64,6 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
@@ -82,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
             HeaderContainer("Login"),
             Expanded(
               child: Container(
-                padding: EdgeInsets.only(left: 40, right: 40, top: 30,bottom: 100),
+                padding: EdgeInsets.only(left: 60, right: 60, top: 30,bottom: 80),
                 child: Column(
                   children: <Widget>[
                     _textInput(hint: "Email", icon: Icons.email),
@@ -96,7 +89,15 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Expanded(
                       child: Center(
-                        child: ButtonWidget(btnText: 'Login',),
+                        child: ButtonWidget(
+                          onClick: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RegPage()));
+                          },
+                          btnText: "LOGIN",
+                        ),
                       ),
                     ),
                     RichText(
@@ -123,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _textInput({controller, hint, icon}) {
+  Widget _textInput({hint, icon}) {
     return Container(
       margin: EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
@@ -132,7 +133,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
       padding: EdgeInsets.only(left: 10),
       child: TextFormField(
-        controller: controller,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hint,
@@ -144,12 +144,9 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 
-
 class ButtonWidget extends StatelessWidget {
   var btnText ="";
   var onClick;
-
-
   ButtonWidget({required this.btnText, this.onClick});
 
   @override
@@ -157,13 +154,9 @@ class ButtonWidget extends StatelessWidget {
     return InkWell(
       onTap: onClick,
       child: Container(
-        width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [orangeColors, orangeLightColors],
-              end: Alignment.centerLeft,
-              begin: Alignment.centerRight),
+         color: orangeLightColors,
           borderRadius: BorderRadius.all(
             Radius.circular(100),
           ),
@@ -174,7 +167,7 @@ class ButtonWidget extends StatelessWidget {
           style: TextStyle(
               fontSize: 20,
               color: Colors.white,
-              fontWeight: FontWeight.bold),
+              fontWeight: FontWeight.bold, letterSpacing: 1),
         ),
       ),
     );
@@ -183,10 +176,8 @@ class ButtonWidget extends StatelessWidget {
 
 
 
-
 class HeaderContainer extends StatelessWidget {
   var text = "Login";
-
   HeaderContainer(this.text);
 
   @override
@@ -200,15 +191,17 @@ class HeaderContainer extends StatelessWidget {
               begin: Alignment.topCenter),
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50),bottomRight: Radius.circular(50)
           )),
-      child: Container(
-        child:
-          Center(
-            child: Image.asset("asldhsiadhai"),
-          ),
+      child:Container(
+        child: new Image.network(
+          'assets/mental.png',height: 150,width: 150,
+        ),
+        alignment: Alignment.center,
       ),
     );
   }
 }
+
+
 
 class BottomContainer extends StatelessWidget {
   var text = "Login";
@@ -222,12 +215,86 @@ class BottomContainer extends StatelessWidget {
       decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [orangeColors, orangeLightColors],
-              end: Alignment.bottomCenter,
-              begin: Alignment.topCenter),
+              end: Alignment.topCenter,
+              begin: Alignment.bottomCenter),
           borderRadius: BorderRadius.only(topLeft: Radius.circular(50), topRight: Radius.circular(50)
-
           )),
+    );
+  }
+}
 
+
+
+class RegPage extends StatefulWidget {
+  @override
+  _RegPageState createState() => _RegPageState();
+}
+
+class _RegPageState extends State<RegPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.only(bottom: 30),
+        child: Column(
+          children: <Widget>[
+            HeaderContainer("Register"),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(left: 60, right: 60, top: 30),
+                child: Column(
+                  children: <Widget>[
+                    _textInput(hint: "Fullname", icon: Icons.person),
+                    _textInput(hint: "Email", icon: Icons.email),
+                    _textInput(hint: "Phone Number", icon: Icons.call),
+                    _textInput(hint: "Password", icon: Icons.vpn_key),
+                    Expanded(
+                      child: Center(
+                        child: ButtonWidget(
+                          btnText: "REGISTER",
+                          onClick: (){
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: "Already a member ? ",
+                            style: TextStyle(color: Colors.black,
+                            letterSpacing: 2)),
+                        TextSpan(
+                            text: "Login",
+                            style: TextStyle(color: orangeColors)),
+                      ]),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+
+  Widget _textInput({hint, icon}) {
+    return Container(
+      margin: EdgeInsets.only(top: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(40)),
+        color: Colors.white,
+      ),
+      padding: EdgeInsets.only(left: 20),
+      child: TextFormField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          hintText: hint,
+          prefixIcon: Icon(icon),
+        ),
+      ),
     );
   }
 }
