@@ -1,9 +1,8 @@
-import 'package:challenge_tracker/ui/widgets/text_field.dart';
+import 'package:challenge_tracker/ui/pages/feed/text_field.dart';
 import 'package:challenge_tracker/ui/widgets/user_info.dart';
 import 'package:challenge_tracker/ui/widgets/view.dart';
 import 'package:flutter/material.dart';
-
-import 'like_button.dart';
+import '../../widgets/like_button.dart';
 
 class FeedCreator extends StatefulWidget {
   final dynamic textField;

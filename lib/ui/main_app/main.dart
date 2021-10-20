@@ -1,7 +1,8 @@
+import 'package:challenge_tracker/navigators/app_bar.dart';
+import 'package:challenge_tracker/navigators/bottom_bar.dart';
+import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
 import 'package:flutter/material.dart';
-import '../splash_page.dart';
-import '../widgets/app_bar.dart';
-import '../widgets/bottom_bar.dart';
+import '../pages/splash/splash_page.dart';
 import 'package:flutter/cupertino.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const MainPage(),
-        '/second': (context) => const MainPage(),
+        '/second': (context) => const FeedMainPage(),
         '/third': (context) => const SplashPage(),
       },
     );

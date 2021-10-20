@@ -10,49 +10,47 @@ class LikeBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children:  [
-          LikeButton(
-            size: 30.0,
-            circleColor: const CircleColor(start: Colors.red, end: Colors.blue),
-            bubblesColor: const BubblesColor(
-              dotPrimaryColor: Colors.red,
-              dotSecondaryColor: Colors.yellow,
-            ),
-            likeBuilder: (bool isLiked) {
-              return Icon(
-                Icons.favorite,
-                color: isLiked ? Colors.red : Colors.grey,
-                size: 30.0,
-              );
-            },
-            likeCount: 99,
-            countBuilder:  (var count, var isLiked, var txt)  {
-              var color = isLiked ? Colors.red : Colors.grey;
-               Widget result;
-              if(count == 0) {
-                print(count);
-                result = Text(
-                  '',
-                    style: TextStyle(
-                      color: color, fontSize: 25,
-                    ),
-                );
-              }
-              else{
-                result = Text(
-                  txt,
-                  style: TextStyle(color: color, fontSize: 15,),
-                );
-              }
-              return result;
-            },
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children:  [
+        LikeButton(
+          size: 30.0,
+          circleColor: const CircleColor(start: Colors.red, end: Colors.blue),
+          bubblesColor: const BubblesColor(
+            dotPrimaryColor: Colors.red,
+            dotSecondaryColor: Colors.yellow,
           ),
-        ],
-      ),
+          likeBuilder: (bool isLiked) {
+            return Icon(
+              Icons.favorite,
+              color: isLiked ? Colors.red : Colors.grey,
+              size: 30.0,
+            );
+          },
+          likeCount: 99,
+          countBuilder:  (var count, var isLiked, var txt)  {
+            var color = isLiked ? Colors.red : Colors.grey;
+             Widget result;
+            if(count == 0) {
+              // print(count);
+              result = Text(
+                '',
+                  style: TextStyle(
+                    color: color, fontSize: 25,
+                  ),
+              );
+            }
+            else {
+              result = Text(
+                txt,
+                style: TextStyle(color: color, fontSize: 15,),
+              );
+            }
+            return result;
+          },
+        ),
+      ],
     );
   }
 

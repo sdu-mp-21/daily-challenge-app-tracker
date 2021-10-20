@@ -88,13 +88,13 @@ class _LoginPageState extends State<LoginPage> {
                     RichText(
 
                       text: TextSpan(children: [
-                        TextSpan(
-                            text: "Don't have an account ? ",
+                        const TextSpan(
+                            text: "Don't have an account?",
                             style: TextStyle(color: Colors.black,)
                         ),
 
                         TextSpan(
-                            text: "Registor",
+                            text: "Register",
                             style: TextStyle(color: orangeColors)),
                       ]),
                     )
@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
 class ButtonWidget extends StatelessWidget {
   var btnText ="";
   var onClick;
-  ButtonWidget({required this.btnText, this.onClick});
+  ButtonWidget({Key? key, required this.btnText, this.onClick}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +163,7 @@ class ButtonWidget extends StatelessWidget {
 
 class HeaderContainer extends StatelessWidget {
   var text = "Login";
-  HeaderContainer(this.text);
+  HeaderContainer(this.text, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -211,6 +211,8 @@ class BottomContainer extends StatelessWidget {
 
 
 class RegPage extends StatefulWidget {
+  const RegPage({Key? key}) : super(key: key);
+
   @override
   _RegPageState createState() => _RegPageState();
 }
@@ -220,13 +222,13 @@ class _RegPageState extends State<RegPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(bottom: 30),
+        padding: const EdgeInsets.only(bottom: 30),
         child: Column(
           children: <Widget>[
             HeaderContainer("Register"),
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(left: 60, right: 60, top: 30),
+                margin: const EdgeInsets.only(left: 60, right: 60, top: 30),
                 child: Column(
                   children: <Widget>[
                     _textInput(hint: "Fullname", icon: Icons.person),
@@ -245,7 +247,7 @@ class _RegPageState extends State<RegPage> {
                     ),
                     RichText(
                       text: TextSpan(children: [
-                        TextSpan(
+                        const TextSpan(
                             text: "Already a member ? ",
                             style: TextStyle(color: Colors.black,
                                 letterSpacing: 2)),
@@ -268,14 +270,14 @@ class _RegPageState extends State<RegPage> {
   Widget _textInput({hint, icon}) {
     return Container(
       margin: EdgeInsets.only(top: 20),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(40)),
         color: Colors.white,
       ),
-      padding: EdgeInsets.only(left: 20),
+      padding: const EdgeInsets.only(left: 20),
       child: TextFormField(
         decoration: InputDecoration(
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
           hintText: hint,
           prefixIcon: Icon(icon),
         ),

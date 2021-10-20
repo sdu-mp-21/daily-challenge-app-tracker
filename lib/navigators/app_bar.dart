@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class GeneralAppBar extends StatelessWidget with PreferredSizeWidget {
   const GeneralAppBar({Key? key}) : super(key: key);
-//#ffe5b4
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      //backgroundColor: Colors.orange.shade300,
-      backgroundColor: const Color(0xfffad6a5),
+      backgroundColor: Colors.orange.shade300,
       leading: IconButton(
         icon: const Icon(Icons.menu),
         tooltip: 'Show the Menu',
@@ -18,10 +18,7 @@ class GeneralAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('This is should display the account info')));
-            },
+            onPressed: () => Navigator.pushNamed(context, '/third'),
             icon: const Icon(Icons.account_circle))
       ],
     );
