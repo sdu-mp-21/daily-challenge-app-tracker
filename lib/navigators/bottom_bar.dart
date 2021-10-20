@@ -1,7 +1,6 @@
+import 'package:challenge_tracker/ui/main_app/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'm_page.dart';
-import '../mainpage.dart';
 
 class GeneralBottomBar extends StatelessWidget {
   const GeneralBottomBar({Key? key}) : super(key: key);
@@ -39,7 +38,7 @@ class GeneralBottomBar extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context,
                   MaterialPageRoute(
-                      builder: (context) => const Mainpage()
+                      builder: (context) => const MainPage()
                   ),
                 );},
               iconSize: 27.0,

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-
 
 class GeneralAppBar extends StatelessWidget with PreferredSizeWidget {
   const GeneralAppBar({Key? key}) : super(key: key);

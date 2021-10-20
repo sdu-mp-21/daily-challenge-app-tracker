@@ -1,20 +1,24 @@
+import 'package:challenge_tracker/ui/widgets/text_field.dart';
+import 'package:challenge_tracker/ui/widgets/user_info.dart';
+import 'package:challenge_tracker/ui/widgets/view.dart';
 import 'package:flutter/material.dart';
-import 'models/textfield.dart';
-import 'models/userinfo.dart';
-import 'models/likebtn.dart';
-import 'models/view.dart';
+
+import 'like_button.dart';
 
 class FeedCreator extends StatefulWidget {
-  final dynamic textfield;
-  const FeedCreator({Key? key, this.textfield}) : super(key: key);
+  final dynamic textField;
+
+  const FeedCreator({Key? key, this.textField}) : super(key: key);
 
   @override
-  State<FeedCreator> createState() => _FeedCreatorState(textfield);
+  State<FeedCreator> createState() => _FeedCreatorState(textField);
 }
 
 class _FeedCreatorState extends State<FeedCreator> {
-   dynamic textfield;
+  dynamic textfield;
+
   _FeedCreatorState(this.textfield);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,22 +38,21 @@ class _FeedCreatorState extends State<FeedCreator> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Userinfo(),
-            Textfield(
-              text: textfield,
-            ),
+          TextFieldCustom(
+            text: textfield,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
-
             children: const [
               Padding(
-                  padding:  EdgeInsets.only(
+                  padding: EdgeInsets.only(
                     left: 24.0,
                     top: 10.0,
                     bottom: 10.0,
                   ),
                   child: LikeBtn()),
-               Padding(
+              Padding(
                 padding: EdgeInsets.only(
                   right: 24.0,
                   top: 10.0,

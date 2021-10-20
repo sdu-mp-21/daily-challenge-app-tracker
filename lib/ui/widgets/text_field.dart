@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Textfield extends StatelessWidget {
+class TextFieldCustom extends StatelessWidget {
   final dynamic text;
-   const Textfield({Key? key, this.text}) : super(key: key);
+   const TextFieldCustom({Key? key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
