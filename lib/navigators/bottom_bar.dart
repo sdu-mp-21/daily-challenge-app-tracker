@@ -39,7 +39,7 @@ class GeneralBottomBar extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context,
                   MaterialPageRoute(
-                      builder: (context) => const Mainpage()
+                      builder: (context) => const  Mainpage()
                   ),
                 );},
               iconSize: 27.0,

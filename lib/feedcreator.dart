@@ -5,16 +5,15 @@ import 'models/likebtn.dart';
 import 'models/view.dart';
 
 class FeedCreator extends StatefulWidget {
-   final dynamic textfield;
-   const FeedCreator({Key? key, this.textfield}) : super(key: key);
+  final dynamic textfield;
+
+  const FeedCreator({Key? key, this.textfield}) : super(key: key);
 
   @override
-  State<FeedCreator> createState() => _FeedCreatorState(textfield);
+  State<FeedCreator> createState() => _FeedCreatorState();
 }
 
 class _FeedCreatorState extends State<FeedCreator> {
-   dynamic textfield;
-  _FeedCreatorState(this.textfield);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,24 +31,24 @@ class _FeedCreatorState extends State<FeedCreator> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Userinfo(),
-            Textfield(
-             text: textfield,
-           ),
+          Textfield(
+            text: widget.textfield,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
-
             children: const [
               Padding(
-                  padding:  EdgeInsets.only(
+                  padding: EdgeInsets.only(
                     left: 24.0,
                     top: 10.0,
                     bottom: 10.0,
                   ),
                   child: LikeBtn()),
-               Padding(
+              Padding(
                 padding: EdgeInsets.only(
                   right: 24.0,
                   top: 10.0,

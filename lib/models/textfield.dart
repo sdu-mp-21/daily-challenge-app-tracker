@@ -2,15 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
 
-class Textfield extends StatelessWidget {
+class Textfield extends StatefulWidget {
    dynamic text;
-   dynamic readMore = '...read more', less = 'less';
+
     Textfield({Key? key, this.text}) : super(key: key);
+
+  @override
+  State<Textfield> createState() => _TextfieldState();
+}
+
+class _TextfieldState extends State<Textfield> {
+   dynamic readMore = '...read more', less = 'less';
 
    Widget readMoreWidget () {
 
      return  ReadMoreText(
-       text ?? 'No Text',
+       widget.text ?? 'No Text',
        textAlign: TextAlign.justify,
        trimLines: 3,
        colorClickableText: Colors.grey,
@@ -29,12 +36,14 @@ class Textfield extends StatelessWidget {
          fontStyle: FontStyle.italic,
          color: Colors.grey,
        ),
-       style: GoogleFonts.lato(
 
+
+       style:  GoogleFonts.lato(
          fontSize: 22,
          fontWeight: FontWeight.w600,
          color: const Color(0xff000080),
        ),
+
      );
    }
 

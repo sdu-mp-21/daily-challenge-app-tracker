@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import '../feedcreator.dart';
+//import '../feedcreator.dart';
 import '../mainpage.dart';
-
-import '../database_helper.dart';
-import '../models/text.dart';
 
 class StatusCreator extends StatefulWidget {
   const StatusCreator({Key? key}) : super(key: key);
+
+
 
   @override
   _StatusCreator createState() => _StatusCreator();
 }
 
 class _StatusCreator extends State<StatusCreator> {
-  String _text = '', s = '';
-  List<FeedCreator> feeds = <FeedCreator>[];
+  String _text = '';
   final _controller = TextEditingController();
 
   _changeText() {
@@ -34,14 +32,6 @@ class _StatusCreator extends State<StatusCreator> {
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-
-  List<FeedCreator> getFeeds() {
-    return feeds;
-  }
-
-  void addFeed(FeedCreator feed) {
-    feeds.add(feed);
   }
 
   //CANCEL BUTTON
@@ -66,6 +56,7 @@ class _StatusCreator extends State<StatusCreator> {
         ),
       ),
       onPressed: () {
+        Mainpage.isCreateBtn =false;
         Navigator.pop(context);
       },
     );
@@ -93,16 +84,11 @@ class _StatusCreator extends State<StatusCreator> {
         ),
       ),
       onPressed: () {
-        s = _controller.text;
-        //addFeed(FeedCreator(textfield: s,));
-
-        //print('getFeeds().length:  ${getFeeds().length}' );
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Mainpage(),
-          ),
-        );
+        Mainpage.isCreateBtn =true;
+        //Accumltr.acc.addText(text);
+        print("create btn: $text");
+       // _feedGetter.addFeed(_addNewFeed(text));
+        Navigator.pop(context);
       },
     );
   }
@@ -136,15 +122,7 @@ class _StatusCreator extends State<StatusCreator> {
             ),
             maxLength: 100,
             minLines: 1,
-            onSubmitted: (value) async {
-              if (value.isNotEmpty) {
-                DatabaseHelper _dbHelper = DatabaseHelper();
-                Texts text = Texts(text: value);
-                await _dbHelper.insertText(text);
-
-                print("new Feed created");
-              }
-            },
+            onSubmitted: (value)  {},
           ),
         ),
       ],
@@ -154,14 +132,13 @@ class _StatusCreator extends State<StatusCreator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff0f0f0),
+      backgroundColor: const Color(0xfff0f0f0),
       body: Center(
-
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            //LOGO
             Container(
               width: 100.0,
               height: 100.0,
@@ -170,25 +147,25 @@ class _StatusCreator extends State<StatusCreator> {
                 image: AssetImage('assets/images/statusIcon.png'),
               ),
             ),
-
+            // LOGO'S TEXT
             Container(
               margin: const EdgeInsets.only(
                 bottom: 15.0,
               ),
-              child:const  Text('Create Status',
-              style: TextStyle(
-                fontSize: 32.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.lightGreen,
+              child: const Text(
+                'Create Status',
+                style: TextStyle(
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.lightGreen,
                 ),
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 24.0,
-              ),
-                child: _textField()
-            ),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 24.0,
+                ),
+                child: _textField()),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -203,3 +180,5 @@ class _StatusCreator extends State<StatusCreator> {
     );
   }
 }
+
+

@@ -1,53 +1,55 @@
+import 'package:daily_challenge_tracker/feedcreator.dart';
 import 'package:flutter/material.dart';
 import 'feedcreator.dart';
 import 'navigators/app_bar.dart';
 import 'navigators/bottom_bar.dart';
 import 'screens/status_creator_page.dart';
-import 'status_create_helper.dart';
-import 'database_helper.dart';
+
+//import 'sanzhar/create_page.dart';
+
 
 class Mainpage extends StatefulWidget {
   const Mainpage({Key? key}) : super(key: key);
-
+  static  bool isCreateBtn = false;
   @override
   _MainpageState createState() => _MainpageState();
 }
 
 class _MainpageState extends State<Mainpage> {
-//  static const dynamic value = 'Second Feed';
-  final DatabaseHelper _dbHelper =  DatabaseHelper();
-  StatusCreateHelper sch = StatusCreateHelper();
+  int _count = 0;
+  dynamic text;
 
-  void check() {
-    ///print('feedcreator.length : ');
+  void _addNewFeeds() {
+    setState(() {
+      ++_count;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    //dynamic s = Accumltr.acc.getText();
+    //dynamic s = 'Accumltr.acc.getText()';
+    List<Widget> _feeds  = List.generate(_count, (int i) => const FeedCreator(textfield: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non porttitor lacus. Integer luctus aliquet maximus. Nam diam diam, laoreet in lorem ullamcorper, varius ornare arcu. Pellentesque tincidunt posuere dictum. Curabitur vehicula leo sit amet malesuada tempor.'));
+
     return Scaffold(
       appBar: const GeneralAppBar(),
-      body: SafeArea(
+      body:  SafeArea(
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(
             horizontal: 2.0,
           ),
           color: const Color(0xfff1f1f1),
-          child: FutureBuilder(
-            initialData: [],
-              future: _dbHelper.getTexts(),
-              builder: (context, snapshot) {
-                check();
-                return ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
+          child: ListView.builder(
+            itemCount: _feeds.length,
+            itemBuilder: (context, index) {
+              //print("working! : ");
+              return _feeds[index];
 
-                    print("work! : ${snapshot.data}");
-                    return const FeedCreator(textfield: " appBar: const GeneralAppBar() ppBar:  onst GeneralAppBar onst GeneralAppBar onst GeneralAppBar const Genera ppBar: const Genera");
-                  },
-                );
-              }),
+            },
+          ),
         ),
+
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
@@ -56,13 +58,35 @@ class _MainpageState extends State<Mainpage> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const StatusCreator()),
-          ).then((value) => () {
-                setState(() {});
-              });
+          ).then((value) => {
+            if(Mainpage.isCreateBtn){
+              setState(() {
+                _addNewFeeds();
+              })
+            }
+            else{}
+          });
         },
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: const GeneralBottomBar(),
     );
   }
+}
+
+class Accumltr {
+  dynamic text;
+  static  Accumltr acc = Accumltr();
+  Accumltr({this.text});
+
+  void addText(dynamic text) {
+    acc.text = text;
+    //print('got text: ');
+  }
+
+  dynamic getText() {
+    //print('return text ${acc.text}');
+    return acc.text;
+  }
+
 }
