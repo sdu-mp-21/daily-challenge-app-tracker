@@ -18,22 +18,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
 
         toolbarHeight: 150,
-        flexibleSpace: Container(
-
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [ColorsCustom.orangeColors, ColorsCustom.orangeLightColors],
-                end: Alignment.bottomCenter,
-                begin: Alignment.topCenter),
-
-            ),
-        child:Container(
-          child: Image.network(
-            'assets/images/mental.png',height: 120,width: 120,
-          ),
-          alignment: Alignment.center,
-        ),
-      ),
+        flexibleSpace: Authorization.getHeader(),
 
       ),
 

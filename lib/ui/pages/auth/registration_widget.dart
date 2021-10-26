@@ -18,22 +18,7 @@ class _RegPageState extends State<RegPage> {
       appBar: AppBar(
 
         toolbarHeight: 150,
-        flexibleSpace: Container(
-
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [ColorsCustom.orangeColors, ColorsCustom.orangeLightColors],
-                end: Alignment.bottomCenter,
-                begin: Alignment.topCenter),
-
-          ),
-          child:Container(
-            child: Image.network(
-              'assets/images/mental.png',height: 120,width: 120,
-            ),
-            alignment: Alignment.center,
-          ),
-        ),
+        flexibleSpace: Authorization.getHeader(),
       ),
 
       body: Container(
@@ -45,7 +30,7 @@ class _RegPageState extends State<RegPage> {
                 margin: const EdgeInsets.only(left: 60, right: 60, top: 30),
                 child: Column(
                   children: <Widget>[
-                    _textInput(hint: "Fullname", icon: Icons.person),
+                    _textInput(hint: "Full name", icon: Icons.person),
                     _textInput(hint: "Email", icon: Icons.email),
                     _textInput(hint: "Phone Number", icon: Icons.call),
                     _textInput(hint: "Password", icon: Icons.vpn_key),
@@ -87,7 +72,7 @@ class _RegPageState extends State<RegPage> {
 
   Widget _textInput({hint, icon}) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(40)),
         color: Colors.white,

@@ -13,8 +13,7 @@ class Authorization extends StatefulWidget {
               colors: [ColorsCustom.orangeColors, ColorsCustom.orangeLightColors],
               end: Alignment.bottomCenter,
               begin: Alignment.topCenter),
-          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(50),bottomRight: Radius.circular(50)
-          )),
+          ),
       child:Container(
         child: Image.network(
           'assets/images/mental.png',height: 120,width: 120,
@@ -22,6 +21,7 @@ class Authorization extends StatefulWidget {
         alignment: Alignment.center,
       ),
     );
+
   }
 
   static Widget getFooter() {
