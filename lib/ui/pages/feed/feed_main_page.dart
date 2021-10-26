@@ -1,7 +1,4 @@
-import 'package:challenge_tracker/navigators/app_bar.dart';
-import 'package:challenge_tracker/navigators/bottom_bar.dart';
 import 'package:challenge_tracker/ui/pages/feed/feed_creator.dart';
-import 'package:challenge_tracker/ui/pages/feed/text_field.dart';
 import 'package:flutter/material.dart';
 class FeedMainPage extends StatefulWidget {
   const FeedMainPage({Key? key}) : super(key: key);
@@ -13,10 +10,7 @@ class FeedMainPage extends StatefulWidget {
 class _FeedMainPageState extends State<FeedMainPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const GeneralAppBar(),
-      body: SafeArea(
-        child: Container(
+    return  Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(
             horizontal: 2.0,
@@ -42,15 +36,6 @@ class _FeedMainPageState extends State<FeedMainPage> {
 
             ],
           ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: const FloatingActionButton(
-        tooltip: "Centre FAB",
-        onPressed: null,
-        child: Icon(Icons.add),
-      ),
-      bottomNavigationBar: GeneralBottomBar(false, true),
-    );
+        );
   }
 }

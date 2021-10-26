@@ -1,7 +1,7 @@
 import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'drawer.dart';
+import '../widgets/drawer.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

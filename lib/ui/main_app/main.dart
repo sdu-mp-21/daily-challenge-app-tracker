@@ -1,7 +1,5 @@
-import 'package:challenge_tracker/navigators/app_bar.dart';
-import 'package:challenge_tracker/navigators/bottom_bar.dart';
 import 'package:challenge_tracker/ui/pages/auth/auth_page.dart';
-import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
+import './navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -21,33 +19,9 @@ class MainApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const MainPage(),
-        '/second': (context) => const FeedMainPage(),
-        '/third': (context) =>  Authorization(),
+        '/login': (context) =>  Authorization(),
       },
     );
   }
 }
 
-class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const GeneralAppBar(),
-      body: const Center(
-        child: Text(
-          'This is the home page',
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: const FloatingActionButton(
-        tooltip: "Centre FAB",
-        onPressed: null,
-        child: Icon(Icons.add),
-      ),
-      bottomNavigationBar: GeneralBottomBar(true, false),
-    );
-  }
-}
