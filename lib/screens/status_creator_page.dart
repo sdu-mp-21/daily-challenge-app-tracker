@@ -39,8 +39,8 @@ class _StatusCreator extends State<StatusCreator> {
     return TextButton(
       child: Container(
         padding: const EdgeInsets.symmetric(
-          vertical: 8.0,
-          horizontal: 40.0,
+          vertical: 3.0,
+          horizontal: 50.0,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
@@ -66,9 +66,10 @@ class _StatusCreator extends State<StatusCreator> {
   Widget _createBtn(context, text) {
     return TextButton(
       child: Container(
+        //width: 180.0,
         padding: const EdgeInsets.symmetric(
-          vertical: 8.0,
-          horizontal: 40.0,
+          vertical: 3.0,
+          horizontal: 50.0,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
@@ -85,7 +86,7 @@ class _StatusCreator extends State<StatusCreator> {
       ),
       onPressed: () {
         Mainpage.isCreateBtn =true;
-        //Accumltr.acc.addText(text);
+
         print("create btn: $text");
        // _feedGetter.addFeed(_addNewFeed(text));
         Navigator.pop(context);
@@ -140,8 +141,8 @@ class _StatusCreator extends State<StatusCreator> {
           children: [
             //LOGO
             Container(
-              width: 100.0,
-              height: 100.0,
+              width: 120.0,
+              height: 120.0,
               margin: const EdgeInsets.all(15.0),
               child: const Image(
                 image: AssetImage('assets/images/statusIcon.png'),
@@ -155,9 +156,9 @@ class _StatusCreator extends State<StatusCreator> {
               child: const Text(
                 'Create Status',
                 style: TextStyle(
-                  fontSize: 32.0,
+                  fontSize: 30.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.lightGreen,
+                  color: Color(0xFF7BC426),
                 ),
               ),
             ),

@@ -4,13 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// This is the stateless widget that the main application instantiates.
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 
   @override
+  _MainpageState createState() => _MainpageState();
+}
+
+class _MainpageState extends State<MainPage> {
+  @override
   Widget build(BuildContext context) {
     return const Scaffold(
-
       appBar: GeneralAppBar(),
       body: Center(
         child: Text(

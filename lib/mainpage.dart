@@ -27,8 +27,7 @@ class _MainpageState extends State<Mainpage> {
 
   @override
   Widget build(BuildContext context) {
-    //dynamic s = Accumltr.acc.getText();
-    //dynamic s = 'Accumltr.acc.getText()';
+
     List<Widget> _feeds  = List.generate(_count, (int i) => const FeedCreator(textfield: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non porttitor lacus. Integer luctus aliquet maximus. Nam diam diam, laoreet in lorem ullamcorper, varius ornare arcu. Pellentesque tincidunt posuere dictum. Curabitur vehicula leo sit amet malesuada tempor.'));
 
     return Scaffold(
@@ -74,19 +73,3 @@ class _MainpageState extends State<Mainpage> {
   }
 }
 
-class Accumltr {
-  dynamic text;
-  static  Accumltr acc = Accumltr();
-  Accumltr({this.text});
-
-  void addText(dynamic text) {
-    acc.text = text;
-    //print('got text: ');
-  }
-
-  dynamic getText() {
-    //print('return text ${acc.text}');
-    return acc.text;
-  }
-
-}

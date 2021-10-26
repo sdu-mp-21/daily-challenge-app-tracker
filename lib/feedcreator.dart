@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'models/textfield.dart';
 import 'models/userinfo.dart';
 import 'models/likebtn.dart';
-import 'models/view.dart';
+
+import 'models/share_btn.dart';
 
 class FeedCreator extends StatefulWidget {
   final dynamic textfield;
@@ -48,14 +49,7 @@ class _FeedCreatorState extends State<FeedCreator> {
                     bottom: 10.0,
                   ),
                   child: LikeBtn()),
-              Padding(
-                padding: EdgeInsets.only(
-                  right: 24.0,
-                  top: 10.0,
-                  bottom: 10.0,
-                ),
-                child: Views(),
-              ),
+              ShareBtn(),
             ],
           ),
         ],
