@@ -2,6 +2,7 @@ import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../widgets/drawer.dart';
+import 'package:challenge_tracker/ui/pages/auth/registration_widget.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class PageNavigatorState extends State<MainPage> {
 
         actions: [
           IconButton(
-              onPressed: () => Navigator.pushNamed(context, '/login'),
+              onPressed: () => Navigator.pushNamed(context, '/register'),
               icon: const Icon(Icons.account_circle))
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:challenge_tracker/ui/pages/auth/auth_page.dart';
+import 'package:challenge_tracker/ui/pages/auth/login_widget.dart';
 import './navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +20,8 @@ class MainApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const MainPage(),
-        '/login': (context) =>  Authorization(),
+        '/register': (context) =>  const Authorization(),
+        '/login': (context) => const LoginPage(),
       },
     );
   }

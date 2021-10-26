@@ -2,6 +2,7 @@ import 'package:challenge_tracker/ui/pages/auth/auth_page.dart';
 import 'package:challenge_tracker/ui/pages/auth/registration_widget.dart';
 import 'package:challenge_tracker/ui/widgets/buttons.dart';
 import 'package:challenge_tracker/ui/widgets/color_custom.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,14 +15,37 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+
+        toolbarHeight: 150,
+        flexibleSpace: Container(
+
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [ColorsCustom.orangeColors, ColorsCustom.orangeLightColors],
+                end: Alignment.bottomCenter,
+                begin: Alignment.topCenter),
+
+            ),
+        child:Container(
+          child: Image.network(
+            'assets/images/mental.png',height: 120,width: 120,
+          ),
+          alignment: Alignment.center,
+        ),
+      ),
+
+      ),
+
       body: Container(
         padding: const EdgeInsets.only(bottom: 0),
         child: Column(
+
           children: <Widget>[
-            Authorization.getHeader(),
+
             Expanded(
               child: Container(
-                // margin: const EdgeInsets.only(left: 60, right: 60, top: 30,bottom: 80),
+                margin: const EdgeInsets.only(left: 60, right: 60, top: 30),
                 child: Column(
                   children: <Widget>[
                     _textInput(hint: "Email", icon: Icons.email),
@@ -53,7 +77,12 @@ class _LoginPageState extends State<LoginPage> {
 
                         TextSpan(
                             text: "Register",
-                            style: TextStyle(color: ColorsCustom.orangeColors)),
+                            style: TextStyle(color: ColorsCustom.orangeColors),
+                            recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(context, '/register');
+                            },
+                        ),
                       ]),
                     )
                   ],

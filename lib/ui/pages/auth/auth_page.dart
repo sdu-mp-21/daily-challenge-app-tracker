@@ -1,7 +1,10 @@
 import 'package:challenge_tracker/ui/widgets/color_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:challenge_tracker/ui/pages/auth/registration_widget.dart';
 
 class Authorization extends StatefulWidget {
+  const Authorization({Key? key}) : super(key: key);
+
   static Widget getHeader() {
     return Container(
       height: 150,
@@ -23,7 +26,7 @@ class Authorization extends StatefulWidget {
 
   static Widget getFooter() {
     return Container(
-      height: 100,
+      height: 70,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [ColorsCustom.orangeColors, ColorsCustom.orangeLightColors],
@@ -41,6 +44,6 @@ class Authorization extends StatefulWidget {
 class _AuthorizationState extends State<Authorization> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const RegPage();
   }
 }
