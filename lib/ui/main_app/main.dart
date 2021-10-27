@@ -20,7 +20,7 @@ class MainApp extends StatelessWidget {
       title: _title,
       initialRoute: '/',
       routes: {
-        '/': (context) => const MainPage(),
+        '/': (context) => MainPage(),
         '/register': (context) =>  const Authorization(),
         '/login': (context) => const LoginPage(),
         '/privacyPolicy': (context) => PrivacyPolicy(),

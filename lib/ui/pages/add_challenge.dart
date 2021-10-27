@@ -1,17 +1,40 @@
+import 'package:challenge_tracker/core/challenge.dart';
 import 'package:challenge_tracker/ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
-class CreateNewWidget extends StatelessWidget {
-  final int page;
+class CreateNewWidget extends StatefulWidget {
+  String createTitle = "";
+  int page = 0;
+  Challenge challenge = Challenge.constructor1();
 
-  const CreateNewWidget({Key? key, required this.page}) : super(key: key);
+  CreateNewWidget.const0({Key? key}) : super(key: key);
+
+  CreateNewWidget.const1(
+      {Key? key, required this.page, required this.challenge})
+      : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _CreateNewWidgetState();
+  }
+}
+
+class _CreateNewWidgetState extends State<CreateNewWidget> {
+  // Initialise outside the build method
+  FocusNode nodeMainText = FocusNode();
+  FocusNode nodeDescription = FocusNode();
+
+  String _value = "";
+  String createTitle = "";
 
   @override
   Widget build(BuildContext context) {
-    String createTitle = "";
-    if (page == 0) {
+    int page = 0;
+    if (widget.page == 0) {
       createTitle = "Challenge";
-    } else if (page == 1) {
+      page = 0;
+    } else if (widget.page == 1) {
+      page = 1;
       createTitle = "Post";
     }
     return MaterialApp(
@@ -20,39 +43,16 @@ class CreateNewWidget extends StatelessWidget {
         home: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.orange.shade300,
-            leading: const Icon(Icons.arrow_back),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             title: Text(createTitle),
           ),
-          body: _CreateNewWidget(createTitle),
+          body: (page == 0) ? setChallenge() : setPost(),
         ));
-  }
-}
-
-class _CreateNewWidget extends StatefulWidget {
-  final String createTitle;
-
-  const _CreateNewWidget(this.createTitle);
-
-  @override
-  State<StatefulWidget> createState() {
-    return _CreateNewWidgetState();
-  }
-}
-
-class _CreateNewWidgetState extends State<_CreateNewWidget> {
-  // Initialise outside the build method
-  FocusNode nodeMainText = FocusNode();
-  FocusNode nodeDescription = FocusNode();
-
-  String _value = "";
-
-  @override
-  Widget build(BuildContext context) {
-    if (widget.createTitle == "Challenge") {
-      return setChallenge();
-    } else {
-      return setPost();
-    }
   }
 
   Widget setChallenge() {
@@ -65,7 +65,7 @@ class _CreateNewWidgetState extends State<_CreateNewWidget> {
           const SizedBox(height: 10),
           Center(
             child: Text(
-              widget.createTitle,
+              createTitle,
               style: const TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
