@@ -19,8 +19,11 @@ class CreateNewWidget extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.arrow_back)
+            ),
             backgroundColor: Colors.orange.shade300,
-            leading: const Icon(Icons.arrow_back),
             title: Text(createTitle),
           ),
           body: _CreateNewWidget(createTitle),

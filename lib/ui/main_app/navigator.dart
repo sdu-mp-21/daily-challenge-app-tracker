@@ -1,14 +1,11 @@
-import 'package:challenge_tracker/ui/pages/add_challenge.dart';
 import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../widgets/drawer.dart';
-import 'package:challenge_tracker/ui/pages/auth/registration_widget.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
-  final CreateNewWidget challenge = const CreateNewWidget(page: 0);
-  final CreateNewWidget post = const CreateNewWidget(page: 1);
+
 
   @override
   PageNavigatorState createState() => PageNavigatorState();
@@ -40,11 +37,8 @@ class PageNavigatorState extends State<MainPage> {
       floatingActionButton: FloatingActionButton(
         tooltip: "Centre FAB",
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => getAddWidget()),
-          );
+          _currentIndex == 0 ? Navigator.pushNamed(context, '/createChallenge'):Navigator.pushNamed(context, '/createPost');
+
         },
         child: const Icon(Icons.add),
       ),
@@ -65,11 +59,5 @@ class PageNavigatorState extends State<MainPage> {
     });
   }
 
-  Widget getAddWidget() {
-    if (_currentIndex == 0) {
-      return widget.challenge;
-    } else {
-      return widget.post;
-    }
-  }
+
 }
