@@ -22,9 +22,10 @@ class OurDrawer extends StatelessWidget {
               ),
             ),
           ),
-          const ListTile(
-            leading: Icon(Icons.message),
-            title: Text('Messages'),
+           ListTile(
+            leading: Icon(Icons.privacy_tip),
+            title: Text('Privacy Policy'),
+            onTap: () {Navigator.pushNamed(context, '/privacyPolicy');},
           ),
           const ListTile(
             leading: Icon(Icons.account_circle),
