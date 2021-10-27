@@ -1,3 +1,4 @@
+import 'package:challenge_tracker/ui/pages/add_challenge.dart';
 import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,23 +7,28 @@ import 'package:challenge_tracker/ui/pages/auth/registration_widget.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
+  final CreateNewWidget challenge = const CreateNewWidget(page: 0);
+  final CreateNewWidget post = const CreateNewWidget(page: 1);
 
   @override
   PageNavigatorState createState() => PageNavigatorState();
 }
+
 class PageNavigatorState extends State<MainPage> {
   int _currentIndex = 0;
   final List _children = [
-    const Center(child: Text('I am here'),),
+    const Center(
+      child: Text('I am here'),
+    ),
     const FeedMainPage()
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const OurDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.orange.shade300,
-
         actions: [
           IconButton(
               onPressed: () => Navigator.pushNamed(context, '/register'),
@@ -31,10 +37,16 @@ class PageNavigatorState extends State<MainPage> {
       ),
       body: _children[_currentIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: const FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         tooltip: "Centre FAB",
-        onPressed: null,
-        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => getAddWidget()),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -43,7 +55,6 @@ class PageNavigatorState extends State<MainPage> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Feed'),
         ],
-
       ),
     );
   }
@@ -53,5 +64,12 @@ class PageNavigatorState extends State<MainPage> {
       _currentIndex = index;
     });
   }
-}
 
+  Widget getAddWidget() {
+    if (_currentIndex == 0) {
+      return widget.challenge;
+    } else {
+      return widget.post;
+    }
+  }
+}
