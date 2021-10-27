@@ -1,3 +1,4 @@
+import 'package:challenge_tracker/ui/pages/add_challenge.dart';
 import 'package:challenge_tracker/ui/pages/auth/auth_page.dart';
 import 'package:challenge_tracker/ui/pages/auth/login_widget.dart';
 import 'package:challenge_tracker/ui/pages/auth/privacy_policy.dart';
@@ -23,7 +24,9 @@ class MainApp extends StatelessWidget {
         '/': (context) => MainPage(),
         '/register': (context) =>  const Authorization(),
         '/login': (context) => const LoginPage(),
-        '/privacyPolicy': (context) => PrivacyPolicy(),
+        '/privacyPolicy': (context) => const PrivacyPolicy(),
+        '/createChallenge': (context) => const CreateNewWidget(page: 0),
+        '/createPost': (context) => const CreateNewWidget(page: 1)
       },
     );
   }
