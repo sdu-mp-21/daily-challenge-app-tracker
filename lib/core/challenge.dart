@@ -21,6 +21,7 @@ class Challenge {
     _daysToDoList.removeAt(index);
     _timeToStart.removeAt(index);
     _timeToEnd.removeAt(index);
+
   }
 
   List<DateTime> get timeToEnd => _timeToEnd;
