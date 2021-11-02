@@ -54,20 +54,25 @@ class ChallengeDatabase {
     );
   }
 
-  Future<List<Challenge>> challenges() async {
+  Future<List<Challenge>?> challenges() async {
     // Get a reference to the database.
     final db = await database;
 
-    // Query the table for all The Dogs.
+    // Query the table for all The challenges.
     final List<Map<String, dynamic>> maps = await db.query('challenges');
+    if(maps.length == 0) {
+      return null;
+    }
+    else {
+      // Convert the List<Map<String, dynamic> into a List<challenge>.
+      return List.generate(maps.length, (i) {
+        return Challenge(
+          id: maps[i]['id'],
+          challengeTitle: maps[i]['challengeTitle'],
+        );
+      });
+    }
 
-    // Convert the List<Map<String, dynamic> into a List<Dog>.
-    return List.generate(maps.length, (i) {
-      return Challenge(
-        id: maps[i]['id'],
-        challengeTitle: maps[i]['challengeTitle'],
-      );
-    });
   }
 
   Future<void> updateChallenge(Challenge challenge) async {
@@ -99,9 +104,17 @@ class ChallengeDatabase {
     );
   }
 
+  Future<Challenge> readNote(int id) async {
+    final db = await instance.database;
 
-  void running = Challenge( id: 0,challengeTitle: 'Running');
+    final List<Map<String, dynamic>> maps = await db.rawQuery('SELECT challengeTitle FROM challenges where id = ${id}');
 
+    if (maps.isNotEmpty) {
+      return Challenge(id: id, challengeTitle: maps[0]['challengeTitle']);
+    } else {
+      throw Exception('ID $id not found');
+    }
+  }
 
 
 }
