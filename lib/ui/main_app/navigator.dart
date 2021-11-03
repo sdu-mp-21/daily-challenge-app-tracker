@@ -18,7 +18,7 @@ class PageNavigatorState extends State<MainPage> {
 
   int _currentIndex = 0;
   final List _children = [
-    DisplayChallenges(),
+    const DisplayChallenges(),
     const FeedMainPage()
   ];
 

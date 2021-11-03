@@ -60,10 +60,9 @@ class ChallengeDatabase {
 
     // Query the table for all The challenges.
     final List<Map<String, dynamic>> maps = await db.query('challenges');
-    if(maps.length == 0) {
+    if(maps.isEmpty) {
       return null;
-    }
-    else {
+    } else {
       // Convert the List<Map<String, dynamic> into a List<challenge>.
       return List.generate(maps.length, (i) {
         return Challenge(
