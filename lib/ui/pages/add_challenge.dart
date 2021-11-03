@@ -10,7 +10,7 @@ class CreateNewWidget extends StatefulWidget {
   CreateNewWidget.const0({Key? key}) : super(key: key);
 
   CreateNewWidget.const1(
-      {Key? key, required this.page, required this.challenge})
+      {Key? key, required this.page})
       : super(key: key);
 
   @override
