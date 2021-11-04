@@ -1,8 +1,8 @@
-import 'package:challenge_tracker/ui/pages/feed/text_field.dart';
-import 'package:challenge_tracker/ui/widgets/user_info.dart';
-import 'package:challenge_tracker/ui/widgets/view.dart';
+import 'text_field.dart';
+import '../../widgets/user_info.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/like_button.dart';
+import '../../widgets/share_btn.dart';
 
 class FeedCreator extends StatefulWidget {
   final dynamic textField;
@@ -10,14 +10,10 @@ class FeedCreator extends StatefulWidget {
   const FeedCreator({Key? key, this.textField}) : super(key: key);
 
   @override
-  State<FeedCreator> createState() => _FeedCreatorState(textField);
+  State<FeedCreator> createState() => _FeedCreatorState();
 }
 
 class _FeedCreatorState extends State<FeedCreator> {
-  dynamic textfield;
-
-  _FeedCreatorState(this.textfield);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,9 +32,9 @@ class _FeedCreatorState extends State<FeedCreator> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Userinfo(),
+          const Userinfo(),
           TextFieldCustom(
-            text: textfield,
+            text: widget.textField,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,14 +47,8 @@ class _FeedCreatorState extends State<FeedCreator> {
                     bottom: 10.0,
                   ),
                   child: LikeBtn()),
-              Padding(
-                padding: EdgeInsets.only(
-                  right: 24.0,
-                  top: 10.0,
-                  bottom: 10.0,
-                ),
-                child: Views(),
-              ),
+              //TODO: add reply button
+              ShareBtn(),
             ],
           ),
         ],

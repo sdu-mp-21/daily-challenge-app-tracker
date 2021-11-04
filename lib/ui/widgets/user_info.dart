@@ -10,20 +10,20 @@ class Userinfo extends StatelessWidget{
     return Container(
       margin: const EdgeInsets.only(
         right: 10.0,
-          left: 10,
+        left: 10,
         top: 10.0,
       ),
       width: double.infinity,
       child: Row(
-        children: const [
-          CircleAvatar(
+        children:  [
+          const CircleAvatar (
             radius: 20,
             backgroundImage: AssetImage(
                 'assets/images/avatar.png'
             ),
 
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(
               left: 16.0,
             ),
@@ -37,21 +37,42 @@ class Userinfo extends StatelessWidget{
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(
-                left: 185,
-            ),
-            child: Image(
 
-              width: 20.0,
-              height: 20.0,
-              image: AssetImage(
-                'assets/images/optionIcon.png'
-              ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 137,
+            ),
+            child: PopupMenuButton<String>(
+              onSelected: choiceAction,
+              itemBuilder: (BuildContext context) {
+                return Constants.choices.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(choice),
+                  );
+                }).toList();
+              },
             ),
           ),
         ],
       ),
     );
   }
+
+  void choiceAction (String choice){
+    if(choice == 'edit')
+      print("edit");
+    else if (choice == 'delete')
+      print("delete");
+  }
+}
+
+class Constants {
+  static const String edit = 'edit',
+      delete = 'delete';
+  static const List<String> choices = [
+    edit,
+    delete
+  ];
+
 }

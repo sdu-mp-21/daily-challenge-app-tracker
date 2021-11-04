@@ -25,8 +25,8 @@ class MainApp extends StatelessWidget {
         '/register': (context) =>  const Authorization(),
         '/login': (context) => const LoginPage(),
         '/privacyPolicy': (context) => const PrivacyPolicy(),
-        '/createChallenge': (context) => const CreateNewWidget(page: 0),
-        '/createPost': (context) => const CreateNewWidget(page: 1)
+        //'/createChallenge': (context) => const CreateNewWidget(page: 0),
+        //'/createPost': (context) => const CreateNewWidget(page: 1)
       },
     );
   }

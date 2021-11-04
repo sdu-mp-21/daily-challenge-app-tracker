@@ -1,17 +1,20 @@
-import 'package:challenge_tracker/core/challenge.dart';
-import 'package:challenge_tracker/ui/widgets/buttons.dart';
+import '../../core/challenge.dart';
+import '../../ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
+import 'feed/feed_main_page.dart';
+import 'feed/status_creator_page.dart';
 
 class CreateNewWidget extends StatefulWidget {
   String createTitle = "";
   int page = 0;
   Challenge challenge = Challenge.constructor1();
-
+  static bool isCreateBtn = false;
   CreateNewWidget.const0({Key? key}) : super(key: key);
 
   CreateNewWidget.const1(
       {Key? key, required this.page, required this.challenge})
       : super(key: key);
+
 
   @override
   State<StatefulWidget> createState() {
@@ -51,8 +54,9 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
             ),
             title: Text(createTitle),
           ),
-          body: (page == 0) ? setChallenge() : setPost(),
-        ));
+          body: (page == 0) ? setChallenge() : setPost(context),
+        )
+    );
   }
 
   Widget setChallenge() {
@@ -91,7 +95,7 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
     );
   }
 
-  Widget setPost() {
+  Widget setPostOld(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
@@ -100,22 +104,20 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
         children: <Widget>[
           const SizedBox(height: 10),
           Center(
-            child: Text(
-              widget.createTitle,
-              style: const TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  letterSpacing: 1.3),
-            ),
+            child: StatusCreator(context:context),
           ),
-          const SizedBox(height: 30),
-          inputTextPost(),
-          const SizedBox(height: 10),
+
         ],
       ),
     );
   }
+
+
+  Widget setPost(BuildContext context) {
+    return  StatusCreator(context:context);
+  }
+
+
 
 //TODO Add some usability in textField Widget, more function
   Widget inputTextChallenge() {

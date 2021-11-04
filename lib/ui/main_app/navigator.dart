@@ -45,7 +45,13 @@ class PageNavigatorState extends State<MainPage> {
             context,
             MaterialPageRoute(
                 builder: (context) => widget.addWidget),
-          );
+          ).then((value) => {
+            if(CreateNewWidget.isCreateBtn){
+              setState(() {
+                ++FeedMainPage.count;
+              })
+            }
+          });
         },
         child: const Icon(Icons.add),
       ),
