@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-
+import 'time_ago.dart';
 
 class Userinfo extends StatelessWidget{
-  const Userinfo({Key? key}) : super(key: key);
+  final DateTime currentTime;
+  const Userinfo({Key? key, required this.currentTime}) : super(key: key);
 
   Widget userAvatarAndName(){
     return Row(
-      children: const [
-         CircleAvatar (
+      children:  [
+        const CircleAvatar (
           radius: 20,
           backgroundImage: AssetImage(
               'assets/images/avatar.png'
@@ -15,17 +16,31 @@ class Userinfo extends StatelessWidget{
 
         ),
          Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 16.0,
           ),
-          child: Text(
-            'User Name',
-            textDirection: TextDirection.ltr,
-            style: TextStyle(
-              fontSize: 20.0,
-              fontFamily: "Georgia",
-              fontWeight: FontWeight.w500,
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children:  [
+              const Text(
+                'User Name',
+                textDirection: TextDirection.ltr,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontFamily: "Georgia",
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+                 Text(
+                   TimeAgo.displayTimeAgoFromTimestamp(currentTime.toString()),
+                   textAlign: TextAlign.left,
+                   textDirection: TextDirection.ltr,
+                   style: const TextStyle(
+                     color: Color(0xFF878585),
+                   ),
+               ),
+
+            ],
           ),
         ),
       ],

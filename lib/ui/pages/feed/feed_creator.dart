@@ -6,8 +6,8 @@ import '../../widgets/share_btn.dart';
 
 class FeedCreator extends StatefulWidget {
   final dynamic textField;
-
-  const FeedCreator({Key? key, this.textField}) : super(key: key);
+  final DateTime currentTime;
+  const FeedCreator({Key? key, this.textField, required this.currentTime}) : super(key: key);
 
   @override
   State<FeedCreator> createState() => _FeedCreatorState();
@@ -32,7 +32,7 @@ class _FeedCreatorState extends State<FeedCreator> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Userinfo(),
+           Userinfo(currentTime: widget.currentTime,),
           TextFieldCustom(
             text: widget.textField,
           ),

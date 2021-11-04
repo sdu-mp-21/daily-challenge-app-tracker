@@ -92,7 +92,7 @@ class _StatusCreator extends State<StatusCreator> {
       ),
       onPressed: () {
         CreateNewWidget.isCreateBtn = true;
-        FeedMainPage.addFeed(FeedCreator(textField: text));
+        FeedMainPage.addFeed(FeedCreator(textField: text, currentTime: DateTime.now(),));
         //_changeFeedMain();
         Navigator.pop(context);
       },
