@@ -139,47 +139,49 @@ class _StatusCreator extends State<StatusCreator> {
   Widget build(BuildContext context) {
     context = widget.context;
     return  Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          //LOGO
-          Container(
-            width: 120.0,
-            height: 120.0,
-            margin: const EdgeInsets.all(15.0),
-            child: const Image(
-              image: AssetImage('assets/images/statusIcon.png'),
-            ),
-          ),
-          // LOGO'S TEXT
-          Container(
-            margin: const EdgeInsets.only(
-              bottom: 15.0,
-            ),
-            child: const Text(
-              'Create Status',
-              style: TextStyle(
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF7BC426),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //LOGO
+            Container(
+              width: 120.0,
+              height: 120.0,
+              margin: const EdgeInsets.all(15.0),
+              child: const Image(
+                image: AssetImage('assets/images/statusIcon.png'),
               ),
             ),
-          ),
-          Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 24.0,
+            // LOGO'S TEXT
+            Container(
+              margin: const EdgeInsets.only(
+                bottom: 15.0,
               ),
-              child: _textField()),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _cancelBtn(context),
-              _createBtn(context, _text),
-            ],
-          ),
-        ],
+              child: const Text(
+                'Create Post',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF7BC426),
+                ),
+              ),
+            ),
+            Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 24.0,
+                ),
+                child: _textField()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _cancelBtn(context),
+                _createBtn(context, _text),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -19,7 +19,7 @@ class _FeedCreatorState extends State<FeedCreator> {
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 5.0,
-        horizontal: 5.0,
+        horizontal: 3.0,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -38,17 +38,13 @@ class _FeedCreatorState extends State<FeedCreator> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
-              Padding(
-                  padding: EdgeInsets.only(
-                    left: 24.0,
-                    top: 10.0,
-                    bottom: 10.0,
-                  ),
-                  child: LikeBtn()),
-              //TODO: add reply button
-              ShareBtn(),
+            //crossAxisAlignment: CrossAxisAlignment.center,
+            children:  [
+              Container(
+                margin: const EdgeInsets.only(left: 20.0,),
+                  child: const LikeBtn()
+              ),
+              const ShareBtn(),
             ],
           ),
         ],

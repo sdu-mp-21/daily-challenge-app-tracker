@@ -1,10 +1,10 @@
-import 'package:challenge_tracker/core/challenge.dart';
+
 import 'package:challenge_tracker/ui/pages/add_challenge.dart';
+import 'package:challenge_tracker/ui/pages/display_challenges.dart';
 import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../widgets/drawer.dart';
-import 'package:challenge_tracker/ui/pages/auth/registration_widget.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -15,11 +15,10 @@ class MainPage extends StatefulWidget {
 }
 
 class PageNavigatorState extends State<MainPage> {
+
   int _currentIndex = 0;
   final List _children = [
-    const Center(
-      child: Text('I am here'),
-    ),
+    const DisplayChallenges(),
     const FeedMainPage()
   ];
 
@@ -45,13 +44,15 @@ class PageNavigatorState extends State<MainPage> {
             context,
             MaterialPageRoute(
                 builder: (context) => widget.addWidget),
-          ).then((value) => {
+          );
+
+          /*.then((value) => {
             if(CreateNewWidget.isCreateBtn){
               setState(() {
                 ++FeedMainPage.count;
               })
             }
-          });
+          })*/
         },
         child: const Icon(Icons.add),
       ),

@@ -9,7 +9,7 @@ class FeedMainPage extends StatefulWidget {
   static List<FeedCreator> feeds = [];
   static void addFeed(FeedCreator feed){
     feeds.add(feed);
-    //++count;
+    ++count;
   }
   @override
   _FeedMainPageState createState() => _FeedMainPageState();
@@ -30,11 +30,8 @@ class _FeedMainPageState extends State<FeedMainPage> {
             (int i) => FeedMainPage.feeds[i]);
 
     return  Container(
+      //width: double.infinity,
 
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 2.0,
-      ),
       color: const Color(0xfff1f1f1),
       child: ListView.builder(
         itemCount: _feeds.length,

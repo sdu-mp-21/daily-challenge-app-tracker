@@ -4,6 +4,33 @@ import 'package:flutter/material.dart';
 class Userinfo extends StatelessWidget{
   const Userinfo({Key? key}) : super(key: key);
 
+  Widget userAvatarAndName(){
+    return Row(
+      children: const [
+         CircleAvatar (
+          radius: 20,
+          backgroundImage: AssetImage(
+              'assets/images/avatar.png'
+          ),
+
+        ),
+         Padding(
+          padding: EdgeInsets.only(
+            left: 16.0,
+          ),
+          child: Text(
+            'User Name',
+            textDirection: TextDirection.ltr,
+            style: TextStyle(
+              fontSize: 20.0,
+              fontFamily: "Georgia",
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,33 +42,13 @@ class Userinfo extends StatelessWidget{
       ),
       width: double.infinity,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:  [
-          const CircleAvatar (
-            radius: 20,
-            backgroundImage: AssetImage(
-                'assets/images/avatar.png'
-            ),
-
-          ),
-          const Padding(
-            padding: EdgeInsets.only(
-              left: 16.0,
-            ),
-            child: Text(
-              'User Name',
-              textDirection: TextDirection.ltr,
-              style: TextStyle(
-                fontSize: 20.0,
-                fontFamily: "Georgia",
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 137,
-            ),
+          userAvatarAndName(),
+          // Options Button
+          Align(
+            alignment: Alignment.topRight,
+            widthFactor: 1.0,
             child: PopupMenuButton<String>(
               onSelected: choiceAction,
               itemBuilder: (BuildContext context) {
