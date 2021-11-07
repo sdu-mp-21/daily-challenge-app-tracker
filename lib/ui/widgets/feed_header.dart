@@ -3,35 +3,34 @@ import 'time_ago.dart';
 import '../pages/feed/feed_main_page.dart';
 import '../pages/feed/feed_creator.dart';
 
-class Userinfo extends StatelessWidget{
+class FeedHeader extends StatelessWidget {
   final DateTime currentTime;
   final Function removeFeed;
   final FeedCreator feed;
-  const Userinfo({Key? key, required this.currentTime, required this.removeFeed, required this.feed}) : super(key: key);
 
+  const FeedHeader(
+      {Key? key,
+      required this.currentTime,
+      required this.removeFeed,
+      required this.feed})
+      : super(key: key);
 
+  void feedCreatorAction(FeedCreator feed) {}
 
-  void feedCreatorAction (FeedCreator feed){
-
-  }
-
-  Widget userAvatarAndName(){
+  Widget userAvatarAndName() {
     return Row(
-      children:  [
-        const CircleAvatar (
+      children: [
+        const CircleAvatar(
           radius: 20,
-          backgroundImage: AssetImage(
-              'assets/images/avatar.png'
-          ),
-
+          backgroundImage: AssetImage('assets/images/avatar.png'),
         ),
-         Padding(
+        Padding(
           padding: const EdgeInsets.only(
             left: 16.0,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children:  [
+            children: [
               const Text(
                 'User Name',
                 textDirection: TextDirection.ltr,
@@ -41,15 +40,14 @@ class Userinfo extends StatelessWidget{
                   fontWeight: FontWeight.w600,
                 ),
               ),
-                 Text(
-                   TimeAgo.displayTimeAgoFromTimestamp(currentTime.toString()),
-                   textAlign: TextAlign.left,
-                   textDirection: TextDirection.ltr,
-                   style: const TextStyle(
-                     color: Color(0xFF878585),
-                   ),
-               ),
-
+              Text(
+                TimeAgo.displayTimeAgoFromTimestamp(currentTime.toString()),
+                textAlign: TextAlign.left,
+                textDirection: TextDirection.ltr,
+                style: const TextStyle(
+                  color: Color(0xFF878585),
+                ),
+              ),
             ],
           ),
         ),
@@ -68,7 +66,7 @@ class Userinfo extends StatelessWidget{
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children:  [
+        children: [
           userAvatarAndName(),
           // Options Button
           Align(
@@ -81,7 +79,6 @@ class Userinfo extends StatelessWidget{
                   return PopupMenuItem<String>(
                     value: choice,
                     child: Text(choice),
-
                   );
                 }).toList();
               },
@@ -92,26 +89,18 @@ class Userinfo extends StatelessWidget{
     );
   }
 
-  void choiceAction (String choice){
-    if(choice == 'edit') {
+  void choiceAction(String choice) {
+    if (choice == 'edit') {
       //print("edit");
-    } else if (choice == 'delete'){
-
+    } else if (choice == 'delete') {
       FeedMainPage.isDeleteBtn = true;
       removeFeed(feed);
       //FeedMainPage.removeFeed();
     }
   }
-
-
 }
 
 class Constants {
-  static const String edit = 'edit',
-      delete = 'delete';
-  static const List<String> choices = [
-    edit,
-    delete
-  ];
-
+  static const String edit = 'edit', delete = 'delete';
+  static const List<String> choices = [edit, delete];
 }

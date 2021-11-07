@@ -1,5 +1,5 @@
 import 'text_field.dart';
-import '../../widgets/user_info.dart';
+import '../../widgets/feed_header.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/like_button.dart';
 import '../../widgets/share_btn.dart';
@@ -37,7 +37,7 @@ class _FeedCreatorState extends State<FeedCreator> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Userinfo(key: widget.key, currentTime: widget.currentTime, removeFeed: widget.onRemoved, feed: widget,),
+           FeedHeader(key: widget.key, currentTime: widget.currentTime, removeFeed: widget.onRemoved, feed: widget,),
           TextFieldCustom(
             text: widget.textField,
           ),
