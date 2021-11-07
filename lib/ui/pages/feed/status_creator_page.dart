@@ -116,29 +116,37 @@ class _StatusCreator extends State<StatusCreator> {
         margin: const EdgeInsets.symmetric(
           horizontal: 24.0,
         ),
-        child: TextField(
-          controller: _controller,
-          decoration: const InputDecoration(
-            labelText: 'My Situation',
-            //hintText: 'My Situation',
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.orange,
-                width: 1.0,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxHeight: 200.0
+          ),
+          child: TextField(
+            autofocus: true,
+            controller: _controller,
+            decoration: const InputDecoration(
+             // contentPadding:  EdgeInsets.symmetric(vertical: 100.0),
+              labelText: 'My Situation',
+              //hintText: 'My Situation',
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.orange,
+                  width: 1.0,
+                ),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+              ),
+              hintStyle: TextStyle(
+                color: Color(0xFFB5B2B2),
+                fontSize: 16.0,
+                fontWeight: FontWeight.w500,
               ),
             ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15.0)),
-            ),
-            hintStyle: TextStyle(
-              color: Color(0xFFB5B2B2),
-              fontSize: 16.0,
-              fontWeight: FontWeight.w500,
-            ),
+            maxLength: 500,
+            minLines: 1,
+            maxLines: 5,
+            onSubmitted: (value) {},
           ),
-          maxLength: 300,
-          minLines: 1,
-          onSubmitted: (value) {},
         ),
       ),
     ],
