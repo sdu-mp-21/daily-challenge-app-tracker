@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'feed_main_page.dart';
 import 'feed_creator.dart';
 import '../add_challenge.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class StatusCreator extends StatefulWidget {
   const StatusCreator({Key? key, this.context}) : super(key: key);
@@ -109,87 +110,93 @@ class _StatusCreator extends State<StatusCreator> {
   }
 
 //INPUT TEXT
-  Widget _textField() {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: 24.0,
-          ),
-          child: TextField(
-            controller: _controller,
-            decoration: const InputDecoration(
-              hintText: 'My Situation',
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.orange,
-                  width: 1.0,
-                ),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15.0)),
-              ),
-              hintStyle: TextStyle(
-                color: Color(0xFFB5B2B2),
-                fontSize: 16.0,
-                fontWeight: FontWeight.w500,
+  Widget _textField() => Column(
+    children: [
+      Container(
+        margin: const EdgeInsets.symmetric(
+          horizontal: 24.0,
+        ),
+        child: TextField(
+          controller: _controller,
+          decoration: const InputDecoration(
+            labelText: 'My Situation',
+            //hintText: 'My Situation',
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.orange,
+                width: 1.0,
               ),
             ),
-            maxLength: 100,
-            minLines: 1,
-            onSubmitted: (value) {},
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+            ),
+            hintStyle: TextStyle(
+              color: Color(0xFFB5B2B2),
+              fontSize: 16.0,
+              fontWeight: FontWeight.w500,
+            ),
           ),
+          maxLength: 300,
+          minLines: 1,
+          onSubmitted: (value) {},
         ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
+
 
   @override
   Widget build(BuildContext context) {
     context = widget.context;
-    return  Center(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            //LOGO
-            Container(
-              width: 120.0,
-              height: 120.0,
-              margin: const EdgeInsets.all(15.0),
-              child: const Image(
-                image: AssetImage('assets/images/statusIcon.png'),
-              ),
-            ),
-            // LOGO'S TEXT
-            Container(
-              margin: const EdgeInsets.only(
-                bottom: 15.0,
-              ),
-              child: const Text(
-                'Create Post',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF7BC426),
+    return  KeyboardDismisser(
+      gestures: const  [
+        GestureType.onTap,
+        GestureType.onVerticalDragDown
+      ],
+      child: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              //LOGO
+              Container(
+                width: 120.0,
+                height: 120.0,
+                margin: const EdgeInsets.all(15.0),
+                child: const Image(
+                  image: AssetImage('assets/images/statusIcon.png'),
                 ),
               ),
-            ),
-            Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 24.0,
+              // LOGO'S TEXT
+              Container(
+                margin: const EdgeInsets.only(
+                  bottom: 15.0,
                 ),
-                child: _textField()),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _cancelBtn(context),
-                _createBtn(context, _text),
-              ],
-            ),
-          ],
+                child: const Text(
+                  'Create Post',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF7BC426),
+                  ),
+                ),
+              ),
+              Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 24.0,
+                  ),
+                  child: _textField()),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _cancelBtn(context),
+                  _createBtn(context, _text),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
