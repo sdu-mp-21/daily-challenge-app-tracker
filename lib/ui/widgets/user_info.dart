@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'time_ago.dart';
+import '../pages/feed/feed_main_page.dart';
+import '../pages/feed/feed_creator.dart';
 
 class Userinfo extends StatelessWidget{
   final DateTime currentTime;
-  const Userinfo({Key? key, required this.currentTime}) : super(key: key);
+  final Function removeFeed;
+  final FeedCreator feed;
+  const Userinfo({Key? key, required this.currentTime, required this.removeFeed, required this.feed}) : super(key: key);
+
+
+
+  void feedCreatorAction (FeedCreator feed){
+
+  }
 
   Widget userAvatarAndName(){
     return Row(
@@ -71,6 +81,7 @@ class Userinfo extends StatelessWidget{
                   return PopupMenuItem<String>(
                     value: choice,
                     child: Text(choice),
+
                   );
                 }).toList();
               },
@@ -82,11 +93,17 @@ class Userinfo extends StatelessWidget{
   }
 
   void choiceAction (String choice){
-    if(choice == 'edit')
-      print("edit");
-    else if (choice == 'delete')
-      print("delete");
+    if(choice == 'edit') {
+      //print("edit");
+    } else if (choice == 'delete'){
+
+      FeedMainPage.isDeleteBtn = true;
+      removeFeed(feed);
+      //FeedMainPage.removeFeed();
+    }
   }
+
+
 }
 
 class Constants {

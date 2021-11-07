@@ -6,6 +6,7 @@ import '../add_challenge.dart';
 class StatusCreator extends StatefulWidget {
   const StatusCreator({Key? key, this.context}) : super(key: key);
   final dynamic context;
+  static int counter = 0;
   @override
   _StatusCreator createState() => _StatusCreator();
 }
@@ -14,17 +15,18 @@ class _StatusCreator extends State<StatusCreator> {
   String _text = '';
   final _controller = TextEditingController();
 
+  /*void removeFeed(FeedCreator feed) {
+    setState(() {
+      FeedMainPage.feeds.remove(feed);
+    });
+  }*/
+
   _changeText() {
     setState(() => {
       _text = _controller.text,
     });
   }
 
-  _changeFeedMain() {
-    setState(() {
-      ++FeedMainPage.count;
-    });
-  }
 
   @override
   initState() {
@@ -91,10 +93,17 @@ class _StatusCreator extends State<StatusCreator> {
         ),
       ),
       onPressed: () {
-        CreateNewWidget.isCreateBtn = true;
-        FeedMainPage.addFeed(FeedCreator(textField: text, currentTime: DateTime.now(),));
-        //_changeFeedMain();
-        Navigator.pop(context);
+        //FeedMainPage? stateObj = context.findAncestorStateOfType<FeedMainPage>();
+
+        setState(() {
+          CreateNewWidget.isCreateBtn = true;
+          FeedMainPage.addFeed(FeedCreator(key: UniqueKey(),
+            textField: text, currentTime: DateTime.now(), onRemoved: FeedMainPage.removeFeed,));
+          Navigator.pop(context);
+        });
+
+
+
       },
     );
   }

@@ -95,23 +95,6 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
     );
   }
 
-  Widget setPostOld(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(height: 10),
-          Center(
-            child: StatusCreator(context:context),
-          ),
-
-        ],
-      ),
-    );
-  }
-
 
   Widget setPost(BuildContext context) {
     return  StatusCreator(context:context);
