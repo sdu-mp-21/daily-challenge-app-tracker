@@ -1,7 +1,6 @@
 import 'package:challenge_tracker/db/challenge_class.dart';
 import 'package:challenge_tracker/db/challenge_database.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class ChallengeDetailPage extends StatefulWidget {
   final int challengeId;
@@ -29,7 +28,7 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
   Future refreshNote() async {
     setState(() => isLoading = true);
 
-    this.challenge = await ChallengeDatabase.instance.readNote(widget.challengeId);
+    challenge = await ChallengeDatabase.instance.readNote(widget.challengeId);
 
     setState(() => isLoading = false);
   }
@@ -38,21 +37,21 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
   Widget build(BuildContext context) => Scaffold(
 
     body: isLoading
-        ? Center(child: CircularProgressIndicator())
+        ? const Center(child: CircularProgressIndicator())
         : Padding(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       child: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         children: [
           Text(
             challenge.challengeTitle,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
 
 
         ],
@@ -73,7 +72,7 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
   //     });
 
   Widget deleteButton() => IconButton(
-    icon: Icon(Icons.delete),
+    icon: const Icon(Icons.delete),
     onPressed: () async {
       await ChallengeDatabase.instance.deleteChallenge(widget.challengeId);
 

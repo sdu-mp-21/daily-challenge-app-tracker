@@ -1,13 +1,12 @@
-import '../../core/challenge.dart';
+import 'package:challenge_tracker/db/challenge_class.dart';
+import 'package:challenge_tracker/db/challenge_database.dart';
 import '../../ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
-import 'feed/feed_main_page.dart';
 import 'feed/status_creator_page.dart';
 
 class CreateNewWidget extends StatefulWidget {
   String createTitle = "";
   int page = 0;
-  Challenge challenge = Challenge.constructor1();
   static bool isCreateBtn = false;
   CreateNewWidget.const0({Key? key}) : super(key: key);
 
@@ -29,6 +28,7 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
 
   String _value = "";
   String createTitle = "";
+  late List<Challenge> challenges;
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +54,19 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
             ),
             title: Text(createTitle),
           ),
-          body: (page == 0) ? setChallenge() : setPost(context),
+          body: (page == 0) ? setChallenge() : StatusCreator(context:context),
         )
     );
   }
 
   Widget setChallenge() {
+    TextEditingController controller = TextEditingController();
+    controller.addListener(() {
+      // Do something here
+    });
+
     return Padding(
+
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,16 +84,51 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
             ),
           ),
           const SizedBox(height: 30),
-          inputTextChallenge(),
+        TextField(
+    controller: controller,
+    keyboardType: TextInputType.text,
+    textInputAction: TextInputAction.done,
+    focusNode: nodeMainText,
+    autofocus: false,
+    // onChanged: (text) {
+    //   // setState(() {
+    //   _value = text;
+    //   // });
+    // },
+    // onSubmitted: (text) {
+    //   setState(() {
+    //     _value = text;
+    //   });
+    // },
+    decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+    labelText: 'Write here',
+    icon: Icon(Icons.add)),
+    ),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               ElevatedButton(
                 style: Style.raisedButtonStyle,
-                child: const Text("Time"),
-                onPressed: () {},
+                child: const Text("CANCEL"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
+              ElevatedButton(
+                style: Style.raisedButtonStyle,
+                child: const Text("ADD"),
+                onPressed: () async {
+                  challenges = await ChallengeDatabase.instance.challenges();
+                  Challenge challengeToInsert = Challenge(id: challenges.length, challengeTitle : controller.text);
+                  // print(challenges.length);
+                  // print(controller.text);
+                  ChallengeDatabase.instance.insertChallenge(challengeToInsert);
+
+                  Navigator.of(context).pop();
+                },
+              )
             ],
           )
         ],
@@ -95,42 +136,6 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
     );
   }
 
-
-  Widget setPost(BuildContext context) {
-    return  StatusCreator(context:context);
-  }
-
-
-
-//TODO Add some usability in textField Widget, more function
-  Widget inputTextChallenge() {
-    TextEditingController controller = TextEditingController();
-
-    controller.addListener(() {
-      // Do something here
-    });
-    return TextField(
-      controller: controller,
-      keyboardType: TextInputType.text,
-      textInputAction: TextInputAction.done,
-      focusNode: nodeMainText,
-      autofocus: false,
-      onChanged: (text) {
-        // setState(() {
-        _value = text;
-        // });
-      },
-      onSubmitted: (text) {
-        setState(() {
-          _value = text;
-        });
-      },
-      decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'Write here',
-          icon: Icon(Icons.add)),
-    );
-  }
 
 //TODO Add some usability in textField Widget, more function
   Widget inputTextPost() {

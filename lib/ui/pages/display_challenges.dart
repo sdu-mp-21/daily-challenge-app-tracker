@@ -14,13 +14,13 @@ class DisplayChallenges extends StatefulWidget {
 }
 
 class _DisplayChallengesState extends State<DisplayChallenges> {
-  List<Challenge> challenges = [];
+  late List<Challenge> challenges;
   bool isLoading = false;
+
 
   @override
   void initState() {
     super.initState();
-
     refreshNotes();
   }
 
@@ -33,9 +33,12 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
 
   Future refreshNotes() async {
     setState(() => isLoading = true);
-    if (challenges.isNotEmpty) {
-      challenges = (await ChallengeDatabase.instance.challenges())!;
-    }
+    // print('challenges');
+      challenges = await ChallengeDatabase.instance.challenges();
+      // print(this.challenges);
+    // print('challenges 2');
+
+
     setState(() => isLoading = false);
   }
 
@@ -44,6 +47,9 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
 
     return Scaffold(
       body: Center(
+          // child: Text(Challenge(id:0, challengeTitle: 'name').toMap().toString()),
+
+
         child: isLoading
             ? const CircularProgressIndicator()
             : challenges.isEmpty
@@ -51,13 +57,13 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
           'Empty Challenge List',
           style: TextStyle(color: Colors.black, fontSize: 24),
         )
-            : buildChallenges(),
+            : buildChallenges(challenges),
       ),
     );
   }
 
-  Widget buildChallenges() => StaggeredGridView.countBuilder(
-        padding: EdgeInsets.all(8),
+  Widget buildChallenges(challenges) => StaggeredGridView.countBuilder(
+        padding: const EdgeInsets.all(8),
         itemCount: challenges.length,
         staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
         crossAxisCount: 4,

@@ -1,7 +1,7 @@
 class Challenge {
   final int id;
   final String challengeTitle;
-  Challenge({
+  Challenge( {
     required this.id,
     required this.challengeTitle,
 });
@@ -15,11 +15,15 @@ class Challenge {
     };
   }
 
+
   // Implement toString to make it easier to see information about
   // each challenge when using the print statement.
   @override
   String toString() {
     return 'Challenge{id: $id, challenge_title: $challengeTitle}';
   }
-
+  static Challenge fromJson(Map<String, Object?> json) => Challenge(
+    id: json['id'] as int,
+    challengeTitle: json['challengeTitle'] == null ? '' : json['challengeTitle'] as String,
+  );
 }
