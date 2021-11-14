@@ -1,8 +1,12 @@
+import 'package:challenge_tracker/db/challenge_database.dart';
 import 'feed_creator.dart';
 import 'package:flutter/material.dart';
 
+
 class FeedMainPage extends StatefulWidget {
+
   const FeedMainPage({Key? key}) : super(key: key);
+
   static bool isCreateBtn = false;
   static int count = 0;
   static List<FeedCreator> feeds = [];
@@ -46,7 +50,7 @@ class _FeedMainPageState extends State<FeedMainPage> {
       });
     }*/
 
-
+    ChallengeDatabase.instance.close();
     List<Widget> _feeds =
         List.generate(FeedMainPage.count, (int i) => FeedMainPage.feeds[i])
             .reversed

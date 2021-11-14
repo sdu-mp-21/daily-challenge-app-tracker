@@ -29,7 +29,7 @@ class ChallengeDatabase {
     return await openDatabase(path, version: 1, onCreate: (db, version) {
       // Run the CREATE TABLE statement on the database.
       return db.execute(
-        'CREATE TABLE challenges (id INTEGER PRIMARY KEY AUTOINCREMENT, challenge_title TEXT NOT NULL)',
+        'CREATE TABLE challenges (id INTEGER PRIMARY KEY AUTOINCREMENT, challenge_title TEXT)',
       );
     },);
   }
@@ -53,10 +53,15 @@ class ChallengeDatabase {
     // `conflictAlgorithm` to use in case the same challenge is inserted twice.
     //
     // In this case, replace any previous data.
+    // print(challenge.id);
+    print(challenge.challengeTitle);
 
-     await db.rawInsert(
-        "INSERT Into challenges (id,challenge_title)"
-            " VALUES (${challenge.id},${challenge.challengeTitle})");
+    await db.rawInsert('INSERT INTO challenges (challenge_title) VALUES(?)', [challenge.challengeTitle]);
+
+
+     // await db.rawInsert(
+     //    "INSERT Into challenges (id,challenge_title)"
+     //        " VALUES (${challenge.id},${challenge.challengeTitle})");
 
 
     // await db.insert(
@@ -131,7 +136,7 @@ class ChallengeDatabase {
     final List<Map<String, dynamic>> maps = await db.rawQuery('SELECT challenge_title FROM challenges where id = $id');
 
     if (maps.isNotEmpty) {
-      return Challenge(id: id, challengeTitle: maps[0]['challengeTitle'] ?? '');
+      return Challenge(id: id, challengeTitle: maps[0]['challenge_title'] ?? '');
     } else {
       throw Exception('ID $id not found');
     }

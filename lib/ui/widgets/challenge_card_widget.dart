@@ -20,6 +20,7 @@ class ChallengeCardWidget extends StatelessWidget {
     Key? key,
     required this.challenge,
     required this.index,
+
   }) : super(key: key);
 
   @override
@@ -27,6 +28,7 @@ class ChallengeCardWidget extends StatelessWidget {
     /// Pick colors from the accent colors based on index
     final color = _lightColors[index % _lightColors.length];
     final minHeight = getMinHeight(index);
+    // print(this.challenge);
 
     return Card(
       color: color,

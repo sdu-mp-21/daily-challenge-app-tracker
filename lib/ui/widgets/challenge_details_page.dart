@@ -18,6 +18,7 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
   late Challenge challenge;
   bool isLoading = false;
 
+
   @override
   void initState() {
     super.initState();
@@ -28,14 +29,17 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
   Future refreshNote() async {
     setState(() => isLoading = true);
 
-    challenge = await ChallengeDatabase.instance.readNote(widget.challengeId);
+    this.challenge = await ChallengeDatabase.instance.readNote(widget.challengeId);
+    print(this.challenge);
 
     setState(() => isLoading = false);
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
-
+    appBar: AppBar(
+      actions: [ deleteButton()],
+    ),
     body: isLoading
         ? const Center(child: CircularProgressIndicator())
         : Padding(
@@ -44,9 +48,9 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
         padding: const EdgeInsets.symmetric(vertical: 8),
         children: [
           Text(
-            challenge.challengeTitle,
+            this.challenge.challengeTitle,
             style: const TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),

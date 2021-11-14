@@ -2,6 +2,7 @@ import 'package:challenge_tracker/db/challenge_class.dart';
 import 'package:challenge_tracker/db/challenge_database.dart';
 import '../../ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
+
 import 'feed/status_creator_page.dart';
 
 class CreateNewWidget extends StatefulWidget {
@@ -125,8 +126,8 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
                   // print(challenges.length);
                   // print(controller.text);
                   ChallengeDatabase.instance.insertChallenge(challengeToInsert);
-
                   Navigator.of(context).pop();
+
                 },
               )
             ],

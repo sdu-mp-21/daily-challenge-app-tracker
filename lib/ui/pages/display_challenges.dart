@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:challenge_tracker/ui/widgets/challenge_details_page.dart';
+import 'add_challenge.dart';
 
 class DisplayChallenges extends StatefulWidget {
   const DisplayChallenges({Key? key}) : super(key: key);
@@ -16,12 +17,13 @@ class DisplayChallenges extends StatefulWidget {
 class _DisplayChallengesState extends State<DisplayChallenges> {
   late List<Challenge> challenges;
   bool isLoading = false;
-
+  final CreateNewWidget addWidget = CreateNewWidget.const0();
 
   @override
   void initState() {
-    super.initState();
     refreshNotes();
+    super.initState();
+
   }
 
   @override
@@ -59,10 +61,24 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
         )
             : buildChallenges(challenges),
       ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          tooltip: "Centre FAB",
+          onPressed: () {
+            addWidget.page = 0;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => addWidget),
+            );
+            refreshNotes();
+          },
+          child: const Icon(Icons.add),
+        )
     );
   }
 
-  Widget buildChallenges(challenges) => StaggeredGridView.countBuilder(
+  Widget buildChallenges(challenges) =>  StaggeredGridView.countBuilder(
         padding: const EdgeInsets.all(8),
         itemCount: challenges.length,
         staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
@@ -88,4 +104,6 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
           );
         },
       );
+
+
 }

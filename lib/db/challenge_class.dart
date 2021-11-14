@@ -11,7 +11,7 @@ class Challenge {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'challenge_title': challengeTitle,
+      'challenge_title': '$challengeTitle',
     };
   }
 
@@ -24,6 +24,6 @@ class Challenge {
   }
   static Challenge fromJson(Map<String, Object?> json) => Challenge(
     id: json['id'] as int,
-    challengeTitle: json['challengeTitle'] == null ? '' : json['challengeTitle'] as String,
+    challengeTitle: json['challenge_title'] == null ? '' : json['challenge_title'] as String,
   );
 }
