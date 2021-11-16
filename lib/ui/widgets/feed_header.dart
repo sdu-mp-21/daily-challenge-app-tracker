@@ -1,22 +1,44 @@
 import 'package:flutter/material.dart';
 import 'time_ago.dart';
-import '../pages/feed/feed_main_page.dart';
 import '../pages/feed/feed_creator.dart';
+import '../pages/feed/status_creator_page.dart';
 
 class FeedHeader extends StatelessWidget {
   final DateTime currentTime;
   final Function removeFeed;
+  final Function onFeedEdit;
+  final dynamic context;
   final FeedCreator feed;
 
-  const FeedHeader(
-      {Key? key,
-      required this.currentTime,
-      required this.removeFeed,
-      required this.feed})
-      : super(key: key);
+  const FeedHeader({
+    Key? key,
+    required this.currentTime,
+    required this.removeFeed,
+    required this.feed,
+    required this.onFeedEdit,
+    this.context,
+  }) : super(key: key);
 
-  void feedCreatorAction(FeedCreator feed) {}
+  // ! PopupMenuButtons
+  Widget getPopupMenuButtons(BuildContext context) {
+    return Align(
+      alignment: Alignment.topRight,
+      widthFactor: 1.0,
+      child: PopupMenuButton<String>(
+        onSelected: choiceAction,
+        itemBuilder: (BuildContext context) {
+          return Constants.choices.map((String choice) {
+            return PopupMenuItem<String>(
+              value: choice,
+              child: Text(choice),
+            );
+          }).toList();
+        },
+      ),
+    );
+  }
 
+  // ! User Avatar and Name
   Widget userAvatarAndName() {
     return Row(
       children: [
@@ -69,33 +91,25 @@ class FeedHeader extends StatelessWidget {
         children: [
           userAvatarAndName(),
           // Options Button
-          Align(
-            alignment: Alignment.topRight,
-            widthFactor: 1.0,
-            child: PopupMenuButton<String>(
-              onSelected: choiceAction,
-              itemBuilder: (BuildContext context) {
-                return Constants.choices.map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
-            ),
-          ),
+          getPopupMenuButtons(context),
         ],
       ),
     );
   }
 
   void choiceAction(String choice) {
+    // ! FIXME: edit button doesn't work yet
     if (choice == 'edit') {
-      //print("edit");
+      // * onFeedEdit(feed);
+      if (context != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const StatusCreator()),
+        );
+      } else
+        print('Null context');
     } else if (choice == 'delete') {
-      FeedMainPage.isDeleteBtn = true;
       removeFeed(feed);
-      //FeedMainPage.removeFeed();
     }
   }
 }

@@ -8,7 +8,6 @@ class CreateNewWidget extends StatefulWidget {
   String createTitle = "";
   int page = 0;
   Challenge challenge = Challenge.constructor1();
-  static bool isCreateBtn = false;
   CreateNewWidget.const0({Key? key}) : super(key: key);
 
   CreateNewWidget.const1(

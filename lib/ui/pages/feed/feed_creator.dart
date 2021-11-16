@@ -8,11 +8,19 @@ class FeedCreator extends StatefulWidget {
   final dynamic textField;
   final DateTime currentTime;
   final Function onRemoved;
+  final Function onFeedEdit;
+  final dynamic context;
 
   @override
   //final Key key;
-  const FeedCreator({Key? key, this.textField, required this.currentTime,
-    required this.onRemoved}) : super(key: key);
+  const FeedCreator({
+    Key? key,
+    this.textField,
+    required this.currentTime,
+    required this.onRemoved,
+    required this.onFeedEdit,
+    this.context,
+  }) : super(key: key);
 
   @override
   State<FeedCreator> createState() => _FeedCreatorState();
@@ -37,7 +45,14 @@ class _FeedCreatorState extends State<FeedCreator> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           FeedHeader(key: widget.key, currentTime: widget.currentTime, removeFeed: widget.onRemoved, feed: widget,),
+           FeedHeader(
+             key: widget.key,
+             currentTime: widget.currentTime,
+             removeFeed: widget.onRemoved,
+             feed: widget,
+             onFeedEdit: widget.onFeedEdit,
+             context: widget.context,
+           ),
           TextFieldCustom(
             text: widget.textField,
           ),

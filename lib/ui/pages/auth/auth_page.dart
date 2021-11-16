@@ -15,8 +15,11 @@ class Authorization extends StatefulWidget {
               begin: Alignment.topCenter),
           ),
       child:Container(
-        child: Image.network(
-          'assets/images/mental.png',height: 120,width: 120,
+        child: const Image(
+            height: 120,
+            width: 120,
+          image: AssetImage(
+          'assets/images/mental.png')
         ),
         alignment: Alignment.center,
       ),

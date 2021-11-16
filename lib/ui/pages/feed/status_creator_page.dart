@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'feed_main_page.dart';
 import 'feed_creator.dart';
-import '../add_challenge.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class StatusCreator extends StatefulWidget {
   const StatusCreator({Key? key, this.context}) : super(key: key);
   final dynamic context;
   static int counter = 0;
+  static bool isEditBtn = false;
+
   @override
   _StatusCreator createState() => _StatusCreator();
 }
@@ -16,18 +17,11 @@ class _StatusCreator extends State<StatusCreator> {
   String _text = '';
   final _controller = TextEditingController();
 
-  /*void removeFeed(FeedCreator feed) {
-    setState(() {
-      FeedMainPage.feeds.remove(feed);
-    });
-  }*/
-
   _changeText() {
     setState(() => {
-      _text = _controller.text,
-    });
+          _text = _controller.text,
+        });
   }
-
 
   @override
   initState() {
@@ -42,7 +36,7 @@ class _StatusCreator extends State<StatusCreator> {
     super.dispose();
   }
 
-  //CANCEL BUTTON
+  // ! CANCEL BUTTON
   Widget _cancelBtn(context) {
     return TextButton(
       child: Container(
@@ -64,14 +58,12 @@ class _StatusCreator extends State<StatusCreator> {
         ),
       ),
       onPressed: () {
-        FeedMainPage.isCreateBtn = false;
-        CreateNewWidget.isCreateBtn = false;
         Navigator.pop(context);
       },
     );
   }
 
-//CREATE BUTTON
+// ! CREATE BUTTON
   Widget _createBtn(context, text) {
     return TextButton(
       child: Container(
@@ -94,73 +86,69 @@ class _StatusCreator extends State<StatusCreator> {
         ),
       ),
       onPressed: () {
-        //FeedMainPage? stateObj = context.findAncestorStateOfType<FeedMainPage>();
-
-        setState(() {
-          CreateNewWidget.isCreateBtn = true;
-          FeedMainPage.addFeed(FeedCreator(key: UniqueKey(),
-            textField: text, currentTime: DateTime.now(), onRemoved: FeedMainPage.removeFeed,));
-          Navigator.pop(context);
-        });
-
-
-
+        if (!StatusCreator.isEditBtn) {
+          setState(() {
+            FeedMainPage.addFeed(FeedCreator(
+              key: UniqueKey(),
+              textField: text,
+              currentTime: DateTime.now(),
+              onRemoved: FeedMainPage.removeFeed,
+              onFeedEdit: FeedMainPage.editFeed,
+              context: widget.context,
+            ));
+            Navigator.pop(context);
+          });
+        }
       },
     );
   }
 
 //INPUT TEXT
   Widget _textField() => Column(
-    children: [
-      Container(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 24.0,
-        ),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxHeight: 200.0
-          ),
-          child: TextField(
-            autofocus: true,
-            controller: _controller,
-            decoration: const InputDecoration(
-             // contentPadding:  EdgeInsets.symmetric(vertical: 100.0),
-              labelText: 'My Situation',
-              //hintText: 'My Situation',
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.orange,
-                  width: 1.0,
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+            ),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 200.0),
+              child: TextField(
+                autofocus: true,
+                controller: _controller,
+                decoration: const InputDecoration(
+                  // contentPadding:  EdgeInsets.symmetric(vertical: 100.0),
+                  labelText: 'My Situation',
+                  //hintText: 'My Situation',
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.orange,
+                      width: 1.0,
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                  ),
+                  hintStyle: TextStyle(
+                    color: Color(0xFFB5B2B2),
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15.0)),
-              ),
-              hintStyle: TextStyle(
-                color: Color(0xFFB5B2B2),
-                fontSize: 16.0,
-                fontWeight: FontWeight.w500,
+                maxLength: 500,
+                minLines: 1,
+                maxLines: 5,
+                onSubmitted: (value) {},
               ),
             ),
-            maxLength: 500,
-            minLines: 1,
-            maxLines: 5,
-            onSubmitted: (value) {},
           ),
-        ),
-      ),
-    ],
-  );
-
+        ],
+      );
 
   @override
   Widget build(BuildContext context) {
     context = widget.context;
-    return  KeyboardDismisser(
-      gestures: const  [
-        GestureType.onTap,
-        GestureType.onVerticalDragDown
-      ],
+    return KeyboardDismisser(
+      gestures: const [GestureType.onTap, GestureType.onVerticalDragDown],
       child: Center(
         child: SingleChildScrollView(
           child: Column(
