@@ -28,6 +28,7 @@ class FeedMainPage extends StatefulWidget {
         builder: (context) => const StatusCreator(),
       ),
     );
+    print("sad");
   }
 
   @override
