@@ -9,11 +9,12 @@ class CreateNewWidget extends StatefulWidget {
   String createTitle = "";
   int page = 0;
   static bool isCreateBtn = false;
-  CreateNewWidget.const0({Key? key}) : super(key: key);
 
-  CreateNewWidget.const1(
-      {Key? key, required this.page})
-      : super(key: key);
+  CreateNewWidget({
+    Key? key,
+    required this.page,
+  }) : super(key: key);
+
 
 
   @override

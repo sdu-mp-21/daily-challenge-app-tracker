@@ -17,41 +17,31 @@ class DisplayChallenges extends StatefulWidget {
 class _DisplayChallengesState extends State<DisplayChallenges> {
   late List<Challenge> challenges;
   bool isLoading = false;
-  final CreateNewWidget addWidget = CreateNewWidget.const0();
+  final CreateNewWidget addWidget = CreateNewWidget(page: 0,);
 
   @override
   void initState() {
     refreshNotes();
     super.initState();
-
   }
 
   @override
   void dispose() {
     ChallengeDatabase.instance.close();
-
     super.dispose();
   }
 
   Future refreshNotes() async {
     setState(() => isLoading = true);
-    // print('challenges');
-      challenges = await ChallengeDatabase.instance.challenges();
-      // print(this.challenges);
-    // print('challenges 2');
-
-
+    challenges = await ChallengeDatabase.instance.challenges();
     setState(() => isLoading = false);
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      body: Center(
+        body: Center(
           // child: Text(Challenge(id:0, challengeTitle: 'name').toMap().toString()),
-
-
         child: isLoading
             ? const CircularProgressIndicator()
             : challenges.isEmpty
@@ -61,7 +51,7 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
         )
             : buildChallenges(challenges),
       ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: FloatingActionButton(
           tooltip: "Centre FAB",
           onPressed: () {
@@ -78,7 +68,7 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
     );
   }
 
-  Widget buildChallenges(challenges) =>  StaggeredGridView.countBuilder(
+  Widget buildChallenges(challenges) => StaggeredGridView.countBuilder(
         padding: const EdgeInsets.all(8),
         itemCount: challenges.length,
         staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
@@ -87,7 +77,6 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
         crossAxisSpacing: 4,
         itemBuilder: (context, index) {
           final Challenge challenge = challenges[index];
-
           return GestureDetector(
             onTap: () async {
               await Navigator.of(context).push(MaterialPageRoute(
@@ -104,6 +93,4 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
           );
         },
       );
-
-
 }

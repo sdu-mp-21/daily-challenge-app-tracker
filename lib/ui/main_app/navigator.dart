@@ -13,7 +13,6 @@ class MainPage extends StatefulWidget {
 }
 
 class PageNavigatorState extends State<MainPage> {
-
   int _currentIndex = 0;
   final List _children = [
     const DisplayChallenges(),
