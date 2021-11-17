@@ -25,11 +25,11 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    ChallengeDatabase.instance.close();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   ChallengeDatabase.instance.close();
+  //   super.dispose();
+  // }
 
   Future refreshNotes() async {
     setState(() => isLoading = true);
