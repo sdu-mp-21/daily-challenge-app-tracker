@@ -20,6 +20,7 @@ class ChallengeCardWidget extends StatelessWidget {
     Key? key,
     required this.challenge,
     required this.index,
+
   }) : super(key: key);
 
   @override
@@ -27,20 +28,22 @@ class ChallengeCardWidget extends StatelessWidget {
     /// Pick colors from the accent colors based on index
     final color = _lightColors[index % _lightColors.length];
     final minHeight = getMinHeight(index);
+    // print(this.challenge);
 
     return Card(
       color: color,
       child: Container(
         constraints: BoxConstraints(minHeight: minHeight),
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(
-              challenge.toString(),
-              style: TextStyle(
+
+              challenge.challengeTitle,
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

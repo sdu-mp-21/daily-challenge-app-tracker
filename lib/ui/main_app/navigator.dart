@@ -1,5 +1,3 @@
-
-import 'package:challenge_tracker/ui/pages/add_challenge.dart';
 import 'package:challenge_tracker/ui/pages/display_challenges.dart';
 import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../widgets/drawer.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({Key? key}) : super(key: key);
-  final CreateNewWidget addWidget = CreateNewWidget.const0();
+  const MainPage({Key? key}) : super(key: key);
+
 
   @override
   PageNavigatorState createState() => PageNavigatorState();
@@ -35,27 +33,7 @@ class PageNavigatorState extends State<MainPage> {
         ],
       ),
       body: _children[_currentIndex],
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        tooltip: "Centre FAB",
-        onPressed: () {
-          widget.addWidget.page = _currentIndex;
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => widget.addWidget),
-          );
 
-          /*.then((value) => {
-            if(CreateNewWidget.isCreateBtn){
-              setState(() {
-                ++FeedMainPage.count;
-              })
-            }
-          })*/
-        },
-        child: const Icon(Icons.add),
-      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: onTabTapped,

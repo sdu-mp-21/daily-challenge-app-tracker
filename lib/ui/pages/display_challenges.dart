@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:challenge_tracker/ui/widgets/challenge_details_page.dart';
+import 'add_challenge.dart';
 
 class DisplayChallenges extends StatefulWidget {
   const DisplayChallenges({Key? key}) : super(key: key);
@@ -14,14 +15,15 @@ class DisplayChallenges extends StatefulWidget {
 }
 
 class _DisplayChallengesState extends State<DisplayChallenges> {
-  List<Challenge> challenges = [];
+  late List<Challenge> challenges;
   bool isLoading = false;
+  final CreateNewWidget addWidget = CreateNewWidget.const0();
 
   @override
   void initState() {
+    refreshNotes();
     super.initState();
 
-    refreshNotes();
   }
 
   @override
@@ -33,9 +35,12 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
 
   Future refreshNotes() async {
     setState(() => isLoading = true);
-    if (challenges.isNotEmpty) {
-      challenges = (await ChallengeDatabase.instance.challenges())!;
-    }
+    // print('challenges');
+      challenges = await ChallengeDatabase.instance.challenges();
+      // print(this.challenges);
+    // print('challenges 2');
+
+
     setState(() => isLoading = false);
   }
 
@@ -44,6 +49,9 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
 
     return Scaffold(
       body: Center(
+          // child: Text(Challenge(id:0, challengeTitle: 'name').toMap().toString()),
+
+
         child: isLoading
             ? const CircularProgressIndicator()
             : challenges.isEmpty
@@ -51,13 +59,27 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
           'Empty Challenge List',
           style: TextStyle(color: Colors.black, fontSize: 24),
         )
-            : buildChallenges(),
+            : buildChallenges(challenges),
       ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          tooltip: "Centre FAB",
+          onPressed: () {
+            addWidget.page = 0;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => addWidget),
+            );
+            refreshNotes();
+          },
+          child: const Icon(Icons.add),
+        )
     );
   }
 
-  Widget buildChallenges() => StaggeredGridView.countBuilder(
-        padding: EdgeInsets.all(8),
+  Widget buildChallenges(challenges) =>  StaggeredGridView.countBuilder(
+        padding: const EdgeInsets.all(8),
         itemCount: challenges.length,
         staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
         crossAxisCount: 4,
@@ -82,4 +104,6 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
           );
         },
       );
+
+
 }

@@ -1,40 +1,43 @@
+import 'package:challenge_tracker/db/challenge_database.dart';
 import 'feed_creator.dart';
-import 'status_creator_page.dart';
 import 'package:flutter/material.dart';
 
+
 class FeedMainPage extends StatefulWidget {
+
   const FeedMainPage({Key? key}) : super(key: key);
+
+  static bool isCreateBtn = false;
   static int count = 0;
   static List<FeedCreator> feeds = [];
-
-
-  // * Add new Feed
-  // !  FIXME: update doesn't work, because can't use setState method with static method
+  static bool isDeleteBtn = false;
   static void addFeed(FeedCreator feed) {
     feeds.add(feed);
     ++count;
   }
-// * Delete Feed
-  // !  FIXME: update doesn't work, because can't use setState method with static method
-  static void removeFeed(FeedCreator feed) {
-    feeds.remove(feed);
-    --count;
-  }
-  // ! edit btn
-  static void editFeed(FeedCreator feed){
-    Navigator.push(
-        feed.context,
-      MaterialPageRoute(
-        builder: (context) => const StatusCreator(),
-      ),
-    );
-  }
+
+  static of(BuildContext context, {bool root = false}) => root  ? context.findRootAncestorStateOfType<_FeedMainPageState>()
+      : context.findAncestorStateOfType<_FeedMainPageState>();
 
   @override
   _FeedMainPageState createState() => _FeedMainPageState();
+  static void removeFeed(FeedCreator feed) {
+    feeds.remove(feed);
+    --count;
+
+  }
+
+
+
+
 }
 
+
+
 class _FeedMainPageState extends State<FeedMainPage> {
+
+
+
   @override
   Widget build(BuildContext context) {
 // ?    _FeedMainPageState? stateObj = context.findAncestorStateOfType<_FeedMainPageState>();
@@ -47,18 +50,23 @@ class _FeedMainPageState extends State<FeedMainPage> {
       });
     }*/
 
+    ChallengeDatabase.instance.close();
     List<Widget> _feeds =
         List.generate(FeedMainPage.count, (int i) => FeedMainPage.feeds[i])
             .reversed
             .toList();
 
+
     return Container(
+      //width: double.infinity,
+
       color: const Color(0xfff1f1f1),
       child: SingleChildScrollView(
         child: Column(
           children: _feeds,
         ),
       ),
+
     );
   }
 }
