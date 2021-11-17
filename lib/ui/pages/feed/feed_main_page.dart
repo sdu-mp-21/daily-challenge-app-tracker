@@ -1,3 +1,4 @@
+import '../add_challenge.dart';
 import 'feed_creator.dart';
 import 'status_creator_page.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ class FeedMainPage extends StatefulWidget {
   const FeedMainPage({Key? key}) : super(key: key);
   static int count = 0;
   static List<FeedCreator> feeds = [];
+
 
 
   // * Add new Feed
@@ -28,7 +30,7 @@ class FeedMainPage extends StatefulWidget {
         builder: (context) => const StatusCreator(),
       ),
     );
-    print("sad");
+
   }
 
   @override
@@ -36,6 +38,7 @@ class FeedMainPage extends StatefulWidget {
 }
 
 class _FeedMainPageState extends State<FeedMainPage> {
+  final CreateNewWidget addWidget = CreateNewWidget(page: 1);
   @override
   Widget build(BuildContext context) {
 // ?    _FeedMainPageState? stateObj = context.findAncestorStateOfType<_FeedMainPageState>();
@@ -53,13 +56,32 @@ class _FeedMainPageState extends State<FeedMainPage> {
             .reversed
             .toList();
 
-    return Container(
-      color: const Color(0xfff1f1f1),
-      child: SingleChildScrollView(
-        child: Column(
-          children: _feeds,
+    return Scaffold(
+      body: Container(
+        color: const Color(0xfff1f1f1),
+        child: SingleChildScrollView(
+          child: Column(
+            children: _feeds,
+          ),
         ),
       ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: FloatingActionButton(
+          tooltip: "Centre FAB",
+          onPressed: () {
+
+            addWidget.page = 1;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => addWidget),
+            );
+
+
+          },
+          child: const Icon(Icons.add),
+        )
     );
+
   }
 }

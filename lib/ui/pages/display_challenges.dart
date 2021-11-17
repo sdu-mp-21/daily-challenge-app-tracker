@@ -17,7 +17,7 @@ class DisplayChallenges extends StatefulWidget {
 class _DisplayChallengesState extends State<DisplayChallenges> {
   late List<Challenge> challenges;
   bool isLoading = false;
-  final CreateNewWidget addWidget = CreateNewWidget(page: 0,);
+  final CreateNewWidget addWidget = CreateNewWidget(page: 0);
 
   @override
   void initState() {
@@ -51,16 +51,18 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
         )
             : buildChallenges(challenges),
       ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionButton(
           tooltip: "Centre FAB",
           onPressed: () {
+
             addWidget.page = 0;
             Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => addWidget),
             );
+
             refreshNotes();
           },
           child: const Icon(Icons.add),
