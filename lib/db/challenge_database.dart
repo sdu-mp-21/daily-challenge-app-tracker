@@ -53,8 +53,8 @@ class ChallengeDatabase {
     // `conflictAlgorithm` to use in case the same challenge is inserted twice.
     //
     // In this case, replace any previous data.
-    // print(challenge.id);
-    print(challenge.challengeTitle);
+
+
 
     await db.rawInsert('INSERT INTO challenges (challenge_title) VALUES(?)', [challenge.challengeTitle]);
 

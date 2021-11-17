@@ -30,7 +30,7 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
     setState(() => isLoading = true);
 
     this.challenge = await ChallengeDatabase.instance.readNote(widget.challengeId);
-    print(this.challenge);
+
 
     setState(() => isLoading = false);
   }
