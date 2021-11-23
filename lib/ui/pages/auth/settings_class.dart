@@ -17,7 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight:130,
+        toolbarHeight:115,
         flexibleSpace: Authorization.getHeader(),
       ),
       body: SettingsList(

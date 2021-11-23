@@ -1,7 +1,5 @@
 import 'package:challenge_tracker/ui/pages/auth/auth_page.dart';
 import 'package:challenge_tracker/ui/pages/auth/firebase_authentication.dart';
-// import 'package:challenge_tracker/ui/pages/auth/registration_widget.dart';
-// import 'package:challenge_tracker/ui/widgets/buttons.dart';
 import 'package:challenge_tracker/ui/widgets/color_custom.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
@@ -88,8 +86,15 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                                 else {
                                   userId = value;
+                                  String s;
+                                  if(value.substring(0,2) == 'No' || value.substring(0,2) == 'Wr') {
+                                    s = userId;
+                                  }
+                                  else {
+                                    s = 'User $userId successfully signed in';
+                                  }
                                   setState(() {
-                                    _message = 'User $userId successfully signed in';
+                                    _message = s;
                                   });
                                 }
                               });
@@ -104,8 +109,15 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                                 else {
                                   userId = value;
+                                  String s;
+                                  if(value.substring(0,3) == 'The') {
+                                    s = userId;
+                                  }
+                                  else {
+                                    s = 'User $userId successfully signed in';
+                                  }
                                   setState(() {
-                                    _message = 'User $userId successfully signed in';
+                                    _message = s;
                                   });
                                 }
                               });

@@ -7,7 +7,17 @@ class FireBaseAuthentication {
   try {
     UserCredential userCredential = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
     return userCredential.user!.uid;
-  } on FirebaseAuthException {
+  }
+  // on FirebaseAuthException {
+  //   return null;
+  // }
+  on FirebaseAuthException catch (e) {
+    if (e.code == 'weak-password') {
+      return 'The password provided is too weak.';
+    } else if (e.code == 'email-already-in-use') {
+      return 'The account already exists for that email.';
+    }
+  } catch (e) {
     return null;
   }
  }
@@ -16,7 +26,18 @@ class FireBaseAuthentication {
    try {
      UserCredential userCredential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
      return userCredential.user!.uid;
-   } on FirebaseAuthException {
+   }
+   // on FirebaseAuthException {
+   //   return null;
+   // }
+   on FirebaseAuthException catch (e) {
+     if (e.code == 'user-not-found') {
+       return 'No user found for that email.';
+     } else if (e.code == 'wrong-password') {
+       return 'Wrong password provided for that user.';
+     }
+   }
+   catch (e) {
      return null;
    }
  }
