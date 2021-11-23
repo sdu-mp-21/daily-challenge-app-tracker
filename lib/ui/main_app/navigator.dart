@@ -27,7 +27,7 @@ class PageNavigatorState extends State<MainPage> {
         backgroundColor: Colors.orange.shade300,
         actions: [
           IconButton(
-              onPressed: () => Navigator.pushNamed(context, '/register'),
+              onPressed: () => Navigator.pushNamed(context, '/login'),
               icon: const Icon(Icons.account_circle))
         ],
       ),
