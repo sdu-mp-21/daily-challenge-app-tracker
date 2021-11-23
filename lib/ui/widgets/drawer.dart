@@ -22,18 +22,20 @@ class OurDrawer extends StatelessWidget {
               ),
             ),
           ),
-           ListTile(
-            leading: Icon(Icons.privacy_tip),
-            title: Text('Privacy Policy'),
+          ListTile(
+            leading: const Icon(Icons.privacy_tip),
+            title: const Text('Privacy Policy'),
             onTap: () {Navigator.pushNamed(context, '/privacyPolicy');},
           ),
-          const ListTile(
-            leading: Icon(Icons.account_circle),
-            title: Text('Profile'),
+          ListTile(
+            leading: const Icon(Icons.account_circle),
+            title: const Text('Profile'),
+            onTap: () {Navigator.pushNamed(context, '/profile');},
           ),
-          const ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
+          ListTile(
+            leading: const Icon(Icons.settings),
+            title: const Text('Settings'),
+            onTap: () {Navigator.pushNamed(context, '/settings');},
           ),
         ],
       ),

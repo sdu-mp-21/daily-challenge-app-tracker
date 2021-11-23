@@ -1,7 +1,10 @@
+import 'package:challenge_tracker/db/feed_class.dart';
 import 'package:flutter/material.dart';
-import 'feed_main_page.dart';
-import 'feed_creator.dart';
+//import 'feed_main_page.dart';
+//import 'feed_creator.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import '../../../db/feed_database.dart';
+import '../../../db/feed_class.dart';
 
 class StatusCreator extends StatefulWidget {
   const StatusCreator({Key? key, this.context}) : super(key: key);
@@ -85,20 +88,21 @@ class _StatusCreator extends State<StatusCreator> {
           ),
         ),
       ),
-      onPressed: () {
-        if (!StatusCreator.isEditBtn) {
-          setState(() {
-            FeedMainPage.addFeed(FeedCreator(
+      onPressed: () async{
+        DatabaseHelper _dbHelper =DatabaseHelper();
+        FeedDescription _newFeedDesc =FeedDescription(description: text);
+        await _dbHelper.insertText(_newFeedDesc);
+            /*FeedMainPage.addFeed(FeedCreator(
               key: UniqueKey(),
               textField: text,
               currentTime: DateTime.now(),
               onRemoved: FeedMainPage.removeFeed,
               onFeedEdit: FeedMainPage.editFeed,
               context: widget.context,
-            ));
+            ));*/
             Navigator.pop(context);
-          });
-        }
+
+
       },
     );
   }
@@ -134,6 +138,7 @@ class _StatusCreator extends State<StatusCreator> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
+
                 maxLength: 500,
                 minLines: 1,
                 maxLines: 5,

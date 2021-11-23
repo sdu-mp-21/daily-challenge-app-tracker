@@ -15,8 +15,6 @@ class CreateNewWidget extends StatefulWidget {
     required this.page,
   }) : super(key: key);
 
-
-
   @override
   State<StatefulWidget> createState() {
     return _CreateNewWidgetState();
@@ -56,9 +54,8 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
             ),
             title: Text(createTitle),
           ),
-          body: (page == 0) ? setChallenge() : StatusCreator(context:context),
-        )
-    );
+          body: (page == 0) ? setChallenge() : StatusCreator(context: context),
+        ));
   }
 
   Widget setChallenge() {
@@ -68,7 +65,6 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
     });
 
     return Padding(
-
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,27 +82,27 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
             ),
           ),
           const SizedBox(height: 30),
-        TextField(
-    controller: controller,
-    keyboardType: TextInputType.text,
-    textInputAction: TextInputAction.done,
-    focusNode: nodeMainText,
-    autofocus: false,
-    // onChanged: (text) {
-    //   // setState(() {
-    //   _value = text;
-    //   // });
-    // },
-    // onSubmitted: (text) {
-    //   setState(() {
-    //     _value = text;
-    //   });
-    // },
-    decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-    labelText: 'Write here',
-    icon: Icon(Icons.add)),
-    ),
+          TextField(
+            controller: controller,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.done,
+            focusNode: nodeMainText,
+            autofocus: false,
+            // onChanged: (text) {
+            //   // setState(() {
+            //   _value = text;
+            //   // });
+            // },
+            // onSubmitted: (text) {
+            //   setState(() {
+            //     _value = text;
+            //   });
+            // },
+            decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Write here',
+                icon: Icon(Icons.add)),
+          ),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -123,12 +119,12 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
                 child: const Text("ADD"),
                 onPressed: () async {
                   challenges = await ChallengeDatabase.instance.challenges();
-                  Challenge challengeToInsert = Challenge(id: challenges.length, challengeTitle : controller.text);
+                  Challenge challengeToInsert = Challenge(
+                      id: challenges.length, challengeTitle: controller.text);
                   // print(challenges.length);
                   // print(controller.text);
                   ChallengeDatabase.instance.insertChallenge(challengeToInsert);
                   Navigator.of(context).pop();
-
                 },
               )
             ],
@@ -137,7 +133,6 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
       ),
     );
   }
-
 
 //TODO Add some usability in textField Widget, more function
   Widget inputTextPost() {

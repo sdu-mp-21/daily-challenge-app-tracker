@@ -2,6 +2,8 @@ import '../add_challenge.dart';
 import 'feed_creator.dart';
 import 'status_creator_page.dart';
 import 'package:flutter/material.dart';
+import '../../../db/feed_database.dart';
+
 
 class FeedMainPage extends StatefulWidget {
   const FeedMainPage({Key? key}) : super(key: key);
@@ -39,6 +41,7 @@ class FeedMainPage extends StatefulWidget {
 
 class _FeedMainPageState extends State<FeedMainPage> {
   final CreateNewWidget addWidget = CreateNewWidget(page: 1);
+  final DatabaseHelper _dbHelper  = DatabaseHelper();
   @override
   Widget build(BuildContext context) {
 // ?    _FeedMainPageState? stateObj = context.findAncestorStateOfType<_FeedMainPageState>();
@@ -51,21 +54,52 @@ class _FeedMainPageState extends State<FeedMainPage> {
       });
     }*/
 
-    List<Widget> _feeds =
+  /*  List<Widget> _feeds =
         List.generate(FeedMainPage.count, (int i) => FeedMainPage.feeds[i])
             .reversed
-            .toList();
+            .toList();*/
+
+
+    /* SingleChildScrollView(
+          child: Column(
+            children: _feeds,
+          ),
+        )*/
 
     return Scaffold(
       body: Container(
         color: const Color(0xfff1f1f1),
-        child: SingleChildScrollView(
-          child: Column(
-            children: _feeds,
-          ),
+        child: FutureBuilder (
+            initialData: const [],
+          future:_dbHelper.getTexts(),
+          builder:  (context, AsyncSnapshot snapshot) {
+              if(snapshot.data.length == null){
+                print("No data, Null");
+              }
+              else if(snapshot.data.length == 0){
+                print("length = 0");
+              }
+            return ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder:(context, index){
+                return FeedCreator(
+                  key: UniqueKey(),
+                  textField: snapshot.data[index].description,
+                  currentTime: DateTime.now(),
+                  //onRemoved: FeedMainPage.removeFeed,
+                  //onFeedEdit: FeedMainPage.editFeed,
+                  //context: context,
+                );
+
+              }
+            );
+
+          }
+
+
         ),
       ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
         floatingActionButton: FloatingActionButton(
           tooltip: "Centre FAB",
           onPressed: () {
@@ -75,7 +109,11 @@ class _FeedMainPageState extends State<FeedMainPage> {
               context,
               MaterialPageRoute(
                   builder: (context) => addWidget),
-            );
+            ).then((value){
+              setState(() {
+
+              });
+            });
 
 
           },

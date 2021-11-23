@@ -5,17 +5,17 @@ import '../pages/feed/status_creator_page.dart';
 
 class FeedHeader extends StatelessWidget {
   final DateTime currentTime;
-  final Function removeFeed;
-  final Function onFeedEdit;
+  //final Function removeFeed;
+  //final Function onFeedEdit;
   final dynamic context;
   final FeedCreator feed;
 
   const FeedHeader({
     Key? key,
     required this.currentTime,
-    required this.removeFeed,
+    //required this.removeFeed,
     required this.feed,
-    required this.onFeedEdit,
+    //required this.onFeedEdit,
     this.context,
   }) : super(key: key);
 
@@ -109,7 +109,7 @@ class FeedHeader extends StatelessWidget {
       } else
         print('Null context');
     } else if (choice == 'delete') {
-      removeFeed(feed);
+      //removeFeed(feed);
     }
   }
 }
