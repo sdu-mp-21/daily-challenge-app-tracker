@@ -12,6 +12,67 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 class _LoginPageState extends State<LoginPage> {
+
+  late String _name;
+  late String _password;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Widget _buildName() {
+    return Container(
+      margin: const EdgeInsets.only(top: 20),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        color: Colors.white,
+      ),
+      padding: const EdgeInsets.only(left: 40,right: 40),
+      child:TextFormField(
+        decoration: InputDecoration(labelText: 'Name',icon: new Icon(Icons.person)),
+        maxLength: 16,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Name is Required';
+          }
+
+          return null;
+        },
+        onSaved: (value) {
+          _name = value!;
+        },
+      ),
+    );
+  }
+
+
+
+  Widget _buildPassword() {
+    return Container(
+      margin: const EdgeInsets.only(top: 20),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        color: Colors.white,
+      ),
+      padding: const EdgeInsets.only(left: 40,right: 40),
+      child:TextFormField(
+        decoration: InputDecoration(labelText: 'Password',icon: new Icon(Icons.vpn_key)),
+        keyboardType: TextInputType.visiblePassword,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return 'Password is Required';
+          }else if(value.length < 6){
+            return 'Password must be more than 6 characters';
+          }
+
+          return null;
+        },
+        onSaved: (value) {
+          _password = value!;
+        },
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,34 +85,60 @@ class _LoginPageState extends State<LoginPage> {
       ),
 
       body: Container(
-        padding: const EdgeInsets.only(bottom: 0),
+        padding: const EdgeInsets.only(top: 50),
         child: Column(
 
           children: <Widget>[
 
+
             Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(left: 60, right: 60, top: 30),
+              child: Form(
+                key:_formKey,
+               // margin: const EdgeInsets.only(left: 60, right: 60, top: 30),
                 child: Column(
                   children: <Widget>[
-                    _textInput(hint: "Email", icon: Icons.email),
-                    _textInput(hint: "Password", icon: Icons.vpn_key),
+                    _buildName(),
+                    _buildPassword(),
+                    const SizedBox(height:50),
+                 //   _textInput(hint: "Email", icon: Icons.email),
+                 //   _textInput(hint: "Password", icon: Icons.vpn_key),
                     Container(
-                      margin: const EdgeInsets.only(top: 10),
+                      margin: const EdgeInsets.only(bottom: 10),
                       alignment: Alignment.centerRight,
                       child: const Text(
                         "Forgot Password?",
                       ),
                     ),
-                    Expanded(
-                      child: Center(
-                        child: Buttons.getAuthButton("LOGIN", () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const RegPage()));
-                          },
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0,bottom:20,left: 20,right: 20),
+
+                      child: ElevatedButton(
+
+
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            return;
+                          }
+                          _formKey.currentState!.save();
+                          print(_name);
+                          print(_password);
+
+
+                          //Send to API
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(ColorsCustom.orangeColors),
                         ),
+                        child: Container(
+                          height: 40,
+                          color: ColorsCustom.orangeColors,
+                          alignment: Alignment.center,
+                          child: const Text('Login', style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold, letterSpacing: 2),),
+                        ),
+
                       ),
                     ),
                     RichText(
