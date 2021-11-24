@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
 import 'time_ago.dart';
 import '../pages/feed/feed_creator.dart';
-import '../pages/feed/status_creator_page.dart';
+//import '../pages/feed/status_creator_page.dart';
+import '../../../db/feed_database.dart';
 
-class FeedHeader extends StatelessWidget {
+class FeedHeader extends StatefulWidget {
   final DateTime currentTime;
   //final Function removeFeed;
   //final Function onFeedEdit;
   final dynamic context;
+  final int feedId;
   final FeedCreator feed;
 
   const FeedHeader({
     Key? key,
     required this.currentTime,
+    required this.feedId,
     //required this.removeFeed,
     required this.feed,
     //required this.onFeedEdit,
     this.context,
   }) : super(key: key);
 
-  // ! PopupMenuButtons
+  @override
+  State<FeedHeader> createState() => _FeedHeaderState();
+}
+
+class _FeedHeaderState extends State<FeedHeader> {
+  final _db = DatabaseHelper();
   Widget getPopupMenuButtons(BuildContext context) {
     return Align(
       alignment: Alignment.topRight,
@@ -38,7 +46,6 @@ class FeedHeader extends StatelessWidget {
     );
   }
 
-  // ! User Avatar and Name
   Widget userAvatarAndName() {
     return Row(
       children: [
@@ -63,7 +70,7 @@ class FeedHeader extends StatelessWidget {
                 ),
               ),
               Text(
-                TimeAgo.displayTimeAgoFromTimestamp(currentTime.toString()),
+                TimeAgo.displayTimeAgoFromTimestamp(widget.currentTime.toString()),
                 textAlign: TextAlign.left,
                 textDirection: TextDirection.ltr,
                 style: const TextStyle(
@@ -97,18 +104,19 @@ class FeedHeader extends StatelessWidget {
     );
   }
 
-  void choiceAction(String choice) {
+  void choiceAction(String choice) async{
     // ! FIXME: edit button doesn't work yet
     if (choice == 'edit') {
       // * onFeedEdit(feed);
-      if (context != null) {
-        Navigator.push(
-          context,
+        /*Navigator.push(
+          widget.context,
           MaterialPageRoute(builder: (context) => const StatusCreator()),
-        );
-      } else
-        print('Null context');
+        );*/
+
     } else if (choice == 'delete') {
+      await _db.deleteFeed(widget.feedId);
+      setState(() {
+      });
       //removeFeed(feed);
     }
   }

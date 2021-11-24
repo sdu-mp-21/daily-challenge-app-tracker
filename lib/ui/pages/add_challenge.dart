@@ -3,10 +3,12 @@ import 'package:challenge_tracker/db/challenge_database.dart';
 import '../../ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
+
 import 'feed/status_creator_page.dart';
 
 class CreateNewWidget extends StatefulWidget {
   String createTitle = "";
+  dynamic fd;
   int page = 0;
   static bool isCreateBtn = false;
 
@@ -54,7 +56,7 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
             ),
             title: Text(createTitle),
           ),
-          body: (page == 0) ? setChallenge() : StatusCreator(context: context),
+          body: (page == 0) ? setChallenge() : StatusCreator(context: context, fd : widget.fd),
         ));
   }
 

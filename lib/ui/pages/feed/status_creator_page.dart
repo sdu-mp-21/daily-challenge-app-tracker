@@ -1,14 +1,14 @@
 import 'package:challenge_tracker/db/feed_class.dart';
 import 'package:flutter/material.dart';
-//import 'feed_main_page.dart';
-//import 'feed_creator.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '../../../db/feed_database.dart';
 import '../../../db/feed_class.dart';
 
 class StatusCreator extends StatefulWidget {
-  const StatusCreator({Key? key, this.context}) : super(key: key);
+  const StatusCreator({Key? key, required this.context, required this.fd})
+      : super(key: key);
   final dynamic context;
+  final dynamic fd;
   static int counter = 0;
   static bool isEditBtn = false;
 
@@ -17,6 +17,9 @@ class StatusCreator extends StatefulWidget {
 }
 
 class _StatusCreator extends State<StatusCreator> {
+
+  int _feedId = 0;
+  String _feedDescription = '';
   String _text = '';
   final _controller = TextEditingController();
 
@@ -28,8 +31,12 @@ class _StatusCreator extends State<StatusCreator> {
 
   @override
   initState() {
+    if(widget.fd != null){
+      _feedDescription = widget.fd.description;
+      _feedId = widget.fd.id;
+    }
     super.initState();
-    _controller.text = _text;
+    //_controller.text = _text;
     _controller.addListener(_changeText);
   }
 
@@ -88,21 +95,20 @@ class _StatusCreator extends State<StatusCreator> {
           ),
         ),
       ),
-      onPressed: () async{
-        DatabaseHelper _dbHelper =DatabaseHelper();
-        FeedDescription _newFeedDesc =FeedDescription(description: text);
-        await _dbHelper.insertText(_newFeedDesc);
-            /*FeedMainPage.addFeed(FeedCreator(
-              key: UniqueKey(),
-              textField: text,
-              currentTime: DateTime.now(),
-              onRemoved: FeedMainPage.removeFeed,
-              onFeedEdit: FeedMainPage.editFeed,
-              context: widget.context,
-            ));*/
-            Navigator.pop(context);
+      onPressed: () async {
+        DatabaseHelper _dbHelper = DatabaseHelper();
+            FeedDescription _newFeedDesc = FeedDescription(description: text);
+            await _dbHelper.insertText(_newFeedDesc);
 
+         /* else {
+            await _dbHelper.updateFeed(_feedId, text);
+            setState(() {
 
+            });
+            print("Update");
+
+          }*/
+        Navigator.pop(context);
       },
     );
   }
@@ -117,7 +123,7 @@ class _StatusCreator extends State<StatusCreator> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxHeight: 200.0),
               child: TextField(
-                autofocus: true,
+                autofocus: false,
                 controller: _controller,
                 decoration: const InputDecoration(
                   // contentPadding:  EdgeInsets.symmetric(vertical: 100.0),
@@ -138,11 +144,25 @@ class _StatusCreator extends State<StatusCreator> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-
                 maxLength: 500,
                 minLines: 1,
                 maxLines: 5,
-                onSubmitted: (value) {},
+                onSubmitted: (value) {
+                  /*print(value);
+                  if (value != "") {
+                    if (widget.fd == null) {
+                      print("create new ");
+                      FeedDescription _newFeedDesc = FeedDescription(description: value);
+                      await _dbHelper.insertText(_newFeedDesc);
+                    }
+                    else {
+                      await _dbHelper.updateFeed(_feedId, value);
+
+                      print("Update");
+
+                    }
+                  }*/
+                },
               ),
             ),
           ),
@@ -152,51 +172,53 @@ class _StatusCreator extends State<StatusCreator> {
   @override
   Widget build(BuildContext context) {
     context = widget.context;
-    return KeyboardDismisser(
-      gestures: const [GestureType.onTap, GestureType.onVerticalDragDown],
-      child: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              //LOGO
-              Container(
-                width: 120.0,
-                height: 120.0,
-                margin: const EdgeInsets.all(15.0),
-                child: const Image(
-                  image: AssetImage('assets/images/statusIcon.png'),
-                ),
-              ),
-              // LOGO'S TEXT
-              Container(
-                margin: const EdgeInsets.only(
-                  bottom: 15.0,
-                ),
-                child: const Text(
-                  'Create Post',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF7BC426),
+    return Scaffold(
+      body: KeyboardDismisser(
+        gestures: const [GestureType.onTap, GestureType.onVerticalDragDown],
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                //LOGO
+                Container(
+                  width: 120.0,
+                  height: 120.0,
+                  margin: const EdgeInsets.all(15.0),
+                  child: const Image(
+                    image: AssetImage('assets/images/statusIcon.png'),
                   ),
                 ),
-              ),
-              Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 24.0,
+                // LOGO'S TEXT
+                Container(
+                  margin: const EdgeInsets.only(
+                    bottom: 15.0,
                   ),
-                  child: _textField()),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _cancelBtn(context),
-                  _createBtn(context, _text),
-                ],
-              ),
-            ],
+                  child: const Text(
+                    'Create Post',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF7BC426),
+                    ),
+                  ),
+                ),
+                Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 24.0,
+                    ),
+                    child: _textField()),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _cancelBtn(context),
+                    _createBtn(context, _text),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

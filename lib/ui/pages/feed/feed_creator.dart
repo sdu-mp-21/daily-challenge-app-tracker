@@ -3,8 +3,10 @@ import '../../widgets/feed_header.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/like_button.dart';
 import '../../widgets/share_btn.dart';
+import '../../../db/feed_class.dart';
 
 class FeedCreator extends StatefulWidget {
+  final FeedDescription fd;
   final dynamic textField;
   final DateTime currentTime;
   //final Function onRemoved;
@@ -16,6 +18,7 @@ class FeedCreator extends StatefulWidget {
 
   const FeedCreator({
     Key? key,
+    required this.fd,
     this.textField,
     required this.currentTime,
     //required this.onRemoved,
@@ -28,6 +31,15 @@ class FeedCreator extends StatefulWidget {
 }
 
 class _FeedCreatorState extends State<FeedCreator> {
+  int _feedId = 0;
+  @override
+  void initState() {
+    if(widget.fd != null) {
+      _feedId = widget.fd.id;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,7 +60,8 @@ class _FeedCreatorState extends State<FeedCreator> {
         children: [
            FeedHeader(
              key: widget.key,
-             currentTime: widget.currentTime,
+             currentTime: DateTime.now(),
+             feedId: _feedId,
              //removeFeed: widget.onRemoved,
              feed: widget,
              //onFeedEdit: widget.onFeedEdit,
