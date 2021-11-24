@@ -7,6 +7,7 @@ class Authorization extends StatefulWidget {
 
   static Widget getHeader() {
     return Container(
+      padding: const EdgeInsets.only(top: 40),
       height: 150,
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -16,8 +17,8 @@ class Authorization extends StatefulWidget {
           ),
       child:Container(
         child: const Image(
-            height: 120,
-            width: 120,
+            height: 100,
+            width: 100,
           image: AssetImage(
           'assets/images/mental.png')
         ),
@@ -29,7 +30,7 @@ class Authorization extends StatefulWidget {
 
   static Widget getFooter() {
     return Container(
-      height: 70,
+      height: 50,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               colors: [ColorsCustom.orangeColors, ColorsCustom.orangeLightColors],

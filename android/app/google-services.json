@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "566701938693",
+    "project_id": "daily-challenge-app-tracker",
+    "storage_bucket": "daily-challenge-app-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566701938693:android:8770420ceed59736aee46c",
+        "android_client_info": {
+          "package_name": "kz.sdu.challenge_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566701938693-hoi6nq5h3o2avmdt7gn1h8ntmamojrco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuDZyQuH-ZOKvgQ04hjBlDo4gc9z2dmfc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566701938693-hoi6nq5h3o2avmdt7gn1h8ntmamojrco.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

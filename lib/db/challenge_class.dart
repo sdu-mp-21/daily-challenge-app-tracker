@@ -1,6 +1,8 @@
 class Challenge {
   final int id;
   final String challengeTitle;
+  //final String challengeDescription;
+  //final boolean[] daysChecked;
   Challenge( {
     required this.id,
     required this.challengeTitle,
@@ -11,7 +13,7 @@ class Challenge {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'challenge_title': '$challengeTitle',
+      'challenge_title': challengeTitle,
     };
   }
 

@@ -17,7 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight:130,
+        toolbarHeight:115,
         flexibleSpace: Authorization.getHeader(),
       ),
       body: SettingsList(
@@ -51,11 +51,11 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
           SettingsSection(
-            title: 'Secutiry',
+            title: 'Security',
             tiles: [
               SettingsTile.switchTile(
                 title: 'Lock app in background',
-                leading: Icon(Icons.phonelink_lock),
+                leading: const Icon(Icons.phonelink_lock),
                 switchValue: lockInBackground,
                 onToggle: (bool value) {
                   setState(() {
