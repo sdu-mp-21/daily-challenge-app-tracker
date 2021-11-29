@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OurDrawer extends StatelessWidget {
-  const OurDrawer({Key? key}) : super(key: key);
+  OurDrawer({Key? key}) : super(key: key);
+  final user = FirebaseAuth.instance.currentUser;
+
 
   @override
   Widget build(BuildContext context) {
+    String? s = (user != null && user!.displayName != null) ? user!.displayName : 'Drawer Header';
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -14,13 +18,13 @@ class OurDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.orange.shade300,
             ),
-            child: const Text(
-              'Drawer Header',
-              style: TextStyle(
+            child: Text(
+              s!,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 24,
               ),
-            ),
+            )
           ),
           ListTile(
             leading: const Icon(Icons.privacy_tip),
