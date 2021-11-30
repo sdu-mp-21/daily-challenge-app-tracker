@@ -68,54 +68,6 @@ class _LoginPageState extends State<LoginPage> {
                             shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0))),
                           ),
                           onPressed: () => submit(),
-                          // onPressed: () {
-                          // String userId = '';
-                          // if(_isLogin) {
-                          //   auth.login(txtUserName.text, txtPassword.text).then((value) {
-                          //     if(value == null) {
-                          //       setState(() {
-                          //         _message = 'Login error';
-                          //       });
-                          //     }
-                          //     else {
-                          //       userId = value;
-                          //       String s;
-                          //       if(value.substring(0,2) == 'No' || value.substring(0,2) == 'Wr') {
-                          //         s = userId;
-                          //       }
-                          //       else {
-                          //         s = 'User $userId successfully signed in';
-                          //       }
-                          //       setState(() {
-                          //         _message = s;
-                          //       });
-                          //     }
-                          //   });
-                          // }
-                          // else {
-                          //   auth.createUser(txtUserName.text, txtPassword.text).then((value) {
-                          //     if(value == null) {
-                          //       setState(() {
-                          //         _message = 'Registration Error!';
-                          //
-                          //       });
-                          //     }
-                          //     else {
-                          //       userId = value;
-                          //       String s;
-                          //       if(value.substring(0,3) == 'The') {
-                          //         s = userId;
-                          //       }
-                          //       else {
-                          //         s = 'User $userId successfully signed in';
-                          //       }
-                          //       setState(() {
-                          //         _message = s;
-                          //       });
-                          //     }
-                          //   });
-                          // }
-                          // },
                           child: Text(_isLogin ? "LOGIN" : "REGISTER", style: const TextStyle(fontSize: 18),),
                         ),
                       ),
