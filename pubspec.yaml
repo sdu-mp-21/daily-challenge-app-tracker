@@ -42,6 +42,9 @@ dependencies:
   sqflite: ^2.0.0+4
   path: ^1.8.0
 
+# state management
+  provider: ^6.0.1
+
 #Date time format
   intl: ^0.17.0
 

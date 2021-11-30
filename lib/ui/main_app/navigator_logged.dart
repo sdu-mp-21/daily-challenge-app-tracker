@@ -1,19 +1,20 @@
 import 'package:challenge_tracker/ui/pages/display_challenges.dart';
 import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../widgets/drawer.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+class MainPageLogged extends StatefulWidget {
+  const MainPageLogged({Key? key}) : super(key: key);
 
 
   @override
-  PageNavigatorState createState() => PageNavigatorState();
+  PageNavigatorLoggedState createState() => PageNavigatorLoggedState();
 }
 
-class PageNavigatorState extends State<MainPage> {
-  
+class PageNavigatorLoggedState extends State<MainPageLogged> {
+
   int _currentIndex = 0;
   final List _children = [
     const DisplayChallenges(),
@@ -24,20 +25,20 @@ class PageNavigatorState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     // final user = FirebaseAuth.instance.currentUser;
-    // bool isLogged = user == null ? false : true;
-    // final provider = Provider.of<EmailSignInProvider>(context);
-    // print('username is');
-    // // print(provider.userEmail);
-    //
+    // print('user name is');
     // print(user);
+
     return Scaffold(
       drawer: OurDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.orange.shade300,
         actions: [
           IconButton(
-              onPressed: () => Navigator.pushNamed(context, '/login'),
-              icon: const Icon(Icons.account_circle))
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushReplacementNamed(context, '/logged_out');
+              },
+              icon: const Icon(Icons.logout))
         ],
       ),
       body: _children[_currentIndex],
