@@ -228,7 +228,9 @@ class _LoginPageState extends State<LoginPage> {
       final isSuccess = await provider.login();
 
       if (isSuccess == 'true') {
+        // Navigator.of(context).replace(newRoute: MaterialPageRoute(builder: (context) => const MainPageLogged()), oldRoute: MaterialPageRoute(builder: (context) => const MainPage()));
         Navigator.of(context).pop();
+        Navigator.pushReplacementNamed(context, '/logged_in');
       } else {
         _message = isSuccess == 'false' ? 'An error occurred, please check your credentials!' : isSuccess;
 
