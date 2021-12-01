@@ -113,6 +113,9 @@ class _StatusCreator extends State<StatusCreator> {
     );
   }
 
+
+
+
 //INPUT TEXT
   Widget _textField() => Column(
         children: [
@@ -171,6 +174,7 @@ class _StatusCreator extends State<StatusCreator> {
 
   @override
   Widget build(BuildContext context) {
+
     context = widget.context;
     return Scaffold(
       body: KeyboardDismisser(
@@ -181,6 +185,7 @@ class _StatusCreator extends State<StatusCreator> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+
                 //LOGO
                 Container(
                   width: 120.0,
