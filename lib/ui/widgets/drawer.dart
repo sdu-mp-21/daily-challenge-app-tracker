@@ -28,6 +28,8 @@ class OurDrawer extends StatelessWidget {
             title: const Text('Settings'),
             onTap: () {Navigator.pushNamed(context, '/settings');},
           ),
+
+
         ],
       ),
     );
@@ -138,70 +140,8 @@ class OurDrawer extends StatelessWidget {
         );
     });
 
-
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   SnackBar(
-    //       padding: const EdgeInsets.symmetric(
-    //         vertical: 8,
-    //         horizontal: 8.0, // Inner padding for SnackBar content.
-    //       ),
-    //       behavior: SnackBarBehavior.floating,
-    //       shape: RoundedRectangleBorder(
-    //         borderRadius: BorderRadius.circular(10.0),
-    //       ),
-    //     content: Column(
-    //       mainAxisSize: MainAxisSize.min,
-    //         children: [
-    //           const SizedBox(
-    //             height: 20,
-    //             child: Text('Select Source'),
-    //           ),
-    //           Row(
-    //           children: [
-    //             GestureDetector(
-    //               onTap: () {Navigator.pop(context);},
-    //               child: const Icon(Icons.collections_outlined, color: Colors.white, size: 30,),
-    //             ),
-    //             GestureDetector(
-    //               onTap: () {Navigator.pop(context);},
-    //               child: const Icon(Icons.camera_alt_rounded, color: Colors.white, size: 30,),
-    //             )
-    //           ],
-    //         )
-    // ]
-    //     )
-    //     ),
-    //
-    // );
-    // showDialog(
-    //   context: context,
-    //   builder: (BuildContext context) {
-    //     return SimpleDialog(
-    //         title: const Text('Select Source'),
-    //         children: <Widget>[
-    //           SimpleDialogOption(
-    //             child: const Icon(Icons.collections_outlined),
-    //             onPressed: () {
-    //               // selectOrTakePhoto(ImageSource.gallery);
-    //               Navigator.pop(context);
-    //               },
-    //           ),
-    //           SimpleDialogOption(
-    //             child: const Icon(Icons.camera_alt_rounded),
-    //             onPressed: () {
-    //               // selectOrTakePhoto(ImageSource.camera);
-    //               Navigator.pop(context);
-    //               },
-    //           ),
-    //         ]
-    //     );
-    //   },
-    // );
   }
 
-  // selectOrTakePhoto(ImageSource imageSource) async {
-  //
-  // }
 
 }
 
