@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '../../../db/feed_database.dart';
 import '../../../db/feed_class.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class StatusCreator extends StatefulWidget {
   const StatusCreator({Key? key, required this.context, required this.fd})
@@ -23,6 +25,12 @@ class _StatusCreator extends State<StatusCreator> {
   String _text = '';
   final _controller = TextEditingController();
 
+  void initFireBase() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  }
+
+
   _changeText() {
     setState(() => {
           _text = _controller.text,
@@ -35,6 +43,7 @@ class _StatusCreator extends State<StatusCreator> {
       _feedDescription = widget.fd.description;
       _feedId = widget.fd.id;
     }
+    initFireBase();
     super.initState();
     //_controller.text = _text;
     _controller.addListener(_changeText);
@@ -74,7 +83,7 @@ class _StatusCreator extends State<StatusCreator> {
   }
 
 // ! CREATE BUTTON
-  Widget _createBtn(context, text) {
+  Widget _createBtn(context, _newDescription) {
     return TextButton(
       child: Container(
         //width: 180.0,
@@ -97,9 +106,10 @@ class _StatusCreator extends State<StatusCreator> {
       ),
       onPressed: () async {
         DatabaseHelper _dbHelper = DatabaseHelper();
-            FeedDescription _newFeedDesc = FeedDescription(description: text);
+            FeedDescription _newFeedDesc = FeedDescription(description: _newDescription);
             await _dbHelper.insertText(_newFeedDesc);
-
+        FirebaseFirestore.instance.collection('feeds')
+            .add({'description': _newDescription});
          /* else {
             await _dbHelper.updateFeed(_feedId, text);
             setState(() {

@@ -2,6 +2,9 @@ import '../add_challenge.dart';
 import 'feed_creator.dart';
 import 'package:flutter/material.dart';
 import '../../../db/feed_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 class FeedMainPage extends StatefulWidget {
   const FeedMainPage({Key? key}) : super(key: key);
@@ -22,13 +25,24 @@ class _FeedMainPageState extends State<FeedMainPage> {
       child: CustomPaint(
         painter: CurvePainter(),
         child: const Center(
-            child: Text('Create Status',
+            child: Text('Create Post',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 30,
+                  fontSize: 25,
                 ))),
       ),
     );
+  }
+
+  void initFireBase() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initFireBase();
   }
 
   @override
