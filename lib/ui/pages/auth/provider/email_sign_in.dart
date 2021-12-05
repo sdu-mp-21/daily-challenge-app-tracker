@@ -100,7 +100,7 @@ class EmailSignInProvider extends ChangeNotifier {
         s = 'The account already exists for that email.';
       }
     } catch (err) {
-      print(err);
+      // print(err);
       isLoading = false;
       s = 'false';
     }
