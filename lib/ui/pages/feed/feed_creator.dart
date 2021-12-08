@@ -6,7 +6,7 @@ import '../../widgets/share_btn.dart';
 import '../../../db/feed_class.dart';
 
 class FeedCreator extends StatefulWidget {
-  final FeedDescription fd;
+  final dynamic fd;
   final dynamic textField;
   final DateTime currentTime;
   //final Function onRemoved;
@@ -31,11 +31,12 @@ class FeedCreator extends StatefulWidget {
 }
 
 class _FeedCreatorState extends State<FeedCreator> {
-  int _feedId = 0;
+  String _feedId = "";
   @override
   void initState() {
     if(widget.fd != null) {
-      _feedId = widget.fd.id;
+      _feedId = widget.fd;
+      print('_feedId : $_feedId');
     }
     super.initState();
   }

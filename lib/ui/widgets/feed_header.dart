@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'time_ago.dart';
 import '../pages/feed/feed_creator.dart';
 //import '../pages/feed/status_creator_page.dart';
-import '../../../db/feed_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+
 
 class FeedHeader extends StatefulWidget {
   final DateTime currentTime;
-  //final Function removeFeed;
-  //final Function onFeedEdit;
   final dynamic context;
-  final int feedId;
+  final dynamic feedId;
   final FeedCreator feed;
 
   const FeedHeader({
     Key? key,
     required this.currentTime,
     required this.feedId,
-    //required this.removeFeed,
+
     required this.feed,
-    //required this.onFeedEdit,
+
     this.context,
   }) : super(key: key);
 
@@ -27,7 +27,6 @@ class FeedHeader extends StatefulWidget {
 }
 
 class _FeedHeaderState extends State<FeedHeader> {
-  final _db = DatabaseHelper();
   Widget getPopupMenuButtons(BuildContext context) {
     return Align(
       alignment: Alignment.topRight,
@@ -114,9 +113,7 @@ class _FeedHeaderState extends State<FeedHeader> {
         );*/
 
     } else if (choice == 'delete') {
-      await _db.deleteFeed(widget.feedId);
-      setState(() {
-      });
+      FirebaseFirestore.instance.collection('feeds').doc(widget.feedId).delete();
       //removeFeed(feed);
     }
   }

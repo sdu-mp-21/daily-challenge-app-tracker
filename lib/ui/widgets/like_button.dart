@@ -4,9 +4,7 @@ import 'package:like_button/like_button.dart';
 class LikeBtn extends StatelessWidget {
   const LikeBtn({Key? key}) : super(key: key);
 
-  void increments(){
 
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class LikeBtn extends StatelessWidget {
               size: 30.0,
             );
           },
-          likeCount: 99,
+          likeCount: 0,
           countBuilder:  (var count, var isLiked, var txt)  {
             var color = isLiked ? Colors.red : Colors.grey;
              Widget result;
@@ -37,7 +35,7 @@ class LikeBtn extends StatelessWidget {
               result = Text(
                 '',
                   style: TextStyle(
-                    color: color, fontSize: 25,
+                    color: color, fontSize: 15,
                   ),
               );
             }

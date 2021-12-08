@@ -18,7 +18,7 @@ class _FeedMainPageState extends State<FeedMainPage> {
   final DatabaseHelper _dbHelper = DatabaseHelper();
   final DateTime time = DateTime.now();
 
-  Widget createPost() {
+  Widget createPostBtn() {
     return SizedBox(
       width: double.infinity,
       height: 60,
@@ -68,11 +68,35 @@ class _FeedMainPageState extends State<FeedMainPage> {
                 setState(() {});
               });
             },
-            child: createPost()),
+            child: createPostBtn()),
       ),
-      body: Container(
-        color: const Color(0xfff1f1f1),
-        child: FutureBuilder(
+      //color: const Color(0xfff1f1f1),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('feeds').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot)
+        {
+          if(!snapshot.hasData) return const Text("нет записи");
+          return ListView.builder(
+              itemCount: snapshot.data?.docs.length,
+              itemBuilder: (context, index) {
+                var i = snapshot.data!.docs[index].id;
+                addWidget.fd = i;
+                return FeedCreator(
+                  key: UniqueKey(),
+                  fd: i,
+                  textField: snapshot.data!.docs[index].get('description'),
+                  currentTime: DateTime.now(),
+                );
+              });
+        },
+      ),
+    );
+  }
+}
+
+
+/*
+ ! FutureBuilder(
             initialData: const [],
             future: _dbHelper.getTexts(),
             builder: (context, AsyncSnapshot snapshot) {
@@ -86,16 +110,10 @@ class _FeedMainPageState extends State<FeedMainPage> {
                       fd: i,
                       textField: snapshot.data[index].description,
                       currentTime: DateTime.now(),
-                      //onRemoved: FeedMainPage.removeFeed,
-                      //onFeedEdit: FeedMainPage.editFeed,
-                      //context: context,
                     );
                   });
-            }),
-      ),
-    );
-  }
-}
+            })*/
+
 
 class CurvePainter extends CustomPainter {
   @override
