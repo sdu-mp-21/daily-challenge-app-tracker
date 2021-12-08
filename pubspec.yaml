@@ -27,6 +27,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  image_picker: ^0.8.4+4
+  firebase_storage: ^10.2.0
   settings_ui: ^1.0.0
   flutter_staggered_grid_view: 0.4.1
   flutter:
