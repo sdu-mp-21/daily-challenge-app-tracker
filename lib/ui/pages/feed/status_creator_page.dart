@@ -104,12 +104,14 @@ class _StatusCreator extends State<StatusCreator> {
           ),
         ),
       ),
-      onPressed: () async {
-        DatabaseHelper _dbHelper = DatabaseHelper();
+      onPressed: () {
+        /*DatabaseHelper _dbHelper = DatabaseHelper();
             FeedDescription _newFeedDesc = FeedDescription(description: _newDescription);
-            await _dbHelper.insertText(_newFeedDesc);
+            await _dbHelper.insertText(_newFeedDesc);*/
+        int id = 3;
         FirebaseFirestore.instance.collection('feeds')
             .add({'description': _newDescription});
+
          /* else {
             await _dbHelper.updateFeed(_feedId, text);
             setState(() {
