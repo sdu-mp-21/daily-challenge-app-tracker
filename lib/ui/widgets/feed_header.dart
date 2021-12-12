@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'time_ago.dart';
 import '../pages/feed/feed_creator.dart';
-//import '../pages/feed/status_creator_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FeedHeader extends StatefulWidget {
   final DateTime currentTime;
   final dynamic context;
   final dynamic feedId;
   final FeedCreator feed;
+  final dynamic userName;
+  final dynamic userPhotoUrl;
+
 
   const FeedHeader({
     Key? key,
+    this.userName,
+    this.userPhotoUrl,
     required this.currentTime,
     required this.feedId,
-
     required this.feed,
-
     this.context,
   }) : super(key: key);
 
@@ -27,6 +28,18 @@ class FeedHeader extends StatefulWidget {
 }
 
 class _FeedHeaderState extends State<FeedHeader> {
+  final _user = FirebaseAuth.instance.currentUser;
+  String _userName = 'User Name';
+  ImageProvider userAvatar() {
+
+      if(widget.userPhotoUrl != ""){
+        return NetworkImage(widget.userPhotoUrl);
+      }else {
+        return const AssetImage('assets/images/avatar.png');
+      }
+
+  }
+
   Widget getPopupMenuButtons(BuildContext context) {
     return Align(
       alignment: Alignment.topRight,
@@ -46,11 +59,15 @@ class _FeedHeaderState extends State<FeedHeader> {
   }
 
   Widget userAvatarAndName() {
+      _userName =
+      (widget.userName != "") ? widget.userName : "User Name";
+
+    //print('_userName: $_userName');
     return Row(
       children: [
-        const CircleAvatar(
+        CircleAvatar(
           radius: 20,
-          backgroundImage: AssetImage('assets/images/avatar.png'),
+          backgroundImage: userAvatar(),
         ),
         Padding(
           padding: const EdgeInsets.only(
@@ -59,17 +76,18 @@ class _FeedHeaderState extends State<FeedHeader> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'User Name',
+              Text(
+                _userName,
                 textDirection: TextDirection.ltr,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20.0,
                   fontFamily: "Georgia",
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
-                TimeAgo.displayTimeAgoFromTimestamp(widget.currentTime.toString()),
+                TimeAgo.displayTimeAgoFromTimestamp(
+                    widget.currentTime.toString()),
                 textAlign: TextAlign.left,
                 textDirection: TextDirection.ltr,
                 style: const TextStyle(
@@ -103,17 +121,20 @@ class _FeedHeaderState extends State<FeedHeader> {
     );
   }
 
-  void choiceAction(String choice) async{
+  void choiceAction(String choice) async {
     // ! FIXME: edit button doesn't work yet
     if (choice == 'edit') {
       // * onFeedEdit(feed);
-        /*Navigator.push(
+      /*Navigator.push(
           widget.context,
           MaterialPageRoute(builder: (context) => const StatusCreator()),
         );*/
 
     } else if (choice == 'delete') {
-      FirebaseFirestore.instance.collection('feeds').doc(widget.feedId).delete();
+      FirebaseFirestore.instance
+          .collection('feeds')
+          .doc(widget.feedId)
+          .delete();
       //removeFeed(feed);
     }
   }

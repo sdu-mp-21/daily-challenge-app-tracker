@@ -1,9 +1,9 @@
 import '../add_challenge.dart';
 import 'feed_creator.dart';
 import 'package:flutter/material.dart';
-import '../../../db/feed_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class FeedMainPage extends StatefulWidget {
@@ -15,9 +15,10 @@ class FeedMainPage extends StatefulWidget {
 
 class _FeedMainPageState extends State<FeedMainPage> {
   final CreateNewWidget addWidget = CreateNewWidget(page: 1);
-  final DatabaseHelper _dbHelper = DatabaseHelper();
   final DateTime time = DateTime.now();
-
+  final  _user = FirebaseAuth.instance.currentUser;
+  String _userName = 'User Name';
+  String _photoURL = "";
   Widget createPostBtn() {
     return SizedBox(
       width: double.infinity,
@@ -54,6 +55,7 @@ class _FeedMainPageState extends State<FeedMainPage> {
         )*/
 
     return Scaffold(
+
       appBar: AppBar(
         backgroundColor: const Color(0xfff1f1f1),
         elevation: 0,
@@ -75,7 +77,13 @@ class _FeedMainPageState extends State<FeedMainPage> {
         stream: FirebaseFirestore.instance.collection('feeds').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot)
         {
+
           if(!snapshot.hasData) return const Text("нет записи");
+          if(_user != null){
+            _userName =
+            (_user?.displayName != null) ? _user!.displayName.toString() : "";
+            _photoURL = (_user?.photoURL != null) ? _user!.photoURL.toString() : "";
+          }
           return ListView.builder(
               itemCount: snapshot.data?.docs.length,
               itemBuilder: (context, index) {
@@ -83,6 +91,8 @@ class _FeedMainPageState extends State<FeedMainPage> {
                 addWidget.fd = i;
                 return FeedCreator(
                   key: UniqueKey(),
+                  userName: _userName,
+                  userPhotoUrl: _photoURL,
                   fd: i,
                   textField: snapshot.data!.docs[index].get('description'),
                   currentTime: DateTime.now(),

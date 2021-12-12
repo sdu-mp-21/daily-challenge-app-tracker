@@ -109,6 +109,7 @@ class _StatusCreator extends State<StatusCreator> {
         FirebaseFirestore.instance.collection('feeds')
             .add({'description': _newDescription});
 
+
         Navigator.pop(context);
       },
     );

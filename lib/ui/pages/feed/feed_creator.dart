@@ -3,21 +3,19 @@ import '../../widgets/feed_header.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/like_button.dart';
 import '../../widgets/share_btn.dart';
-import '../../../db/feed_class.dart';
-
 class FeedCreator extends StatefulWidget {
   final dynamic fd;
   final dynamic textField;
   final DateTime currentTime;
-  //final Function onRemoved;
-  //final Function onFeedEdit;
+  final dynamic userName;
   final dynamic context;
+  final dynamic userPhotoUrl;
 
   @override
-  //final Key key;
-
   const FeedCreator({
     Key? key,
+    this.userName,
+    this.userPhotoUrl,
     required this.fd,
     this.textField,
     required this.currentTime,
@@ -36,7 +34,6 @@ class _FeedCreatorState extends State<FeedCreator> {
   void initState() {
     if(widget.fd != null) {
       _feedId = widget.fd;
-      print('_feedId : $_feedId');
     }
     super.initState();
   }
@@ -64,9 +61,10 @@ class _FeedCreatorState extends State<FeedCreator> {
              key: widget.key,
              currentTime: DateTime.now(),
              feedId: _feedId,
-             //removeFeed: widget.onRemoved,
+             userName: widget.userName,
+             userPhotoUrl: widget.userPhotoUrl,
              feed: widget,
-             //onFeedEdit: widget.onFeedEdit,
+
              context: widget.context,
            ),
           TextFieldCustom(
