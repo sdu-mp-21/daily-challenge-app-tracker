@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'time_ago.dart';
 import '../pages/feed/feed_creator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class FeedHeader extends StatefulWidget {
   final DateTime currentTime;
@@ -28,10 +27,8 @@ class FeedHeader extends StatefulWidget {
 }
 
 class _FeedHeaderState extends State<FeedHeader> {
-  final _user = FirebaseAuth.instance.currentUser;
   String _userName = 'User Name';
   ImageProvider userAvatar() {
-
       if(widget.userPhotoUrl != ""){
         return NetworkImage(widget.userPhotoUrl);
       }else {
@@ -62,7 +59,6 @@ class _FeedHeaderState extends State<FeedHeader> {
       _userName =
       (widget.userName != "") ? widget.userName : "User Name";
 
-    //print('_userName: $_userName');
     return Row(
       children: [
         CircleAvatar(
