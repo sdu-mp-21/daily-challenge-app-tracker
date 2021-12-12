@@ -105,26 +105,6 @@ class _FeedMainPageState extends State<FeedMainPage> {
 }
 
 
-/*
- ! FutureBuilder(
-            initialData: const [],
-            future: _dbHelper.getTexts(),
-            builder: (context, AsyncSnapshot snapshot) {
-              return ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    var i = snapshot.data[index];
-                    addWidget.fd = i;
-                    return FeedCreator(
-                      key: UniqueKey(),
-                      fd: i,
-                      textField: snapshot.data[index].description,
-                      currentTime: DateTime.now(),
-                    );
-                  });
-            })*/
-
-
 class CurvePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
