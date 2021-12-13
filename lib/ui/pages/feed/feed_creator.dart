@@ -6,7 +6,7 @@ import '../../widgets/share_btn.dart';
 class FeedCreator extends StatefulWidget {
   final dynamic fd;
   final dynamic textField;
-  final DateTime currentTime;
+  final dynamic currentTime;
   final dynamic userName;
   final dynamic context;
   final dynamic userPhotoUrl;
@@ -59,7 +59,7 @@ class _FeedCreatorState extends State<FeedCreator> {
         children: [
            FeedHeader(
              key: widget.key,
-             currentTime: DateTime.now(),
+             currentTime: widget.currentTime,
              feedId: _feedId,
              userName: widget.userName,
              userPhotoUrl: widget.userPhotoUrl,

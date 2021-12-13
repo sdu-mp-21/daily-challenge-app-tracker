@@ -1,10 +1,11 @@
+import 'package:challenge_tracker/ui/pages/feed/status_creator_page.dart';
 import 'package:flutter/material.dart';
 import 'time_ago.dart';
 import '../pages/feed/feed_creator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FeedHeader extends StatefulWidget {
-  final DateTime currentTime;
+  final dynamic currentTime;
   final dynamic context;
   final dynamic feedId;
   final FeedCreator feed;
@@ -83,7 +84,7 @@ class _FeedHeaderState extends State<FeedHeader> {
               ),
               Text(
                 TimeAgo.displayTimeAgoFromTimestamp(
-                    widget.currentTime.toString()),
+                    widget.currentTime),
                 textAlign: TextAlign.left,
                 textDirection: TextDirection.ltr,
                 style: const TextStyle(
@@ -121,10 +122,10 @@ class _FeedHeaderState extends State<FeedHeader> {
     // ! FIXME: edit button doesn't work yet
     if (choice == 'edit') {
       // * onFeedEdit(feed);
-      /*Navigator.push(
+      Navigator.push(
           widget.context,
           MaterialPageRoute(builder: (context) => const StatusCreator()),
-        );*/
+        );
 
     } else if (choice == 'delete') {
       FirebaseFirestore.instance

@@ -1,27 +1,22 @@
-import 'package:challenge_tracker/db/feed_class.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import '../../../db/feed_database.dart';
-import '../../../db/feed_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class StatusCreator extends StatefulWidget {
-  const StatusCreator({Key? key, required this.context, required this.fd})
+  const StatusCreator({Key? key, this.context,  this.fd})
       : super(key: key);
   final dynamic context;
   final dynamic fd;
-  static int counter = 0;
-  static bool isEditBtn = false;
 
   @override
   _StatusCreator createState() => _StatusCreator();
 }
 
 class _StatusCreator extends State<StatusCreator> {
-
-  int _feedId = 0;
-  String _feedDescription = '';
+  final  _user = FirebaseAuth.instance.currentUser;
+  String _userName = 'User Name';
+  String _photoURL = "";
   String _text = '';
   final _controller = TextEditingController();
 
@@ -39,10 +34,6 @@ class _StatusCreator extends State<StatusCreator> {
 
   @override
   initState() {
-    if(widget.fd != null){
-      _feedDescription = widget.fd.description;
-      _feedId = widget.fd.id;
-    }
     initFireBase();
     super.initState();
     //_controller.text = _text;
@@ -105,9 +96,19 @@ class _StatusCreator extends State<StatusCreator> {
         ),
       ),
       onPressed: () {
-
+        var now = DateTime.now().toString();
+        if(_user != null){
+          _userName =
+          (_user?.displayName != null) ? _user!.displayName.toString() : "";
+          _photoURL = (_user?.photoURL != null) ? _user!.photoURL.toString() : "";
+        }
         FirebaseFirestore.instance.collection('feeds')
-            .add({'description': _newDescription});
+            .add({
+          'description': _newDescription,
+          'time_ago': now,
+          'username': _userName,
+          'photoURL': _photoURL
+            });
 
 
         Navigator.pop(context);
@@ -131,7 +132,7 @@ class _StatusCreator extends State<StatusCreator> {
                 autofocus: false,
                 controller: _controller,
                 decoration: const InputDecoration(
-                  // contentPadding:  EdgeInsets.symmetric(vertical: 100.0),
+
                   labelText: 'My Situation',
                   //hintText: 'My Situation',
                   enabledBorder: OutlineInputBorder(

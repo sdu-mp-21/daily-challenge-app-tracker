@@ -1,10 +1,8 @@
 import '../add_challenge.dart';
 import 'feed_creator.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import  'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 
 class FeedMainPage extends StatefulWidget {
   const FeedMainPage({Key? key}) : super(key: key);
@@ -16,9 +14,7 @@ class FeedMainPage extends StatefulWidget {
 class _FeedMainPageState extends State<FeedMainPage> {
   final CreateNewWidget addWidget = CreateNewWidget(page: 1);
   final DateTime time = DateTime.now();
-  final  _user = FirebaseAuth.instance.currentUser;
-  String _userName = 'User Name';
-  String _photoURL = "";
+
   Widget createPostBtn() {
     return SizedBox(
       width: double.infinity,
@@ -74,28 +70,34 @@ class _FeedMainPageState extends State<FeedMainPage> {
       ),
       //color: const Color(0xfff1f1f1),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('feeds').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('feeds')
+            .orderBy('time_ago', descending: true)
+            .snapshots(includeMetadataChanges: true),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot)
         {
-
-          if(!snapshot.hasData) return const Text("нет записи");
-          if(_user != null){
-            _userName =
-            (_user?.displayName != null) ? _user!.displayName.toString() : "";
-            _photoURL = (_user?.photoURL != null) ? _user!.photoURL.toString() : "";
+          if (snapshot.hasError) {
+            return const Center(child:  Text('Something went wrong'));
           }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: Text("Loading"));
+          }
+          if(!snapshot.hasData) return const Center(child: Text("нет записи"));
+
           return ListView.builder(
+
               itemCount: snapshot.data?.docs.length,
               itemBuilder: (context, index) {
                 var i = snapshot.data!.docs[index].id;
                 addWidget.fd = i;
                 return FeedCreator(
                   key: UniqueKey(),
-                  userName: _userName,
-                  userPhotoUrl: _photoURL,
+                  userName: snapshot.data!.docs[index].get('username'),
+                  userPhotoUrl: snapshot.data!.docs[index].get('photoURL'),
                   fd: i,
                   textField: snapshot.data!.docs[index].get('description'),
-                  currentTime: DateTime.now(),
+                  currentTime: snapshot.data!.docs[index].get('time_ago'),
                 );
               });
         },
