@@ -13,7 +13,7 @@ class FeedMainPage extends StatefulWidget {
 
 class _FeedMainPageState extends State<FeedMainPage> {
   final CreateNewWidget addWidget = CreateNewWidget(page: 1);
-  final DateTime time = DateTime.now();
+
 
   Widget createPostBtn() {
     return SizedBox(
@@ -44,21 +44,27 @@ class _FeedMainPageState extends State<FeedMainPage> {
 
   @override
   Widget build(BuildContext context) {
-    /* SingleChildScrollView(
-          child: Column(
-            children: _feeds,
-          ),
-        )*/
+    // SingleChildScrollView()
+
+    void edit(bool isEdit, var id, var textfield){
+      if(isEdit){
+        addWidget.feedID = id;
+        addWidget.textfield = textfield;
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => addWidget),
+      );
+      }
+    }
 
     return Scaffold(
-
       appBar: AppBar(
         backgroundColor: const Color(0xfff1f1f1),
         elevation: 0,
         title: GestureDetector(
             onTap: () {
               addWidget.page = 1;
-              addWidget.fd = null;
+              addWidget.feedID = null;
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => addWidget),
@@ -79,26 +85,24 @@ class _FeedMainPageState extends State<FeedMainPage> {
           if (snapshot.hasError) {
             return const Center(child:  Text('Something went wrong'));
           }
-
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: Text("Loading"));
           }
           if(!snapshot.hasData) return const Center(child: Text("нет записи"));
 
           return ListView.builder(
-
               itemCount: snapshot.data?.docs.length,
               itemBuilder: (context, index) {
-                var i = snapshot.data!.docs[index].id;
-                addWidget.fd = i;
+                var id = snapshot.data!.docs[index].id;
+                addWidget.feedID = id;
                 return FeedCreator(
                   key: UniqueKey(),
+                  edit: edit,
                   userName: snapshot.data!.docs[index].get('username'),
                   userPhotoUrl: snapshot.data!.docs[index].get('photoURL'),
-                  fd: i,
+                  feedId: id,
                   textField: snapshot.data!.docs[index].get('description'),
                   currentTime: snapshot.data!.docs[index].get('time_ago'),
-                  context: snapshot.data!.docs[index].get('context')
                 );
               });
         },

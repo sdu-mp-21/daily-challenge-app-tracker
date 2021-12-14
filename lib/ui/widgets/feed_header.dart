@@ -5,20 +5,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FeedHeader extends StatefulWidget {
   final dynamic currentTime;
-  final dynamic context;
-  final dynamic feedId;
 
+  final dynamic feedId;
+  final dynamic textField;
+  final Function edit;
   final dynamic userName;
   final dynamic userPhotoUrl;
 
-
   const FeedHeader({
     Key? key,
+    required this.edit,
+    this.textField,
     this.userName,
     this.userPhotoUrl,
     required this.currentTime,
     required this.feedId,
-    this.context,
   }) : super(key: key);
 
   @override
@@ -27,13 +28,13 @@ class FeedHeader extends StatefulWidget {
 
 class _FeedHeaderState extends State<FeedHeader> {
   String _userName = 'User Name';
-  ImageProvider userAvatar() {
-      if(widget.userPhotoUrl != ""){
-        return NetworkImage(widget.userPhotoUrl);
-      }else {
-        return const AssetImage('assets/images/avatar.png');
-      }
 
+  ImageProvider userAvatar() {
+    if (widget.userPhotoUrl != "") {
+      return NetworkImage(widget.userPhotoUrl);
+    } else {
+      return const AssetImage('assets/images/avatar.png');
+    }
   }
 
   Widget getPopupMenuButtons(BuildContext context) {
@@ -55,8 +56,7 @@ class _FeedHeaderState extends State<FeedHeader> {
   }
 
   Widget userAvatarAndName() {
-      _userName =
-      (widget.userName != "") ? widget.userName : "User Name";
+    _userName = (widget.userName != "") ? widget.userName : "User Name";
 
     return Row(
       children: [
@@ -81,8 +81,7 @@ class _FeedHeaderState extends State<FeedHeader> {
                 ),
               ),
               Text(
-                TimeAgo.displayTimeAgoFromTimestamp(
-                    widget.currentTime),
+                TimeAgo.displayTimeAgoFromTimestamp(widget.currentTime),
                 textAlign: TextAlign.left,
                 textDirection: TextDirection.ltr,
                 style: const TextStyle(
@@ -116,16 +115,9 @@ class _FeedHeaderState extends State<FeedHeader> {
     );
   }
 
-  void choiceAction(String choice) async {
-    // ! FIXME: edit button doesn't work yet
+  void choiceAction(String choice) {
     if (choice == 'edit') {
-      // * onFeedEdit(feed);
-      /*BuildContext con = widget.context;
-      Navigator.push(
-        con,
-          MaterialPageRoute(builder: (context) => const StatusCreator()),
-        );*/
-
+      widget.edit(true, widget.feedId, widget.textField);
     } else if (choice == 'delete') {
       FirebaseFirestore.instance
           .collection('feeds')

@@ -4,10 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 class StatusCreator extends StatefulWidget {
-  const StatusCreator({Key? key, this.context,  this.fd})
+  const StatusCreator({Key? key, this.context,  this.feedID, this.textfield})
       : super(key: key);
   final dynamic context;
-  final dynamic fd;
+  final dynamic feedID;
+  final dynamic textfield;
 
   @override
   _StatusCreator createState() => _StatusCreator();
@@ -18,7 +19,7 @@ class _StatusCreator extends State<StatusCreator> {
   String _userName = 'User Name';
   String _photoURL = "";
   String _text = '';
-  final _controller = TextEditingController();
+  TextEditingController  _controller = TextEditingController();
 
   void initFireBase() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +38,7 @@ class _StatusCreator extends State<StatusCreator> {
     initFireBase();
     super.initState();
     //_controller.text = _text;
+    //_changeText();
     _controller.addListener(_changeText);
   }
 
@@ -102,16 +104,16 @@ class _StatusCreator extends State<StatusCreator> {
           (_user?.displayName != null) ? _user!.displayName.toString() : "";
           _photoURL = (_user?.photoURL != null) ? _user!.photoURL.toString() : "";
         }
-        FirebaseFirestore.instance.collection('feeds')
-            .add({
-          'description': _newDescription,
-          'time_ago': now,
-          'username': _userName,
-          'photoURL': _photoURL,
-          'context': widget.context.toString()
-            });
-
-        print('context: ${widget.context}');
+        if(widget.feedID == null){
+          FirebaseFirestore.instance.collection('feeds')
+              .add({
+            'description': _newDescription,
+            'time_ago': now,
+            'username': _userName,
+            'photoURL': _photoURL,
+          });
+        }
+        //print('context: ${widget.context}');
         Navigator.pop(context);
       },
     );
@@ -154,21 +156,20 @@ class _StatusCreator extends State<StatusCreator> {
                 maxLength: 500,
                 minLines: 1,
                 maxLines: 5,
-                onSubmitted: (value) {
-                  /*print(value);
+                onChanged: (value) {
                   if (value != "") {
-                    if (widget.fd == null) {
-                      print("create new ");
-                      FeedDescription _newFeedDesc = FeedDescription(description: value);
-                      await _dbHelper.insertText(_newFeedDesc);
-                    }
-                    else {
-                      await _dbHelper.updateFeed(_feedId, value);
+                    if(widget.feedID != null){
+                      var now = DateTime.now().toString();
+                      CollectionReference user = FirebaseFirestore.instance.collection('feeds');
+                      user.doc(widget.feedID)
+                          .update({
+                        'description': value,
+                        'time_ago': now,
+                      });
 
-                      print("Update");
-
                     }
-                  }*/
+
+                  }
                 },
               ),
             ),
@@ -180,6 +181,9 @@ class _StatusCreator extends State<StatusCreator> {
   Widget build(BuildContext context) {
 
     context = widget.context;
+    if(widget.feedID != null ) {
+      _controller = TextEditingController(text: widget.textfield);
+    }
     return Scaffold(
       body: KeyboardDismisser(
         gestures: const [GestureType.onTap, GestureType.onVerticalDragDown],

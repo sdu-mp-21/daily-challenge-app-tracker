@@ -4,22 +4,23 @@ import 'package:flutter/material.dart';
 import '../../widgets/like_button.dart';
 import '../../widgets/share_btn.dart';
 class FeedCreator extends StatefulWidget {
-  final dynamic fd;
+  final dynamic feedId;
   final dynamic textField;
   final dynamic currentTime;
   final dynamic userName;
-  final dynamic context;
+
   final dynamic userPhotoUrl;
+  final Function edit;
 
   @override
   const FeedCreator({
     Key? key,
+    required this.edit,
     this.userName,
     this.userPhotoUrl,
-    required this.fd,
+    required this.feedId,
     this.textField,
     required this.currentTime,
-    this.context,
   }) : super(key: key);
 
   @override
@@ -30,8 +31,8 @@ class _FeedCreatorState extends State<FeedCreator> {
   String _feedId = "";
   @override
   void initState() {
-    if(widget.fd != null) {
-      _feedId = widget.fd;
+    if(widget.feedId != null) {
+      _feedId = widget.feedId;
     }
     super.initState();
   }
@@ -59,9 +60,10 @@ class _FeedCreatorState extends State<FeedCreator> {
              key: widget.key,
              currentTime: widget.currentTime,
              feedId: _feedId,
+             edit: widget.edit,
+             textField:widget.textField,
              userName: widget.userName,
              userPhotoUrl: widget.userPhotoUrl,
-             context: widget.context,
            ),
           TextFieldCustom(
             text: widget.textField,

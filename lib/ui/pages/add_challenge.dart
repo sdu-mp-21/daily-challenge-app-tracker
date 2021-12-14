@@ -9,9 +9,11 @@ import 'feed/status_creator_page.dart';
 
 class CreateNewWidget extends StatefulWidget {
   String createTitle = "";
-  dynamic fd;
+  // ? feedId and textfield need for update feed
+  dynamic feedID;
+  dynamic textfield;
   int page = 0;
-  static bool isCreateBtn = false;
+
 
   CreateNewWidget({
     Key? key,
@@ -29,7 +31,7 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
   FocusNode nodeMainText = FocusNode();
   FocusNode nodeDescription = FocusNode();
 
-  String _value = "";
+  //String _value = "";
   String createTitle = "";
   late List<Challenge> challenges;
 
@@ -64,7 +66,7 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
             ),
             title: Text(createTitle),
           ),
-          body: (page == 0) ? setChallenge() : StatusCreator(context: context, fd : widget.fd),
+          body: (page == 0) ? setChallenge() : StatusCreator(context: context, feedID : widget.feedID, textfield : widget.textfield),
         ));
   }
 
@@ -175,12 +177,12 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
       autofocus: true,
       onChanged: (text) {
         // setState(() {
-        _value = text;
+        //_value = text;
         // });
       },
       onSubmitted: (text) {
         setState(() {
-          _value = text;
+          //_value = text;
         });
       },
       decoration: InputDecoration(
