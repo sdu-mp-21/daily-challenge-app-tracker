@@ -164,7 +164,7 @@ class _StatusCreator extends State<StatusCreator> {
                       user.doc(widget.feedID)
                           .update({
                         'description': value,
-                        'time_ago': now,
+                        'time_ago': now
                       });
 
                     }

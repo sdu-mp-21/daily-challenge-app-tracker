@@ -136,7 +136,7 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
                       fromFirestore: (snapshot, _) => Challenge.fromJson(snapshot.data()!),
                       toFirestore: (challenge, _) => challenge.toJson(),
                   );
-
+                  challenges = await ChallengeDatabase.instance.challenges();
                   challengeRef.add(
                       Challenge(
                           challengeTitle: controller.text,
@@ -144,7 +144,7 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
                   );
 
 
-                  challenges = await ChallengeDatabase.instance.challenges();
+
                   Challenge challengeToInsert = Challenge(
                       id: challenges.length, challengeTitle: controller.text);
                   // print(challenges.length);

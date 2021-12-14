@@ -1,10 +1,10 @@
 class Challenge {
-  final dynamic id;
+  final int id;
   final String challengeTitle;
   //final String challengeDescription;
   //final boolean[] daysChecked;
   Challenge( {
-    this.id,
+    required this.id,
     required this.challengeTitle,
 });
 
