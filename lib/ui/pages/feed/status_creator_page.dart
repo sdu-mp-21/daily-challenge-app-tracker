@@ -107,10 +107,11 @@ class _StatusCreator extends State<StatusCreator> {
           'description': _newDescription,
           'time_ago': now,
           'username': _userName,
-          'photoURL': _photoURL
+          'photoURL': _photoURL,
+          'context': widget.context.toString()
             });
 
-
+        print('context: ${widget.context}');
         Navigator.pop(context);
       },
     );

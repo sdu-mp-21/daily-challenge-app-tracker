@@ -19,8 +19,6 @@ class FeedCreator extends StatefulWidget {
     required this.fd,
     this.textField,
     required this.currentTime,
-    //required this.onRemoved,
-    //required this.onFeedEdit,
     this.context,
   }) : super(key: key);
 
@@ -63,8 +61,6 @@ class _FeedCreatorState extends State<FeedCreator> {
              feedId: _feedId,
              userName: widget.userName,
              userPhotoUrl: widget.userPhotoUrl,
-             feed: widget,
-
              context: widget.context,
            ),
           TextFieldCustom(

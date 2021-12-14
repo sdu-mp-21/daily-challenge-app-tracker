@@ -1,14 +1,13 @@
-import 'package:challenge_tracker/ui/pages/feed/status_creator_page.dart';
+//import 'package:challenge_tracker/ui/pages/feed/status_creator_page.dart';
 import 'package:flutter/material.dart';
 import 'time_ago.dart';
-import '../pages/feed/feed_creator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FeedHeader extends StatefulWidget {
   final dynamic currentTime;
   final dynamic context;
   final dynamic feedId;
-  final FeedCreator feed;
+
   final dynamic userName;
   final dynamic userPhotoUrl;
 
@@ -19,7 +18,6 @@ class FeedHeader extends StatefulWidget {
     this.userPhotoUrl,
     required this.currentTime,
     required this.feedId,
-    required this.feed,
     this.context,
   }) : super(key: key);
 
@@ -122,10 +120,11 @@ class _FeedHeaderState extends State<FeedHeader> {
     // ! FIXME: edit button doesn't work yet
     if (choice == 'edit') {
       // * onFeedEdit(feed);
+      /*BuildContext con = widget.context;
       Navigator.push(
-          widget.context,
+        con,
           MaterialPageRoute(builder: (context) => const StatusCreator()),
-        );
+        );*/
 
     } else if (choice == 'delete') {
       FirebaseFirestore.instance

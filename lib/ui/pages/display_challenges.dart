@@ -63,7 +63,7 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
                   builder: (context) => addWidget),
             );
 
-            refreshNotes();
+           // refreshNotes();
           },
           child: const Icon(Icons.add),
         )

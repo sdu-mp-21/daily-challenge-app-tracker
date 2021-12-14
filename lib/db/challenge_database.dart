@@ -108,7 +108,7 @@ class ChallengeDatabase {
     // Update the given Challenge.
     await db.update(
       'challenges',
-      challenge.toMap(),
+      challenge.toJson(),
       // Ensure that the Challenge has a matching id.
       where: 'id = ?',
       // Pass the Challenge's id as a whereArg to prevent SQL injection.

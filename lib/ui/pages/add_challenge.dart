@@ -2,7 +2,8 @@ import 'package:challenge_tracker/db/challenge_class.dart';
 import 'package:challenge_tracker/db/challenge_database.dart';
 import '../../ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'feed/status_creator_page.dart';
 
@@ -31,6 +32,13 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
   String _value = "";
   String createTitle = "";
   late List<Challenge> challenges;
+
+  void initFireBase() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +128,20 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
                 style: Style.raisedButtonStyle,
                 child: const Text("ADD"),
                 onPressed: () async {
+
+                  final challengeRef = FirebaseFirestore.instance.collection('challenges')
+                      .withConverter<Challenge>(
+                      fromFirestore: (snapshot, _) => Challenge.fromJson(snapshot.data()!),
+                      toFirestore: (challenge, _) => challenge.toJson(),
+                  );
+
+                  challengeRef.add(
+                      Challenge(
+                          challengeTitle: controller.text,
+                          id: challenges.length,)
+                  );
+
+
                   challenges = await ChallengeDatabase.instance.challenges();
                   Challenge challengeToInsert = Challenge(
                       id: challenges.length, challengeTitle: controller.text);

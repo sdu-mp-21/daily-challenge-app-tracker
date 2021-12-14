@@ -1,16 +1,16 @@
 class Challenge {
-  final int id;
+  final dynamic id;
   final String challengeTitle;
   //final String challengeDescription;
   //final boolean[] daysChecked;
   Challenge( {
-    required this.id,
+    this.id,
     required this.challengeTitle,
 });
 
   // Convert a challenge into a Map. The keys must correspond to the names of the
   // columns in the database.
-  Map<String, dynamic> toMap() {
+   Map<String, dynamic> toJson() {
     return {
       'id': id,
       'challenge_title': challengeTitle,
@@ -24,8 +24,8 @@ class Challenge {
   String toString() {
     return 'Challenge{id: $id, challenge_title: $challengeTitle}';
   }
-  static Challenge fromJson(Map<String, Object?> json) => Challenge(
-    id: json['id'] as int,
+   Challenge.fromJson(Map<String, Object?> json) : this(
+    id: json['id'] as dynamic,
     challengeTitle: json['challenge_title'] == null ? '' : json['challenge_title'] as String,
   );
 }

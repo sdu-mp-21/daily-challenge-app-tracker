@@ -98,6 +98,7 @@ class _FeedMainPageState extends State<FeedMainPage> {
                   fd: i,
                   textField: snapshot.data!.docs[index].get('description'),
                   currentTime: snapshot.data!.docs[index].get('time_ago'),
+                  context: snapshot.data!.docs[index].get('context')
                 );
               });
         },
