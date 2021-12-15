@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
+
+import 'auth_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -21,19 +24,8 @@ class _ProfilePageState extends State<ProfilePage>  {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-
-          toolbarHeight: 138,
-          flexibleSpace:  Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkTeyKKhCeXGhe_pdatQghtspNKST0BopZXA&usqp=CAU"
-                    ),
-                    fit: BoxFit.cover
-                )
-            ),
-          ),
-
+            toolbarHeight:130,
+            flexibleSpace: Authorization.getHeader(),
         ),
         body: SafeArea(
 
@@ -78,8 +70,8 @@ class _ProfilePageState extends State<ProfilePage>  {
                 height: 10,
               ),
               const Text(
-                "Almaty, Kazakhstan"
-                ,style: TextStyle(
+                "Almaty, Kazakhstan\n",
+                style: TextStyle(
                   fontSize: 18.0,
                   color:Colors.black45,
                   letterSpacing: 2.0,
@@ -101,23 +93,38 @@ class _ProfilePageState extends State<ProfilePage>  {
               const SizedBox(
                 height: 10,
               ),
-              const Card(
-                  margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 8.0),
+              Card(
+                  margin: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 8.0),
 
                   elevation: 2.0,
                   child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 12,horizontal: 30),
-                      child: Text("Watch the news",style: TextStyle(
-                          letterSpacing: 2.0,
-                          fontWeight: FontWeight.w300
-                      ),))
+                      padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 30),
+                      child:
+                      RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                            text: "Watch the news",
+                            style: const TextStyle(
+                                letterSpacing: 2.0,
+                                fontWeight: FontWeight.w300
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushNamed(context, '/logged_in');
+                              },
+                          ),
+                        ]),
+                      ),
+
+                  )
               ),
               const SizedBox(
                 height: 15,
               ),
-              const Text(
-                "NickName:SSurikkiller\nID: 190107046"
-                ,style: TextStyle(
+              Text(
+                "NickName:"+ user!.displayName.toString()
+                    +"\nEmail: "+user!.email.toString()
+                ,style: const TextStyle(
                   fontSize: 18.0,
                   color:Colors.black45,
                   letterSpacing: 2.0,
