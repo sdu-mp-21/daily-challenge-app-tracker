@@ -1,5 +1,4 @@
 import 'package:challenge_tracker/db/challenge_class.dart';
-import 'package:challenge_tracker/db/challenge_database.dart';
 import '../../ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -71,8 +70,12 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
   }
 
   Widget setChallenge() {
-    TextEditingController controller = TextEditingController();
-    controller.addListener(() {
+    TextEditingController titleController = TextEditingController();
+    titleController.addListener(() {
+      // Do something here
+    });
+    TextEditingController descriptionController = TextEditingController();
+    descriptionController.addListener(() {
       // Do something here
     });
 
@@ -95,7 +98,7 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
           ),
           const SizedBox(height: 30),
           TextField(
-            controller: controller,
+            controller: titleController,
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.done,
             focusNode: nodeMainText,
@@ -112,7 +115,29 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
             // },
             decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Write here',
+                labelText: 'Title of the challenge',
+                icon: Icon(Icons.add)),
+          ),
+          const SizedBox(height: 30),
+          TextField(
+            controller: descriptionController,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.done,
+            focusNode: nodeMainText,
+            autofocus: false,
+            // onChanged: (text) {
+            //   // setState(() {
+            //   _value = text;
+            //   // });
+            // },
+            // onSubmitted: (text) {
+            //   setState(() {
+            //     _value = text;
+            //   });
+            // },
+            decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Description of the challenge',
                 icon: Icon(Icons.add)),
           ),
           const SizedBox(height: 10),
@@ -131,25 +156,32 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
                 child: const Text("ADD"),
                 onPressed: () async {
 
-                  final challengeRef = FirebaseFirestore.instance.collection('challenges')
+                  final challengeRef = FirebaseFirestore.instance.collection('Challenges')
                       .withConverter<Challenge>(
                       fromFirestore: (snapshot, _) => Challenge.fromJson(snapshot.data()!),
                       toFirestore: (challenge, _) => challenge.toJson(),
                   );
-                  challenges = await ChallengeDatabase.instance.challenges();
+                  print('here');
+                  print(challengeRef);
+                  // challenges = await ChallengeDatabase.instance.challenges();
+
+
                   challengeRef.add(
                       Challenge(
-                          challengeTitle: controller.text,
-                          id: challenges.length,)
+                          challengeTitle: titleController.text,
+                          challengeDescription: descriptionController.text,
+                          challengeDays: [false, false, false, false, false, false, false, false, false, false, false, false, false,
+                            false, false, false, false, false, false, false, false],
+                          )
                   );
 
 
 
-                  Challenge challengeToInsert = Challenge(
-                      id: challenges.length, challengeTitle: controller.text);
+                  // Challenge challengeToInsert = Challenge(
+                  //     id: challenges.length, challengeTitle: controller.text);
                   // print(challenges.length);
                   // print(controller.text);
-                  ChallengeDatabase.instance.insertChallenge(challengeToInsert);
+                  // ChallengeDatabase.instance.insertChallenge(challengeToInsert);
                   Navigator.of(context).pop();
                 },
               )

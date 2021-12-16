@@ -24,12 +24,13 @@ class PageNavigatorLoggedState extends State<MainPageLogged> {
 
   @override
   Widget build(BuildContext context) {
-    // final user = FirebaseAuth.instance.currentUser;
+    final user = FirebaseAuth.instance.currentUser;
+    // print(user);
     // print('user name is');
     // print(user);
 
     return Scaffold(
-      drawer: OurDrawer(),
+      drawer: const OurDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.orange.shade300,
         actions: [

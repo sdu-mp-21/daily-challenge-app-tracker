@@ -1,6 +1,6 @@
 import 'package:challenge_tracker/db/challenge_class.dart';
-import 'package:challenge_tracker/db/challenge_database.dart';
 import 'package:challenge_tracker/ui/widgets/challenge_card_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -32,13 +32,29 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
   // }
 
   Future refreshNotes() async {
+    challenges = [];
+
     setState(() => isLoading = true);
-    challenges = await ChallengeDatabase.instance.challenges();
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    CollectionReference collections = db.collection('Challenges');
+    QuerySnapshot snapshot = await collections.get();
+    List<QueryDocumentSnapshot> list = snapshot.docs;
+
+    for(int i = 0; i < list.length; i++) {
+      DocumentSnapshot document = list[i];
+      // final id = document.id;
+      var d = document.data() as Map<String, dynamic>;
+      var c = Challenge(challengeTitle: d['challenge_title'], challengeDescription: d['challenge_description'], challengeDays: d['challenge_days']);
+      challenges.add(c);
+      // print(challenges);
+    }
+
     setState(() => isLoading = false);
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         body: Center(
           // child: Text(Challenge(id:0, challengeTitle: 'name').toMap().toString()),
@@ -49,6 +65,7 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
           'Empty Challenge List',
           style: TextStyle(color: Colors.black, fontSize: 24),
         )
+            // : const Text('I am here'),
             : buildChallenges(challenges),
       ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -83,7 +100,7 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
             onTap: () async {
               await Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) =>
-                    ChallengeDetailPage(challengeId: challenge.id),
+                    ChallengeDetailPage(challengeDesc: challenge.challengeDescription, challengeTitle: challenge.challengeTitle),
               ));
 
               refreshNotes();
