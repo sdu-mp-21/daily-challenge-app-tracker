@@ -44,7 +44,7 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
       DocumentSnapshot document = list[i];
       // final id = document.id;
       var d = document.data() as Map<String, dynamic>;
-      var c = Challenge(challengeTitle: d['challenge_title'], challengeDescription: d['challenge_description'], challengeDays: d['challenge_days']);
+      var c = Challenge(challengeTitle: d['challenge_title'], challengeDescription: d['challenge_description'], challengeDays: d['challenge_days'], challengeStart: d['challenge_start']);
       challenges.add(c);
       // print(challenges);
     }
@@ -78,7 +78,12 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
               context,
               MaterialPageRoute(
                   builder: (context) => addWidget),
-            );
+            ).then((value)=> {
+              setState(() {
+                refreshNotes();
+              })
+            }) ;
+
 
            // refreshNotes();
           },

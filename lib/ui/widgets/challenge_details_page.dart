@@ -1,6 +1,7 @@
 import 'package:challenge_tracker/db/challenge_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class ChallengeDetailPage extends StatefulWidget {
   final String challengeTitle;
@@ -37,7 +38,7 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
         .get();
     for (var d in result.docs) {
       // print(d.id);
-      this.challenge = Challenge(challengeTitle: d['challenge_title'], challengeDescription: d['challenge_description'], challengeDays: d['challenge_days']);
+      challenge = Challenge(challengeTitle: d['challenge_title'], challengeDescription: d['challenge_description'], challengeDays: d['challenge_days'], challengeStart: d['challenge_start']);
       // print(res.data());
     }
     // print(result);
@@ -48,40 +49,49 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      actions: [ deleteButton()],
-    ),
-    body: isLoading
-        ? const Center(child: CircularProgressIndicator())
-        : Padding(
-      padding: const EdgeInsets.all(12),
-      child: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        children: [
-          Text(
-            this.challenge.challengeTitle,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            this.challenge.challengeDescription,
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 8),
+  Widget build(BuildContext context) {
+    // print('here');
+    // print(challenge.challengeStart);
+    return Scaffold(
 
-        ],
+      appBar: AppBar(
+        actions: [ deleteButton()],
       ),
-    ),
-  );
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Padding(
+        padding: const EdgeInsets.all(12),
+        child: ListView(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          children: [
+            Text(
+              challenge.challengeTitle,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              challenge.challengeDescription,
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+
+            calendar(challenge.challengeDays, challenge.challengeStart.toDate()),
+
+            // calendar(challenge.challengeDays, DateTime.fromMicrosecondsSinceEpoch(challenge.challengeStart.seconds *1000)),
+
+          ],
+        ),
+      ),
+    );
+  }
 
   // Widget editButton() => IconButton(
   //     icon: Icon(Icons.edit_outlined),
@@ -109,4 +119,47 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
       Navigator.of(context).pop();
     },
   );
+
+  Widget calendar(List days, DateTime start) {
+    return SfCalendar(
+      view: CalendarView.month,
+      dataSource: ChallengeDays(getAppointments(days, start)),
+      firstDayOfWeek: 1,
+    );
+  }
+  List<Appointment> getAppointments(List days, DateTime start) {
+    List<Appointment> challengeDays = <Appointment>[];
+    print(start);
+    for(int i = 0; i < days.length; i++) {
+
+      final DateTime startTime;
+      final DateTime endTime;
+      if(i == 0) {
+        startTime = DateTime(start.year, start.month, start.day, 0, 0, 0);
+        endTime = startTime.add(const Duration(hours: 23));
+      }
+      else {
+        DateTime elseDay = start.add(Duration(days: i));
+        startTime = DateTime(elseDay.year, elseDay.month, elseDay.day, 0, 0, 0);
+        endTime = startTime.add(const Duration(hours: 23));
+      }
+      challengeDays.add(Appointment(
+          startTime: startTime,
+          endTime: endTime,
+          color: days[i] ? Colors.green : Colors.black38,
+        isAllDay: true
+      ),
+      );
+
+    }
+
+    return challengeDays;
+
+
+}
+}
+class ChallengeDays extends CalendarDataSource {
+  ChallengeDays(List<Appointment> source) {
+    appointments = source;
+  }
 }

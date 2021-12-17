@@ -45,7 +45,7 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
   Widget build(BuildContext context) {
     int page = 0;
     if (widget.page == 0) {
-      createTitle = "Challenge";
+      createTitle = "Add Challenge";
       page = 0;
     } else if (widget.page == 1) {
       page = 1;
@@ -79,9 +79,7 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
       // Do something here
     });
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Column(
+    return  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         // mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -97,99 +95,132 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
             ),
           ),
           const SizedBox(height: 30),
-          TextField(
-            controller: titleController,
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.done,
-            focusNode: nodeMainText,
-            autofocus: false,
-            // onChanged: (text) {
-            //   // setState(() {
-            //   _value = text;
-            //   // });
-            // },
-            // onSubmitted: (text) {
-            //   setState(() {
-            //     _value = text;
-            //   });
-            // },
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Title of the challenge',
-                icon: Icon(Icons.add)),
-          ),
-          const SizedBox(height: 30),
-          TextField(
-            controller: descriptionController,
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.done,
-            focusNode: nodeMainText,
-            autofocus: false,
-            // onChanged: (text) {
-            //   // setState(() {
-            //   _value = text;
-            //   // });
-            // },
-            // onSubmitted: (text) {
-            //   setState(() {
-            //     _value = text;
-            //   });
-            // },
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Description of the challenge',
-                icon: Icon(Icons.add)),
+          Padding(padding: const EdgeInsets.only(left:20.0, right: 20.0),
+            child: Column(
+              children: [
+                TextField(
+                  controller: titleController,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
+                  focusNode: nodeMainText,
+                  autofocus: false,
+                  // onChanged: (text) {
+                  //   // setState(() {
+                  //   _value = text;
+                  //   // });
+                  // },
+                  // onSubmitted: (text) {
+                  //   setState(() {
+                  //     _value = text;
+                  //   });
+                  // },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Title of the challenge',),
+                ),
+                const SizedBox(height: 30),
+                TextField(
+                  controller: descriptionController,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
+                  focusNode: nodeDescription,
+                  autofocus: false,
+                  // onChanged: (text) {
+                  //   // setState(() {
+                  //   _value = text;
+                  //   // });
+                  // },
+                  // onSubmitted: (text) {
+                  //   setState(() {
+                  //     _value = text;
+                  //   });
+                  // },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Description of the challenge',),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 10),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              ElevatedButton(
-                style: Style.raisedButtonStyle,
-                child: const Text("CANCEL"),
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextButton(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 3.0,
+                    horizontal: 50.0,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: Colors.red,
+                  ),
+                  child: const Text('Cancel',
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
                 onPressed: () {
-                  Navigator.of(context).pop();
-                },
+                  Navigator.pop(context);
+                  },
               ),
-              ElevatedButton(
-                style: Style.raisedButtonStyle,
-                child: const Text("ADD"),
-                onPressed: () async {
 
-                  final challengeRef = FirebaseFirestore.instance.collection('Challenges')
-                      .withConverter<Challenge>(
+              TextButton(
+                child: Container(
+                  //width: 180.0,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 3.0,
+                    horizontal: 50.0,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: Colors.lightBlue,
+                  ),
+                  child: const Text(
+                    'Create',
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                  onPressed: () async {
+
+                    final challengeRef = FirebaseFirestore.instance.collection('Challenges')
+                        .withConverter<Challenge>(
                       fromFirestore: (snapshot, _) => Challenge.fromJson(snapshot.data()!),
                       toFirestore: (challenge, _) => challenge.toJson(),
-                  );
-                  print('here');
-                  print(challengeRef);
-                  // challenges = await ChallengeDatabase.instance.challenges();
+                    );
+                    print('here');
+                    print(challengeRef);
+                    // challenges = await ChallengeDatabase.instance.challenges();
 
 
-                  challengeRef.add(
-                      Challenge(
-                          challengeTitle: titleController.text,
-                          challengeDescription: descriptionController.text,
-                          challengeDays: [false, false, false, false, false, false, false, false, false, false, false, false, false,
-                            false, false, false, false, false, false, false, false],
-                          )
-                  );
+                    challengeRef.add(
+                        Challenge(
+                            challengeTitle: titleController.text,
+                            challengeDescription: descriptionController.text,
+                            challengeDays: [false, false, false, false, false, false, false, false, false, false, false, false, false,
+                              false, false, false, false, false, false, false, false],
+                            challengeStart: DateTime.now()
+                        )
+                    );
 
 
-
-                  // Challenge challengeToInsert = Challenge(
-                  //     id: challenges.length, challengeTitle: controller.text);
-                  // print(challenges.length);
-                  // print(controller.text);
-                  // ChallengeDatabase.instance.insertChallenge(challengeToInsert);
-                  Navigator.of(context).pop();
-                },
+                    Navigator.of(context).pop();
+                  },
               )
             ],
-          )
+          ),
+
         ],
-      ),
-    );
+      );
   }
 
 //TODO Add some usability in textField Widget, more function
