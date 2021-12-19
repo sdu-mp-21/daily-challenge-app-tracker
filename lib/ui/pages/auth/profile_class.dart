@@ -1,3 +1,5 @@
+import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
+import 'package:challenge_tracker/ui/widgets/color_custom.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -25,6 +27,7 @@ class _ProfilePageState extends State<ProfilePage>  {
     return Scaffold(
         appBar: AppBar(
             toolbarHeight:130,
+            backgroundColor: ColorsCustom.orangeLightColors,
             flexibleSpace: Authorization.getHeader(),
         ),
         body: SafeArea(
@@ -110,7 +113,10 @@ class _ProfilePageState extends State<ProfilePage>  {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.pushNamed(context, '/logged_in');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const FeedMainPage()),
+                                );
                               },
                           ),
                         ]),
