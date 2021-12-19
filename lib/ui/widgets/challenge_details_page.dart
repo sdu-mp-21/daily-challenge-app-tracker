@@ -147,7 +147,7 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
           startTime: startTime,
           endTime: endTime,
           color: days[i] ? Colors.green : Colors.black38,
-        isAllDay: true
+          isAllDay: true
       ),
       );
 
@@ -156,7 +156,7 @@ class _ChallengeDetailPageState extends State<ChallengeDetailPage> {
     return challengeDays;
 
 
-}
+  }
 }
 class ChallengeDays extends CalendarDataSource {
   ChallengeDays(List<Appointment> source) {

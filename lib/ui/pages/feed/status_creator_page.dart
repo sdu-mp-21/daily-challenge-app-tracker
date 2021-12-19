@@ -3,6 +3,7 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 class StatusCreator extends StatefulWidget {
   const StatusCreator({Key? key, this.context,  this.feedID, this.textfield})
       : super(key: key);
@@ -97,8 +98,9 @@ class _StatusCreator extends State<StatusCreator> {
           ),
         ),
       ),
-      onPressed: () {
-        var now = DateTime.now().toString();
+        onPressed: () async{
+        var now = DateTime.now().toLocal().toString();
+
         if(_user != null){
           _userName =
           (_user?.displayName != null) ? _user!.displayName.toString() : "";
@@ -113,7 +115,7 @@ class _StatusCreator extends State<StatusCreator> {
             'photoURL': _photoURL,
           });
         }
-        //print('context: ${widget.context}');
+
         Navigator.pop(context);
       },
     );

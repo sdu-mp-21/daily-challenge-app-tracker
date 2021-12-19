@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'time_ago.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../ui/pages/auth/profile_class.dart';
 
 class FeedHeader extends StatefulWidget {
   final dynamic currentTime;
@@ -58,40 +59,48 @@ class _FeedHeaderState extends State<FeedHeader> {
   Widget userAvatarAndName() {
     _userName = (widget.userName != "") ? widget.userName : "User Name";
 
-    return Row(
-      children: [
-        CircleAvatar(
-          radius: 20,
-          backgroundImage: userAvatar(),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 16.0,
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
+        );
+      },
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 20,
+            backgroundImage: userAvatar(),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                _userName,
-                textDirection: TextDirection.ltr,
-                style: const TextStyle(
-                  fontSize: 20.0,
-                  fontFamily: "Georgia",
-                  fontWeight: FontWeight.w600,
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16.0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _userName,
+                  textDirection: TextDirection.ltr,
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontFamily: "Georgia",
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              Text(
-                TimeAgo.displayTimeAgoFromTimestamp(widget.currentTime),
-                textAlign: TextAlign.left,
-                textDirection: TextDirection.ltr,
-                style: const TextStyle(
-                  color: Color(0xFF878585),
+                Text(
+                  TimeAgo.displayTimeAgoFromTimestamp(widget.currentTime),
+                  textAlign: TextAlign.left,
+                  textDirection: TextDirection.ltr,
+                  style: const TextStyle(
+                    color: Color(0xFF878585),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

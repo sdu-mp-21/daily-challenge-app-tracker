@@ -58,16 +58,16 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
     return Scaffold(
         body: Center(
           // child: Text(Challenge(id:0, challengeTitle: 'name').toMap().toString()),
-        child: isLoading
-            ? const CircularProgressIndicator()
-            : challenges.isEmpty
-            ? const Text(
-          'Empty Challenge List',
-          style: TextStyle(color: Colors.black, fontSize: 24),
-        )
-            // : const Text('I am here'),
-            : buildChallenges(challenges),
-      ),
+          child: isLoading
+              ? const CircularProgressIndicator()
+              : challenges.isEmpty
+              ? const Text(
+            'Empty Challenge List',
+            style: TextStyle(color: Colors.black, fontSize: 24),
+          )
+          // : const Text('I am here'),
+              : buildChallenges(challenges),
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         floatingActionButton: FloatingActionButton(
           tooltip: "Centre FAB",
@@ -85,7 +85,7 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
             }) ;
 
 
-           // refreshNotes();
+            // refreshNotes();
           },
           child: const Icon(Icons.add),
         )
@@ -93,28 +93,28 @@ class _DisplayChallengesState extends State<DisplayChallenges> {
   }
 
   Widget buildChallenges(challenges) => StaggeredGridView.countBuilder(
-        padding: const EdgeInsets.all(8),
-        itemCount: challenges.length,
-        staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
-        crossAxisCount: 4,
-        mainAxisSpacing: 4,
-        crossAxisSpacing: 4,
-        itemBuilder: (context, index) {
-          final Challenge challenge = challenges[index];
-          return GestureDetector(
-            onTap: () async {
-              await Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>
-                    ChallengeDetailPage(challengeDesc: challenge.challengeDescription, challengeTitle: challenge.challengeTitle),
-              ));
+    padding: const EdgeInsets.all(8),
+    itemCount: challenges.length,
+    staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
+    crossAxisCount: 4,
+    mainAxisSpacing: 4,
+    crossAxisSpacing: 4,
+    itemBuilder: (context, index) {
+      final Challenge challenge = challenges[index];
+      return GestureDetector(
+        onTap: () async {
+          await Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                ChallengeDetailPage(challengeDesc: challenge.challengeDescription, challengeTitle: challenge.challengeTitle),
+          ));
 
-              refreshNotes();
-            },
-            child: ChallengeCardWidget(
-              challenge: challenge,
-              index: index,
-            ),
-          );
+          refreshNotes();
         },
+        child: ChallengeCardWidget(
+          challenge: challenge,
+          index: index,
+        ),
       );
+    },
+  );
 }
