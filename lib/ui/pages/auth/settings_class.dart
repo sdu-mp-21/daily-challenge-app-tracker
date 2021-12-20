@@ -143,7 +143,18 @@ class _SettingsPageState extends State<SettingsPage> {
                       con: context,
                     )),
           );
-        } else {
+        }
+        // else if(title == 'Privacy and security') {
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) =>
+        //             PrivacyPolicy(
+        //               con: context,
+        //             )),
+        //   );
+        // }
+        else {
           showDialog(
               context: context,
               builder: (BuildContext context) {

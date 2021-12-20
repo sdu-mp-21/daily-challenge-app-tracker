@@ -137,12 +137,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(widget.context);
+                    },
                     child: const Text("CANCEL",
+
                         style: TextStyle(
                             fontSize: 14,
                             letterSpacing: 2.2,
                             color: Colors.black)),
+
                   ),
                   RaisedButton(
                     onPressed: () {},
