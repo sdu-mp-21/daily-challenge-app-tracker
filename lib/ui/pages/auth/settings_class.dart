@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:settings_ui/settings_ui.dart';
 
 import 'auth_page.dart';
 
@@ -63,6 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(
               height: 10,
             ),
+            buildAccountOptionRow(context, "Edit Profile"),
             buildAccountOptionRow(context, "Change password"),
             buildAccountOptionRow(context, "Content settings"),
             buildAccountOptionRow(context, "Social"),

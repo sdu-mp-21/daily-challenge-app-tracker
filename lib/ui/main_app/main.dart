@@ -16,7 +16,14 @@ import 'navigator_logged.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyAuDZyQuH-ZOKvgQ04hjBlDo4gc9z2dmfc",
+      appId: "1:566701938693:android:8770420ceed59736aee46c",
+      messagingSenderId: "566701938693",
+      projectId: "daily-challenge-app-tracker",
+    ),
+  );
 
   runApp(MainApp());
 }
