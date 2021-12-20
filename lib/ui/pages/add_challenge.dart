@@ -1,5 +1,4 @@
 import 'package:challenge_tracker/db/challenge_class.dart';
-import '../../ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,7 +29,6 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
   FocusNode nodeMainText = FocusNode();
   FocusNode nodeDescription = FocusNode();
 
-  //String _value = "";
   String createTitle = "";
   late List<Challenge> challenges;
 
@@ -84,6 +82,18 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         // mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
+          const SizedBox(height: 10),
+          //LOGO
+          Center(
+            child: Container(
+              width: 120.0,
+              height: 120.0,
+              margin: const EdgeInsets.all(15.0),
+              child: const Image(
+                image: AssetImage('assets/images/challenge-icon2.png'),
+              ),
+            ),
+          ),
           const SizedBox(height: 10),
           Center(
             child: Text(
@@ -198,8 +208,7 @@ class _CreateNewWidgetState extends State<CreateNewWidget> {
                     fromFirestore: (snapshot, _) => Challenge.fromJson(snapshot.data()!),
                     toFirestore: (challenge, _) => challenge.toJson(),
                   );
-                  print('here');
-                  print(challengeRef);
+
                   // challenges = await ChallengeDatabase.instance.challenges();
 
 
