@@ -124,7 +124,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
               buildTextField("Full Name", "Marlen Shokparbek", false),
               buildTextField(
-                  "E-mail", "marlenkaisarovich0072gmail.com@gmail.com", false),
+                  "E-mail", "190103027@stu.sdu.edu.kz", false),
               buildTextField("Password", "********", true),
               buildTextField("Location", "Almaty, Kazakhstan", false),
               const SizedBox(
