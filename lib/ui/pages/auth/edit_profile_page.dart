@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:challenge_tracker/ui/pages/auth/settings_class.dart';
 
-
-
 class SettingsUI extends StatelessWidget {
+  final dynamic con;
+
+  const SettingsUI({Key? key, required this.con}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Setting UI",
-      home: EditProfilePage(),
+      home: EditProfilePage(context: con),
     );
   }
 }
 
 class EditProfilePage extends StatefulWidget {
+  final BuildContext context;
+
+  const EditProfilePage({Key? key, required this.context}) : super(key: key);
+
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
   bool showPassword = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,15 +35,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 1,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.green,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(widget.context);
+          },
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.settings,
               color: Colors.green,
             ),
@@ -48,18 +57,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+        padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
           },
           child: ListView(
             children: [
-              Text(
+              const Text(
                 "Edit Profile",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Center(
@@ -77,15 +86,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 spreadRadius: 2,
                                 blurRadius: 10,
                                 color: Colors.black.withOpacity(0.1),
-                                offset: Offset(0, 10))
+                                offset: const Offset(0, 10))
                           ],
                           shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
-                              ))),
+                          image:  const DecorationImage(
+                            image: NetworkImage('https://cdn-icons-png.flaticon.com/512/147/147144.png'),
+                            fit: BoxFit.cover,
+                          )
+                      ),
+                        //image:AssetImage('assets/images/avatar.png') )
                     ),
+
                     Positioned(
                         bottom: 0,
                         right: 0,
@@ -100,7 +111,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             ),
                             color: Colors.green,
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.edit,
                             color: Colors.white,
                           ),
@@ -108,25 +119,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 35,
               ),
               buildTextField("Full Name", "Marlen Shokparbek", false),
-              buildTextField("E-mail", "marlenkaisarovich0072gmail.com@gmail.com", false),
+              buildTextField(
+                  "E-mail", "marlenkaisarovich0072gmail.com@gmail.com", false),
               buildTextField("Password", "********", true),
               buildTextField("Location", "Almaty, Kazakhstan", false),
-              SizedBox(
+              const SizedBox(
                 height: 35,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OutlineButton(
-                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     onPressed: () {},
-                    child: Text("CANCEL",
+                    child: const Text("CANCEL",
                         style: TextStyle(
                             fontSize: 14,
                             letterSpacing: 2.2,
@@ -135,11 +147,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   RaisedButton(
                     onPressed: () {},
                     color: Colors.green,
-                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    child: Text(
+                    child: const Text(
                       "SAVE",
                       style: TextStyle(
                           fontSize: 14,
@@ -165,22 +177,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
         decoration: InputDecoration(
             suffixIcon: isPasswordTextField
                 ? IconButton(
-              onPressed: () {
-                setState(() {
-                  showPassword = !showPassword;
-                });
-              },
-              icon: Icon(
-                Icons.remove_red_eye,
-                color: Colors.grey,
-              ),
-            )
+                    onPressed: () {
+                      setState(() {
+                        showPassword = !showPassword;
+                      });
+                    },
+                    icon: const Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.grey,
+                    ),
+                  )
                 : null,
-            contentPadding: EdgeInsets.only(bottom: 3),
+            contentPadding: const EdgeInsets.only(bottom: 3),
             labelText: labelText,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Colors.black,

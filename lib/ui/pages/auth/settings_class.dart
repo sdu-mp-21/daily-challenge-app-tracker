@@ -1,11 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'auth_page.dart';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
+import '../../../ui/pages/auth/edit_profile_page.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -23,25 +18,25 @@ class _SettingsPageState extends State<SettingsPage> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.green,
           ),
         ),
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+        padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
         child: ListView(
           children: [
-            Text(
+            const Text(
               "Settings",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
-              children: [
+              children: const [
                 Icon(
                   Icons.person,
                   color: Colors.green,
@@ -55,11 +50,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               height: 15,
               thickness: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             buildAccountOptionRow(context, "Edit Profile"),
@@ -68,11 +63,11 @@ class _SettingsPageState extends State<SettingsPage> {
             buildAccountOptionRow(context, "Social"),
             buildAccountOptionRow(context, "Language"),
             buildAccountOptionRow(context, "Privacy and security"),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
-              children: [
+              children: const [
                 Icon(
                   Icons.volume_up_outlined,
                   color: Colors.green,
@@ -86,26 +81,26 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               height: 15,
               thickness: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             buildNotificationOptionRow("New for you", true),
             buildNotificationOptionRow("Account activity", true),
             buildNotificationOptionRow("Opportunity", false),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Center(
               child: OutlineButton(
-                padding: EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 onPressed: () {},
-                child: Text("SIGN OUT",
+                child: const Text("SIGN OUT",
                     style: TextStyle(
                         fontSize: 16, letterSpacing: 2.2, color: Colors.black)),
               ),
@@ -140,28 +135,38 @@ class _SettingsPageState extends State<SettingsPage> {
   GestureDetector buildAccountOptionRow(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(title),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("Option 1"),
-                    Text("Option 2"),
-                    Text("Option 3"),
+        if (title == 'Edit Profile') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SettingsUI(
+                      con: context,
+                    )),
+          );
+        } else {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(title),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Text("Option 1"),
+                      Text("Option 2"),
+                      Text("Option 3"),
+                    ],
+                  ),
+                  actions: [
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Close")),
                   ],
-                ),
-                actions: [
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text("Close")),
-                ],
-              );
-            });
+                );
+              });
+        }
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -176,7 +181,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 color: Colors.grey[600],
               ),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios,
               color: Colors.grey,
             ),
