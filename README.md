@@ -8,7 +8,7 @@ This project is being developed by 5 students from the SDU:
 - [Daryn](https://github.com/Daryn0001)
 - [Serik](https://github.com/SSurikkiller)
 
-(Final Presentation)[https://1drv.ms/p/s!AkKXPCCE3tS3gYp8RN5gLu-AGA1tFA?e=UVpbMp]
+[Final Presentation](https://1drv.ms/p/s!AkKXPCCE3tS3gYp8RN5gLu-AGA1tFA?e=UVpbMp)
 
 ## What is it
 This application was created to solve problems that often arise in humans.
