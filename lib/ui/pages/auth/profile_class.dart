@@ -1,8 +1,7 @@
-import 'package:challenge_tracker/ui/pages/feed/feed_main_page.dart';
+
 import 'package:challenge_tracker/ui/widgets/color_custom.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -96,36 +95,14 @@ class _ProfilePageState extends State<ProfilePage>  {
               const SizedBox(
                 height: 10,
               ),
-              Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 8.0),
+              const Card(
+                  margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 8.0),
 
                   elevation: 2.0,
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 30),
-                      child:
-                      RichText(
-                        text: TextSpan(children: [
-                          TextSpan(
-                            text: "Watch the news",
-                            style: const TextStyle(
-                                letterSpacing: 2.0,
-                                fontWeight: FontWeight.w300
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const FeedMainPage()),
-                                );
-                              },
-                          ),
-                        ]),
-                      ),
 
-                  )
               ),
               const SizedBox(
-                height: 15,
+                height: 35,
               ),
               Text(
                 "NickName:"+ user!.displayName.toString()
